@@ -1,0 +1,10 @@
+# Command types this platform accepts.
+# Each code: 4 bits control mode + 2 bits yaw mode + 2 bits reference frame.
+#   control mode: unset=0000 hover=0001 speed=0100 position=0110
+#   yaw mode:     angle=00 speed=01
+#   frame:        local FLU=00 global ENU=01
+available_modes:
+  - 0b00000000 # UNSET
+  - 0b01000001 # SPEED with yaw ANGLE in the GLOBAL_ENU_FRAME
+  - 0b01000101 # SPEED with yaw SPEED in the GLOBAL_ENU_FRAME
+  - 0b01100001 # POSITION with yaw ANGLE in the GLOBAL_ENU_FRAME

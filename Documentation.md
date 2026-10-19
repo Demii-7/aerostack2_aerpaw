@@ -57,3 +57,29 @@ Observations:
 - MAVROS frame: x = east, y = north, z = up (meters from start).
 
 ✅ Stage 2 complete.
+
+## Stage 3: Empty platform package
+
+Package: ~/aerostack2_aerpaw/ws/src/as2_platform_aerpaw
+Files: package.xml, CMakeLists.txt, include/as2_platform_aerpaw/aerpaw_platform.hpp,
+src/aerpaw_platform.cpp, src/aerpaw_platform_node.cpp, config/control_modes.yaml,
+config/platform_config_file.yaml, launch/as2_platform_aerpaw_launch.py
+Every contract function present; each logs "not implemented yet" and returns false.
+
+| Action | Window | Command | Result |
+|---|---|---|---|
+| Create folders | W2 | mkdir -p ~/aerostack2_aerpaw/ws/src/as2_platform_aerpaw/{include/as2_platform_aerpaw,src,config,launch} | |
+| Build | W4 | cd /root/ws; colcon build --symlink-install | 1 package finished (11.7 s) |
+| Load package | W4 | source install/setup.bash | |
+| Run | W4 | ros2 launch as2_platform_aerpaw as2_platform_aerpaw_launch.py | "AERPAW platform started"; 4 control modes listed |
+| Node exists | W5 | ros2 node list | /drone0/platform |
+| Status | W5 | ros2 topic echo /drone0/platform/info --once | connected: true, armed: false, offboard: false, state: 0 (DISARMED) |
+| Services | W5 | ros2 service list \| grep drone0 | set_arming_state, set_offboard_mode, set_platform_control_mode, platform_takeoff, platform_land, platform/state_machine_event, platform/list_control_modes |
+| Wiring | W5 | ros2 service call /drone0/set_arming_state std_srvs/srv/SetBool "{data: true}" | success=False; W4 shows "ownSetArmingState(true): not implemented yet" |
+
+Notes:
+- connected: true is hard-coded by AerialPlatform in 1.1.3; to be fixed in stage 8.
+- build/, install/, log/ are created by root (container); delete from inside the container if needed.
+- Run "source install/setup.bash" in every new container shell.
+
+✅ Stage 3 complete.
