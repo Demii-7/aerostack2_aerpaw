@@ -83,3 +83,27 @@ Notes:
 - Run "source install/setup.bash" in every new container shell.
 
 ✅ Stage 3 complete.
+
+## Stage 4: Sensors
+
+Changes (diffs): package.xml + CMakeLists.txt (nav_msgs, sensor_msgs);
+aerpaw_platform.hpp (includes, private members: frame ids, 4 sensors, 4 MAVROS subscriptions);
+aerpaw_platform.cpp (tf_utils include; configureSensors relays MAVROS → sensor_measurements).
+
+| Action | Window | Command | Result |
+|---|---|---|---|
+| MAVROS in drone namespace | W3 | ros2 launch mavros apm.launch fcu_url:=udp://:14550@ namespace:=drone0 | logs as drone0.mavros.* |
+| Build + run platform | W4 | cd /root/ws; colcon build --symlink-install; source install/setup.bash; ros2 launch as2_platform_aerpaw as2_platform_aerpaw_launch.py | "relaying MAVROS odom, imu, gps, battery" |
+| Compare odom | W6 | ros2 topic echo /drone0/mavros/local_position/odom --once; ros2 topic echo /drone0/sensor_measurements/odom --once | same values; frames map/base_link → drone0/odom, drone0/base_link |
+| State estimator | W5 | ros2 launch as2_state_estimator state_estimator_launch.py namespace:=drone0 plugin_name:=raw_odometry | "Earth to map set to 0, 0, 0" |
+| Self-localization (ground) | W6 | ros2 topic echo /drone0/self_localization/pose --once | frame earth; x 9.94, y -0.02, z 0.34 |
+| Fly by hand | W6 | /drone0/mavros/set_mode GUIDED; /drone0/mavros/cmd/arming true; /drone0/mavros/cmd/takeoff 5.0 | all success |
+| Self-localization (air) | W6 | ros2 topic echo /drone0/self_localization/pose --once | z 5.28 |
+| Land | W6 | /drone0/mavros/set_mode LAND | landed, auto-disarmed |
+
+Notes:
+- MAVROS topics now under /drone0/mavros/...; platform uses relative "mavros/..." names.
+- Local z ≈ 0.3 m on the ground (ArduPilot offset); Aerostack2 matches MAVROS exactly.
+- Harmless MAVROS warnings: "Unexpected command 11" (SET_MODE ack), "stale remote address 255.x" (QGC).
+
+✅ Stage 4 complete.
