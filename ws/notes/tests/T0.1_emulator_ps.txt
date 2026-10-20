@@ -1,0 +1,4 @@
+NAME                    IMAGE                          COMMAND                  SERVICE           CREATED          STATUS                   PORTS
+C-VM-X0841-M1           aerpaw-standalone-cvm:latest   "/opt/standalone/doc…"   node1-uav-cvm     44 minutes ago   Up 6 minutes (healthy)   
+E-VM-X0841-M1           aerpaw-standalone-evm:latest   "/opt/standalone/doc…"   node1-uav-evm     44 minutes ago   Up 6 minutes             
+MAVLink-Gateway-X0841   aerpaw-standalone-cvm:latest   "/opt/standalone/doc…"   mavlink-gateway   44 minutes ago   Up 6 minutes (healthy)   127.0.0.1:5760->5760/tcp

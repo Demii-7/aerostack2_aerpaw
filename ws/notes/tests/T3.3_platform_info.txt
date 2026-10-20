@@ -1,0 +1,20 @@
+header:
+  stamp:
+    sec: 1792500964
+    nanosec: 691251191
+  frame_id: ''
+connected: true
+armed: false
+offboard: false
+status:
+  state: 0
+current_control_mode:
+  header:
+    stamp:
+      sec: 0
+      nanosec: 0
+    frame_id: ''
+  yaw_mode: 0
+  control_mode: 0
+  reference_frame: 0
+---

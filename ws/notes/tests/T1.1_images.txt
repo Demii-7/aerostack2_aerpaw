@@ -1,0 +1,7 @@
+IMAGE                                         ID             DISK USAGE   CONTENT SIZE   EXTRA
+aerostack2/humble:latest                      9fc3619c1541       6.81GB         1.53GB        
+aerpaw-standalone-cvm:latest                  a1ddbac7829b       6.33GB         1.84GB   U    
+aerpaw-standalone-evm:latest                  890b6c15593d        430MB         93.8MB   U    
+as2-aerpaw:latest                             68ee67976e5c       5.23GB         1.14GB        
+hello-world:latest                            5e2309035332       25.9kB         9.49kB        
+local/jupyter-pytorch-opencode:cuda12-py311   10fc6a45b48b         16GB         4.99GB   U    

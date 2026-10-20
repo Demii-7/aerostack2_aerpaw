@@ -1,0 +1,4 @@
+/drone0/sensor_measurements/battery
+/drone0/sensor_measurements/gps
+/drone0/sensor_measurements/imu
+/drone0/sensor_measurements/odom

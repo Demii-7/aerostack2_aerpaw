@@ -11,6 +11,8 @@ set(PROJECT_DEPENDENCIES
   rclcpp
   as2_core
   as2_msgs
+  nav_msgs
+  sensor_msgs
 )
 foreach(DEPENDENCY ${PROJECT_DEPENDENCIES})
   find_package(${DEPENDENCY} REQUIRED)

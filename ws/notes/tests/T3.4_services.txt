@@ -1,0 +1,13 @@
+/drone0/platform/describe_parameters
+/drone0/platform/get_parameter_types
+/drone0/platform/get_parameters
+/drone0/platform/list_control_modes
+/drone0/platform/list_parameters
+/drone0/platform/set_parameters
+/drone0/platform/set_parameters_atomically
+/drone0/platform/state_machine_event
+/drone0/platform_land
+/drone0/platform_takeoff
+/drone0/set_arming_state
+/drone0/set_offboard_mode
+/drone0/set_platform_control_mode

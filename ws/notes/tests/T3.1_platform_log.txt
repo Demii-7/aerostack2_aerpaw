@@ -1,0 +1,12 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-10-20-12-47-19-946001-e-vm-x0841-m1-339
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [as2_platform_aerpaw_node-1]: process started with pid [341]
+[as2_platform_aerpaw_node-1] [0m[INFO] [1792500440.628001378] [drone0.platform]: Construct with name [platform][0m
+[as2_platform_aerpaw_node-1] [0m[INFO] [1792500440.642386417] [as2_mode]: Control mode: UNSET [0m
+[as2_platform_aerpaw_node-1] [0m[INFO] [1792500440.642580990] [as2_mode]: Control mode: SPEED YAW_ANGLE LOCAL_ENU_FRAME [0m
+[as2_platform_aerpaw_node-1] [0m[INFO] [1792500440.642615770] [as2_mode]: Control mode: SPEED YAW_SPEED LOCAL_ENU_FRAME [0m
+[as2_platform_aerpaw_node-1] [0m[INFO] [1792500440.642637468] [as2_mode]: Control mode: POSITION YAW_ANGLE LOCAL_ENU_FRAME [0m
+[as2_platform_aerpaw_node-1] [0m[INFO] [1792500440.700216544] [drone0.platform]: configureSensors: relaying MAVROS odom, imu, gps, battery[0m
+[as2_platform_aerpaw_node-1] [0m[INFO] [1792500440.700332232] [drone0.platform]: AERPAW platform started (skeleton: nothing implemented yet)[0m
+[as2_platform_aerpaw_node-1] [33m[WARN] [1792501011.088777787] [drone0.platform]: ownSetArmingState(true): not implemented yet[0m
+[as2_platform_aerpaw_node-1] [33m[WARN] [1792501011.089952495] [drone0.platform]: Unable to set arming state ON[0m

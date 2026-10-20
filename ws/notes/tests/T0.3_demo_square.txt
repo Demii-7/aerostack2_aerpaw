@@ -1,0 +1,4 @@
+vehicle armed
+[INFO] [aerpawlib] Guided command attempted. Waiting for safety pilot to arm
+[INFO] [aerpawlib] Mission took 00:35 mm:ss
+vehicle disarmed

@@ -1,0 +1,4 @@
+Starting >>> as2_platform_aerpaw
+Finished <<< as2_platform_aerpaw [0.34s]
+
+Summary: 1 package finished [0.75s]

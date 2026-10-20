@@ -1,0 +1,41 @@
+[INFO] [1792502967.318947733] [tf2_echo]: Waiting for transform earth ->  drone0/base_link: Invalid frame ID "earth" passed to canTransform argument target_frame - frame does not exist
+At time 1792502968.51814144
+- Translation: [10.070, -0.558, 5.284]
+- Rotation: in Quaternion (xyzw) [-0.001, -0.004, -0.002, 1.000]
+- Rotation: in RPY (radian) [-0.002, -0.008, -0.003]
+- Rotation: in RPY (degree) [-0.132, -0.458, -0.173]
+- Matrix:
+  1.000  0.003 -0.008 10.070
+ -0.003  1.000  0.002 -0.558
+  0.008 -0.002  1.000  5.284
+  0.000  0.000  0.000  1.000
+At time 1792502969.50983872
+- Translation: [10.072, -0.557, 5.281]
+- Rotation: in Quaternion (xyzw) [-0.006, -0.009, -0.002, 1.000]
+- Rotation: in RPY (radian) [-0.012, -0.019, -0.004]
+- Rotation: in RPY (degree) [-0.662, -1.076, -0.256]
+- Matrix:
+  1.000  0.005 -0.019 10.072
+ -0.004  1.000  0.012 -0.557
+  0.019 -0.012  1.000  5.281
+  0.000  0.000  0.000  1.000
+At time 1792502970.52166912
+- Translation: [10.070, -0.557, 5.283]
+- Rotation: in Quaternion (xyzw) [-0.008, -0.007, -0.001, 1.000]
+- Rotation: in RPY (radian) [-0.016, -0.014, -0.002]
+- Rotation: in RPY (degree) [-0.933, -0.800, -0.088]
+- Matrix:
+  1.000  0.002 -0.014 10.070
+ -0.002  1.000  0.016 -0.557
+  0.014 -0.016  1.000  5.283
+  0.000  0.000  0.000  1.000
+At time 1792502971.51351488
+- Translation: [10.067, -0.552, 5.282]
+- Rotation: in Quaternion (xyzw) [-0.010, -0.012, -0.002, 1.000]
+- Rotation: in RPY (radian) [-0.021, -0.024, -0.004]
+- Rotation: in RPY (degree) [-1.190, -1.386, -0.244]
+- Matrix:
+  1.000  0.005 -0.024 10.067
+ -0.004  1.000  0.021 -0.552
+  0.024 -0.021  0.999  5.282
+  0.000  0.000  0.000  1.000
