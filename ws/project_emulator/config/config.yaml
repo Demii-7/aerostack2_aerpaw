@@ -1,0 +1,61 @@
+# Aerostack2 config for the AERPAW emulator (ArduPilot Copter, one UAV).
+# Adapted from GQP3715/AS2_ardupilot src/project_mavlink/config/config.yaml (dea4310).
+# Changes: MAVROS fcu_url points at the E-VM UDP port, takeoff height 5 m,
+# go_to/follow_path use position plugins (no trajectory generator needed).
+/**:
+  ros__parameters:
+    tf_timeout_threshold: 0.05
+
+  # Platform (as2_platform_mavlink, ArduPilot profile)
+  platform:
+    ros__parameters:
+      cmd_freq: 50.0
+      info_freq: 10.0
+      autopilot: "ardupilot"
+      vehicle_type: "copter"
+      modes:
+        offboard: "GUIDED"
+        manual: "LOITER"
+        hold: "BRAKE"
+      connection:
+        timeout: 8.0
+      control:
+        command_timeout: 0.5
+        mode_change_timeout: 5.0
+      # Sent as MAV_CMD_NAV_TAKEOFF. The Takeoff action goal height is NOT
+      # forwarded by takeoff_plugin_platform, so this is the real takeoff height.
+      takeoff:
+        height: 5.0
+        height_tolerance: 0.3
+        timeout: 30.0
+        blocking: true
+      land:
+        timeout: 60.0
+
+  # State estimator: MAVROS local odom (ENU, anchored at ArduPilot EKF origin)
+  state_estimator:
+    ros__parameters:
+      plugin_name: "raw_odometry"
+      use_gps: true
+      set_origin_on_start: true
+
+  # Motion behaviors
+  TakeoffBehavior:
+    ros__parameters:
+      takeoff_plugin_name: "takeoff_plugin_platform"
+  LandBehavior:
+    ros__parameters:
+      land_plugin_name: "land_plugin_platform"
+  GoToBehavior:
+    ros__parameters:
+      go_to_plugin_name: "go_to_plugin_position"
+  FollowPathBehavior:
+    ros__parameters:
+      follow_path_plugin_name: "follow_path_plugin_position"
+
+# MAVROS: same link as Stage 1 (C-VM mavlink-router -> E-VM UDP 14550)
+drone0:
+  mavros/mavros_node:
+    ros__parameters:
+      fcu_url: "udp://:14550@"
+      tgt_system: 1

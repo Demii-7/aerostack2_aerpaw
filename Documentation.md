@@ -107,3 +107,37 @@ Notes:
 - Harmless MAVROS warnings: "Unexpected command 11" (SET_MODE ack), "stale remote address 255.x" (QGC).
 
 ✅ Stage 4 complete.
+## Stage 5 (pivot): reuse as2_platform_mavlink with the ArduPilot profile
+
+Why: meeting Oct 20, 2026 — with the MAVROS adapter approach nothing is AERPAW-specific, so use
+as2_platform_mavlink (ArduPilot-fixed version from https://github.com/GQP3715/AS2_ardupilot, commit dea4310)
+instead of finishing as2_platform_aerpaw. That fork already implements stages 5–8 of our plan for ArduPilot:
+GUIDED as offboard, arm after GUIDED, MAV_CMD_NAV_TAKEOFF, LAND, position/velocity/trajectory setpoints, BRAKE hover.
+Both use Aerostack2 1.1.3, same as our as2-aerpaw image.
+
+Files:
+- ws/src/as2_platform_mavlink/ — copied unchanged from AS2_ardupilot dea4310 (BSD-3)
+- ws/project_emulator/config/config.yaml — emulator config (fcu_url udp://:14550@, tgt_system 1, takeoff 5 m, position go_to)
+- ws/project_emulator/launch_as2.bash — tmux session as2_drone0: mavros, platform, estimator, controller, behaviors, viewer
+- ws/project_emulator/mission_takeoff_land.py, mission_square.py — test missions
+- ws/src/as2_platform_aerpaw/ — kept for reference, not used from here on
+
+Known differences from the AS2_ardupilot setup:
+- Their Aerostack2 copy has a 2-line as2_core fix (arm/offboard return true when already in that state).
+  The 1.1.3 binary does not, so calling offboard()/arm() twice returns FAILED — run missions from a landed, disarmed, non-GUIDED drone.
+- No GCOPTER / trajectory generator: go_to uses go_to_plugin_position (ArduPilot does the tracking).
+
+| Action | Window | Command | Result |
+|---|---|---|---|
+| Pull branch | W2 | cd ~/aerostack2_aerpaw; git fetch; git checkout stage5-pivot-mavlink-platform | |
+| Emulator up, QGC connected | W2/W1 | (Stage 0) | |
+| Start container | W3 | docker run -it --rm --name as2 --network container:E-VM-X0841-M1 -v ~/aerostack2_aerpaw/ws:/root/ws as2-aerpaw bash | |
+| Build | W3 | cd /root/ws; colcon build --symlink-install --packages-select as2_platform_mavlink --cmake-args -DBUILD_TESTING=OFF; source install/setup.bash | |
+| Launch stack | W3 | cd /root/ws/project_emulator; ./launch_as2.bash; tmux attach -t as2_drone0 | |
+| Connected | W4 | ros2 topic echo /drone0/mavros/state --once; ros2 topic echo /drone0/platform/info --once | |
+| Position | W4 | ros2 topic echo /drone0/self_localization/pose --once | |
+| T5/T6 takeoff + land | W4 | cd /root/ws/project_emulator; python3 mission_takeoff_land.py | |
+| T7 square | W4 | python3 mission_square.py | |
+| Stop | W3 | ./launch_as2.bash -k | |
+
+Pass criteria: QGC shows GUIDED → armed → climb to ~5 m → LAND → disarmed (T6); 10 m square at 5 m like demo_square (T7).
