@@ -908,17 +908,17 @@ bool MavlinkPlatform::sendTrajectorySetpoint(const as2_msgs::msg::ControlMode & 
     return false;
   }
   // The controller publishes trajectory references in the LOCAL_ENU frame,
-  // which is already the MAVROS local ENU frame. The conversion below is a
-  // safety net for references produced in any other frame.
+  // which is already the MAVROS local ENU frame.
+  // AERPAW change: the Aerostack2 1.1.3 binary has no tf2::doTransform for
+  // TrajectorySetpoints (link error), so references in other frames are
+  // rejected instead of converted.
   if (this->command_trajectory_msg_.header.frame_id != odom_frame_id_) {
-    if (!tf_handler_->tryConvert(this->command_trajectory_msg_, odom_frame_id_)) {
-      auto & clk = *this->get_clock();
-      RCLCPP_ERROR_THROTTLE(
-        this->get_logger(), clk, 1000,
-        "Cannot convert the trajectory reference from '%s' to '%s'",
-        this->command_trajectory_msg_.header.frame_id.c_str(), odom_frame_id_.c_str());
-      return false;
-    }
+    auto & clk = *this->get_clock();
+    RCLCPP_ERROR_THROTTLE(
+      this->get_logger(), clk, 1000,
+      "Trajectory reference in frame '%s' is not supported, expected '%s'",
+      this->command_trajectory_msg_.header.frame_id.c_str(), odom_frame_id_.c_str());
+    return false;
   }
 
   as2_msgs::msg::TrajectoryPoint setpoint;
