@@ -83,10 +83,10 @@ def get_node(context, *args, **kwargs) -> list:
     pluginlists_yaml = PathJoinSubstitution(
         [FindPackageShare('mavros'), 'launch', f'{prefix}_pluginlists.yaml'])
     namespace = LaunchConfiguration('namespace').perform(context)
-    if namespace == 'mavros':
-        ns = 'mavros'
-    else:
-        ns = namespace + '/mavros'
+    # AERPAW change: the MAVROS node is itself named 'mavros' and publishes
+    # under ~/, so namespace '<ns>/mavros' gave /<ns>/mavros/mavros/state.
+    # Namespace '<ns>' gives /<ns>/mavros/state, which the platform expects.
+    ns = namespace
     print(f'Namespace: {ns}')
 
     return [
