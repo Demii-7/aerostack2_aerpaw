@@ -8,6 +8,21 @@ AerpawPlatform::AerpawPlatform(const rclcpp::NodeOptions & options)
 : as2::AerialPlatform(options)
 {
   configureSensors();
+
+  // Stage 5: MAVROS state and command services
+  mavros_state_sub_ = this->create_subscription<mavros_msgs::msg::State>(
+    "mavros/state", rclcpp::SensorDataQoS(),
+    [this](const mavros_msgs::msg::State::SharedPtr msg) {
+      mavros_state_ = *msg;
+    });
+
+  mavros_arming_client_ =
+    std::make_shared<as2::SynchronousServiceClient<mavros_msgs::srv::CommandBool>>(
+    "mavros/cmd/arming", this);
+  mavros_set_mode_client_ =
+    std::make_shared<as2::SynchronousServiceClient<mavros_msgs::srv::SetMode>>(
+    "mavros/set_mode", this);
+
   RCLCPP_INFO(this->get_logger(), "AERPAW platform started (skeleton: nothing implemented yet)");
 }
 
@@ -56,23 +71,77 @@ void AerpawPlatform::configureSensors()
     this->get_logger(), "configureSensors: relaying MAVROS odom, imu, gps, battery");
  }
 
-// Stage 5: call /mavros/cmd/arming
+// Stage 5: arm (in STABILIZE, as AERPAW's safety pilot does) or disarm
 bool AerpawPlatform::ownSetArmingState(bool state)
 {
-  RCLCPP_WARN(
-    this->get_logger(), "ownSetArmingState(%s): not implemented yet",
-    state ? "true" : "false");
-  return false;
+  if (!mavros_state_.connected) {
+    RCLCPP_ERROR(this->get_logger(), "Cannot change arming state: MAVROS not connected");
+    return false;
+  }
+  if (mavros_state_.armed == state) {
+    RCLCPP_INFO(this->get_logger(), "Already %s", state ? "armed" : "disarmed");
+    return true;
+  }
+  if (state && !setMavrosMode("STABILIZE")) {
+    return false;
+  }
+
+  mavros_msgs::srv::CommandBool::Request request;
+  mavros_msgs::srv::CommandBool::Response response;
+  request.value = state;
+  if (!mavros_arming_client_->sendRequest(request, response, 5)) {
+    RCLCPP_ERROR(this->get_logger(), "Arming service not available");
+    return false;
+  }
+  if (!response.success) {
+    RCLCPP_ERROR(
+      this->get_logger(), "%s rejected by ArduPilot (result %d)",
+      state ? "Arming" : "Disarming", response.result);
+    return false;
+  }
+  RCLCPP_INFO(this->get_logger(), "%s", state ? "Armed" : "Disarmed");
+  return true;
 }
 
-// Stage 5: call /mavros/set_mode with GUIDED
+// Stage 5: computer control on = GUIDED; off = hand control back
 bool AerpawPlatform::ownSetOffboardControl(bool offboard)
 {
-  RCLCPP_WARN(
-    this->get_logger(), "ownSetOffboardControl(%s): not implemented yet",
-    offboard ? "true" : "false");
-  return false;
+  if (!mavros_state_.connected) {
+    RCLCPP_ERROR(this->get_logger(), "Cannot change control mode: MAVROS not connected");
+    return false;
+  }
+  if (offboard) {
+    if (mavros_state_.mode == "GUIDED") {
+      RCLCPP_INFO(this->get_logger(), "Already in GUIDED");
+      return true;
+    }
+    return setMavrosMode("GUIDED");
+  }
+  if (!mavros_state_.armed) {
+    RCLCPP_INFO(this->get_logger(), "Offboard off while disarmed: flight mode unchanged");
+    return true;
+  }
+  // Armed: hand over to a position-holding mode (revisited in stage 8)
+  return setMavrosMode("LOITER");
 }
+
+bool AerpawPlatform::setMavrosMode(const std::string & mode)
+{
+  mavros_msgs::srv::SetMode::Request request;
+  mavros_msgs::srv::SetMode::Response response;
+  
+  request.custom_mode = mode;
+  if (!mavros_set_mode_client_->sendRequest(request, response, 5)) {
+    RCLCPP_ERROR(this->get_logger(), "Set mode %s: MAVROS service not available", mode.c_str());
+    return false;
+  }
+  if (!response.mode_sent) {
+    RCLCPP_ERROR(this->get_logger(), "Set mode %s: rejected", mode.c_str());
+    return false;
+  }
+  RCLCPP_INFO(this->get_logger(), "Flight mode set to %s", mode.c_str());
+  return true;
+ }
 
 // Stage 7: remember which kind of command will be sent
 bool AerpawPlatform::ownSetPlatformControlMode(const as2_msgs::msg::ControlMode & msg)

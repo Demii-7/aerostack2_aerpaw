@@ -8,7 +8,11 @@
 
 #include <as2_core/aerial_platform.hpp>
 #include <as2_core/sensor.hpp>
+#include <as2_core/synchronous_service_client.hpp>
 #include <as2_msgs/msg/control_mode.hpp>
+#include <mavros_msgs/msg/state.hpp>
+#include <mavros_msgs/srv/command_bool.hpp>
+#include <mavros_msgs/srv/set_mode.hpp>
 #include <nav_msgs/msg/odometry.hpp>
 #include <sensor_msgs/msg/imu.hpp>
 #include <sensor_msgs/msg/nav_sat_fix.hpp>
@@ -37,6 +41,16 @@ public:
   bool ownLand() override;
 
 private:
+  // Ask MAVROS to change ArduPilot's flight mode (e.g. "GUIDED")
+  bool setMavrosMode(const std::string & mode);
+  // Latest MAVROS state: connected, armed, current mode
+  mavros_msgs::msg::State mavros_state_;
+  rclcpp::Subscription<mavros_msgs::msg::State>::SharedPtr mavros_state_sub_;
+  
+  // Clients for MAVROS services
+  as2::SynchronousServiceClient<mavros_msgs::srv::CommandBool>::SharedPtr mavros_arming_client_;
+  as2::SynchronousServiceClient<mavros_msgs::srv::SetMode>::SharedPtr mavros_set_mode_client_;
+
   // Frame names used by Aerostack2, e.g. "drone0/odom" and "drone0/base_link"
   std::string odom_frame_id_;
   std::string base_link_frame_id_;

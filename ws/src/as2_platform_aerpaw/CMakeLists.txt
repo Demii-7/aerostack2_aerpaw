@@ -13,6 +13,7 @@ set(PROJECT_DEPENDENCIES
   as2_msgs
   nav_msgs
   sensor_msgs
+  mavros_msgs
 )
 foreach(DEPENDENCY ${PROJECT_DEPENDENCIES})
   find_package(${DEPENDENCY} REQUIRED)
