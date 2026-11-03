@@ -10,3 +10,6 @@ ws/log/
 # Editor / OS clutter
 .vscode/
 *.swp
+
+# Python
+__pycache__/

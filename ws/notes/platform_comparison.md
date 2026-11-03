@@ -38,7 +38,8 @@ Adopt it. Our work shifts to what's genuinely AERPAW-specific:
 
 ## Caveats
 
-- Not yet flown on our emulator. Status: compared by code only.
+- Flown on our emulator Nov 2–3, 2026: arm, GUIDED, takeoff (5.04 m), land, 10 m square (corners within
+  0.13 m). Needed 5 small fixes, listed in Documentation.md (Stage 5). Stage 8 (emergencies) not tested yet.
 - AS2_ardupilot patched 2 lines in as2_core (arm/offboard return true when already in that state).
   Our image uses the 1.1.3 binary without that patch → run missions from a landed, disarmed drone.
 - Their smooth-trajectory generator (GCOPTER) needs their patched Aerostack2; we use position go_to instead.

@@ -116,28 +116,42 @@ GUIDED as offboard, arm after GUIDED, MAV_CMD_NAV_TAKEOFF, LAND, position/veloci
 Both use Aerostack2 1.1.3, same as our as2-aerpaw image.
 
 Files:
-- ws/src/as2_platform_mavlink/ — copied unchanged from AS2_ardupilot dea4310 (BSD-3)
-- ws/project_emulator/config/config.yaml — emulator config (fcu_url udp://:14550@, tgt_system 1, takeoff 5 m, position go_to)
-- ws/project_emulator/launch_as2.bash — tmux session as2_drone0: mavros, platform, estimator, controller, behaviors, viewer
-- ws/project_emulator/mission_takeoff_land.py, mission_square.py — test missions
-- ws/src/as2_platform_aerpaw/ — kept for reference, not used from here on
+- ws/src/as2_platform_mavlink/ — from AS2_ardupilot dea4310 (BSD-3), AERPAW changes marked "AERPAW change" in the code
+- ws/project_emulator/config/config.yaml — emulator config (takeoff 5 m, position go_to, estimator without GPS)
+- ws/project_emulator/launch_as2.bash — tmux session as2_<ns>: mavros, platform, estimator, controller, behaviors, viewer; -u fcu_url -s tgt_system
+- ws/project_emulator/run_tests.bash — build / check / reset / takeoff / square, logs to ws/notes/tests/T5.x_*
+- ws/project_emulator/mission_takeoff_land.py, mission_square.py, summarize_path.py — missions and path summary
+- ws/src/as2_platform_aerpaw/ — kept for reference; earlier stage 5 WIP saved on branch stage5-aerpaw-platform-wip
+
+Changes needed to run it on our setup (each found by a failed test, logs kept):
+| Test that failed | Cause | Change |
+|---|---|---|
+| T5.1a build | AS2 1.1.3 binary has no tf2::doTransform for TrajectorySetpoints (link error) | mavlink_platform.cpp: reject non-odom trajectory references instead of converting |
+| T5.2 run1 | MAVROS topics were /drone0/mavros/mavros/* (node named mavros inside ns drone0/mavros) | mavros_launch.py: namespace drone0 → /drone0/mavros/* |
+| T5.2 run2 | FCU URL empty after the namespace change (YAML key no longer matched) | mavros_launch.py: fcu_url / tgt_system launch args; launch_as2.bash passes udp://:14550@, 1 |
+| T5.3 run1 | Takeoff goal rejected: "earth" frame missing, estimator "Waiting for origin" with use_gps: true | config.yaml: use_gps false (as in Stage 4) |
+| T5.4 run2 | go_to after a finished go_to/takeoff reports success at once → corners (10,0), (0,10) missed by 2.2–2.4 m | mission_square.py: fly_to() waits until within 0.5 m of the corner |
 
 Known differences from the AS2_ardupilot setup:
 - Their Aerostack2 copy has a 2-line as2_core fix (arm/offboard return true when already in that state).
-  The 1.1.3 binary does not, so calling offboard()/arm() twice returns FAILED — run missions from a landed, disarmed, non-GUIDED drone.
+  The 1.1.3 binary does not → run_tests.bash reset (disarm + LAND) before each mission.
 - No GCOPTER / trajectory generator: go_to uses go_to_plugin_position (ArduPilot does the tracking).
+- Harmless "Invalid transition" warnings (e.g. LANDED -> LANDED), also listed in the AS2_ardupilot README.
 
-| Action | Window | Command | Result |
-|---|---|---|---|
-| Pull branch | W2 | cd ~/aerostack2_aerpaw; git fetch; git checkout stage5-pivot-mavlink-platform | |
-| Emulator up, QGC connected | W2/W1 | (Stage 0) | |
-| Start container | W3 | docker run -it --rm --name as2 --network container:E-VM-X0841-M1 -v ~/aerostack2_aerpaw/ws:/root/ws as2-aerpaw bash | |
-| Build | W3 | cd /root/ws; colcon build --symlink-install --packages-select as2_platform_mavlink --cmake-args -DBUILD_TESTING=OFF; source install/setup.bash | |
-| Launch stack | W3 | cd /root/ws/project_emulator; ./launch_as2.bash; tmux attach -t as2_drone0 | |
-| Connected | W4 | ros2 topic echo /drone0/mavros/state --once; ros2 topic echo /drone0/platform/info --once | |
-| Position | W4 | ros2 topic echo /drone0/self_localization/pose --once | |
-| T5/T6 takeoff + land | W4 | cd /root/ws/project_emulator; python3 mission_takeoff_land.py | |
-| T7 square | W4 | python3 mission_square.py | |
-| Stop | W3 | ./launch_as2.bash -k | |
+Run on Chameleon, Nov 2–3, 2026 (UTC), as2 container started detached (docker run -d ... sleep infinity; docker exec).
 
-Pass criteria: QGC shows GUIDED → armed → climb to ~5 m → LAND → disarmed (T6); 10 m square at 5 m like demo_square (T7).
+| Test | Command (in as2 container, ws/project_emulator) | Result |
+|---|---|---|
+| T5.1 build | ./run_tests.bash build | 1 package finished (52.4 s) after link fix |
+| Launch | ./launch_as2.bash | tmux as2_drone0; estimator "Earth to map set to 0, 0, 0" |
+| T5.2 link | ./run_tests.bash check | mavros connected: true, mode LAND; platform connected: true (from MAVROS, no longer hard-coded), DISARMED; self_localization frame earth |
+| T5.0 reset | ./run_tests.bash reset | arming success=True, mode_sent=True |
+| T5.3 takeoff + land | ./run_tests.bash takeoff | GUIDED OK, arm OK, takeoff OK ("Takeoff completed at 5.04 m"), land OK, final z 0.35 m |
+| T5.4 square | ./run_tests.bash square | all OK; corners reached within 0.13 / 0.11 / 0.09 / 0.04 m; max z 5.06 m; final z 0.02 m; 50.3 s |
+| Stop | ./launch_as2.bash -k | |
+
+Notes:
+- Positions printed by the missions come from DroneInterface; use T5.4_square_pose.csv / summary for the real path.
+- Don't run aerpawlib experiments while the stack (MAVROS) is running (both use UDP 14550).
+
+✅ Stage 5–7 equivalent complete on the emulator (arm, GUIDED, takeoff, land, position moves) using as2_platform_mavlink.
