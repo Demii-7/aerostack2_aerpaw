@@ -1,64 +1,110 @@
-## Stage 0: Test bench
+# Documentation (newest first)
 
-Window: W2 (Chameleon) unless noted.
+## Stage 6: AERPAW mode, flying by the real AERPAW rules (Nov 3, 2026)
 
-| Action | Command | Result |
-|---|---|---|
-| Project + reference clones | mkdir -p ~/aerostack2_aerpaw/reference ~/aerostack2_aerpaw/ws/src; cd ~/aerostack2_aerpaw/reference; git clone --branch 1.1.3 https://github.com/aerostack2/aerostack2.git; git clone --branch 1.1.0 https://github.com/aerostack2/as2_platform_mavlink.git | git describe --tags → 1.1.3, 1.1.0 |
-| Clone emulator | cd ~/aerostack2_aerpaw; git clone https://github.com/teaching-on-testbeds/aerpaw-emulator.git; cd aerpaw-emulator; git checkout 298ba60 | at commit 298ba60 |
-| Docker | docker --version (install via get.docker.com if missing; sudo usermod -aG docker cc; re-login) | docker run hello-world works |
-| Build + start emulator | tmux new -s emu; cd ~/aerostack2_aerpaw/aerpaw-emulator; docker compose -f docker-compose.uav.yml up --build -d | C-VM-X0841-M1 healthy; E-VM-X0841-M1, MAVLink-Gateway-X0841 up |
-| QGC tunnel (W1, Mac) | ssh -N -L 5760:127.0.0.1:5760 chameleon; QGC TCP link localhost:5760 | drone on ground in Raleigh, disarmed |
-| Test flight | cd ~/aerostack2_aerpaw/aerpaw-emulator; docker compose -f docker-compose.uav.yml exec node1-uav-evm run-aerpawlib demo_square | took off, flew 10 m square, landed |
+Why: on real AERPAW a MAVLink filter between the E-VM and the drone only allows GUIDED and LAND, takeoff to 20–110 m
+and GPS waypoints; the safety pilot arms; the drone must land within 5 m of takeoff. Our emulator has no filter, so
+Stage 5 (5 m, our own arm command, 50 Hz local setpoints) would abort on AERPAW. Research and plan:
+ws/notes/aerpaw_real_testbed_plan.md.
 
-✅ Stage 0 complete.
-
-## Stage 1: Aerostack2 + MAVROS environment
+Code change: parameter aerpaw.enabled in as2_platform_mavlink (src/aerpaw_mode.cpp): waits for the pilot to arm, one
+GPS waypoint per move, refuses < 20 m or > 110 m, LAND only within 5 m of takeoff. Settings: config/config_aerpaw.yaml
+(takeoff 25 m), config/control_modes_aerpaw.yaml (HOVER and POSITION only).
 
 | Action | Window | Command | Result |
 |---|---|---|---|
-| Write Dockerfile | W2 | nano ~/aerostack2_aerpaw/docker/Dockerfile (ros:humble-ros-base + ros-humble-aerostack2, ros-humble-mavros, ros-humble-mavros-extras, geographiclib-tools, wget, tmux; geographiclib datasets script) | file saved |
-| Build image | W2 | cd ~/aerostack2_aerpaw; docker build -t as2-aerpaw docker | as2-aerpaw:latest built (536 s) |
-| Remove old container | W2 | docker ps -a --filter name=as2; docker rm as2 | leftover aerostack2/humble container removed |
-| Start container | W3 | docker run -it --rm --name as2 --network container:E-VM-X0841-M1 -v ~/aerostack2_aerpaw/ws:/root/ws as2-aerpaw bash | prompt root@e-vm-x0841-m1:~/ws# |
-| Start MAVROS | W3 | ros2 launch mavros apm.launch fcu_url:=udp://:14550@ | connected; param download log flood (harmless) |
-| Open 2nd shell | W4 | docker exec -it as2 bash | inside container |
-| Check state | W4 | ros2 topic echo /mavros/state --once | connected: true, armed: false, mode: LAND, system_status: 3 |
-| Check GPS | W4 | ros2 topic echo /mavros/global_position/global --once | lat 35.7274877, lon -78.6962707, alt -34.17 (ellipsoid height) |
-| Check local position | W4 | ros2 topic echo /mavros/local_position/pose --once | x 0.36, y 0.58, z 0.04, frame map |
+| Get the latest code | W2 | cd ~/aerostack2_aerpaw; git pull | |
+| Start the as2 container | W3 | docker run -it --rm --name as2 --network container:E-VM-X0841-M1 -v ~/aerostack2_aerpaw/ws:/root/ws as2-aerpaw bash | |
+| Rebuild the platform | W3 | cd /root/ws; colcon build --symlink-install --packages-select as2_platform_mavlink --cmake-args -DBUILD_TESTING=OFF; source install/setup.bash | 1 package finished |
+| Start MAVROS, connected to the drone on UDP 14550 | W3 | ros2 launch as2_platform_mavlink mavros_launch.py namespace:=drone0 autopilot:=ardupilot fcu_url:=udp://:14550@ tgt_system:=1 mavros_config_file:=/root/ws/project_emulator/config/config_aerpaw.yaml | |
+| New container shell (W4–W8) | W4–W8 | ssh chameleon; docker exec -it as2 bash; source /root/ws/install/setup.bash | |
+| Platform (Aerostack2 commands → MAVROS) | W4 | ros2 launch as2_platform_mavlink as2_platform_mavlink_launch.py namespace:=drone0 platform_config_file:=/root/ws/project_emulator/config/config_aerpaw.yaml control_modes_file:=/root/ws/project_emulator/config/control_modes_aerpaw.yaml | |
+| State estimator (position in earth frame) | W5 | ros2 launch as2_state_estimator state_estimator_launch.py namespace:=drone0 config_file:=/root/ws/project_emulator/config/config_aerpaw.yaml | |
+| Motion controller | W6 | ros2 launch as2_motion_controller controller_launch.py namespace:=drone0 config_file:=/root/ws/project_emulator/config/config_aerpaw.yaml plugin_name:=pid_speed_controller | |
+| Motion behaviors (takeoff, land, go_to) | W7 | ros2 launch as2_behaviors_motion motion_behaviors_launch.py namespace:=drone0 config_file:=/root/ws/project_emulator/config/config_aerpaw.yaml | |
+| Check AERPAW mode is on | W4 | (read the output) | "AERPAW mode: pilot arms, GUIDED/LAND only, global waypoints, altitude 20-110 m" |
+| Start the mission | W8 | cd /root/ws/project_emulator; python3 mission_aerpaw.py -n drone0 | "waiting for the safety pilot to arm..." |
+| Act as the safety pilot (arm in STABILIZE) | W2 | docker exec E-VM-X0841-M1 python3 /opt/standalone/tools/auto_arm.py --connect udp:0.0.0.0:14551 --action arm --mode STABILIZE --timeout 60 | vehicle armed |
+| Watch the flight | W8, QGC | | arm OK, GUIDED, takeoff 25 m, 20 m square, back over takeoff point, LAND |
+| Optional: record every MAVLink message we send (start before MAVROS; MAVROS then uses fcu_url:=udp://:14570@127.0.0.1:14550) | W9 | python3 /root/ws/project_emulator/mavlink_audit.py --listen 14550 --mavros-port 14570 --out /root/ws/notes/tests/T6.3_mavlink_audit.json | JSON summary on Ctrl+C |
+| Stop | all | Ctrl+C in each window | |
 
-Observations:
-- Connection path: C-VM mavlink-router → E-VM address UDP 14550 → shared network (--network container:E-VM-X0841-M1) → MAVROS.
-- fcu_url default in apm.launch is a USB serial port; overridden with udp://:14550@.
-- MAVROS target system ID defaults to 1, matching the emulator drone.
-- Don't run aerpawlib experiments while MAVROS is running (both use UDP 14550).
+Results:
+- Run 1: takeoff refused, "no GPS fix" (the Stage 5 namespace fix changed the GPS topic). Fixed: platform also reads /drone0/mavros/global_position/global.
+- Run 2: waited for the pilot, takeoff 24.9 m, 20 m square at 22.5 m, landed 0.05 m from takeoff.
+- Audit: no arm/disarm sent; 1 NAV_TAKEOFF, SET_MODE GUIDED and LAND, 19 SET_POSITION_TARGET_GLOBAL_INT + MAVROS housekeeping.
+- aerpawlib demo_square through the same audit: waypoints as MISSION_ITEM current=2, mode via DO_SET_MODE.
+  Open question: does the real filter accept SET_POSITION_TARGET_GLOBAL_INT?
 
-✅ Stage 1 complete.
+Shortcut: ws/project_emulator/test_aerpaw_emulator.sh runs the same commands in screen sessions; logs in ws/notes/tests/T6.*.
 
-## Stage 2: Fly by hand (MAVROS only)
+✅ Stage 6 complete on the emulator.
 
-Window: W4 (inside as2 container), MAVROS running in W3, QGC connected.
+## Stage 5 (pivot): use as2_platform_mavlink instead of our own platform (Nov 2, 2026)
 
-| Action | Command | Result |
-|---|---|---|
-| Check state | ros2 topic echo /mavros/state --once | connected: true, armed: false |
-| GUIDED | ros2 service call /mavros/set_mode mavros_msgs/srv/SetMode "{custom_mode: 'GUIDED'}" | mode_sent=True |
-| Arm | ros2 service call /mavros/cmd/arming mavros_msgs/srv/CommandBool "{value: true}" | success=True, result=0 |
-| Take off 5 m | ros2 service call /mavros/cmd/takeoff mavros_msgs/srv/CommandTOL "{altitude: 5.0}" | success=True; rel_alt ≈ 5.00 |
-| Watch height | ros2 topic echo /mavros/global_position/rel_alt | 4.99–5.01 |
-| Move 10 m east | ros2 topic pub --once /mavros/setpoint_position/local geometry_msgs/msg/PoseStamped "{header: {frame_id: 'map'}, pose: {position: {x: 10.0, y: 0.0, z: 5.0}}}" | x=10.0, y=-0.04, z=5.01 |
-| Land | ros2 service call /mavros/set_mode mavros_msgs/srv/SetMode "{custom_mode: 'LAND'}" | landed, auto-disarmed |
+Why: meeting Oct 20, 2026. Every job left in our plan (stages 5–8) already exists in as2_platform_mavlink with the
+ArduPilot changes from https://github.com/GQP3715/AS2_ardupilot (commit dea4310). Comparison: ws/notes/platform_comparison.md.
+Our own as2_platform_aerpaw is kept for reference; its stage 5 WIP is on branch stage5-aerpaw-platform-wip.
 
-Observations:
-- Takeoff returns success immediately; must wait for altitude separately.
-- Takeoff while airborne fails with result=4 (MAV_RESULT_FAILED); use position setpoints to change height in flight.
-- A single position setpoint is enough for ArduPilot to fly to and hold a position.
-- LAND mode disarms automatically after touchdown.
-- MAVROS frame: x = east, y = north, z = up (meters from start).
+| Action | Window | Command | Result |
+|---|---|---|---|
+| Get the branch | W2 | cd ~/aerostack2_aerpaw; git fetch; git checkout stage5-pivot-mavlink-platform | |
+| Start the as2 container | W3 | docker run -it --rm --name as2 --network container:E-VM-X0841-M1 -v ~/aerostack2_aerpaw/ws:/root/ws as2-aerpaw bash | |
+| Build the platform | W3 | cd /root/ws; colcon build --symlink-install --packages-select as2_platform_mavlink --cmake-args -DBUILD_TESTING=OFF; source install/setup.bash | 1 package finished (52.4 s) |
+| Start MAVROS, connected to the drone on UDP 14550 | W3 | ros2 launch as2_platform_mavlink mavros_launch.py namespace:=drone0 autopilot:=ardupilot fcu_url:=udp://:14550@ tgt_system:=1 mavros_config_file:=/root/ws/project_emulator/config/config.yaml | |
+| New container shell (W4–W8) | W4–W8 | ssh chameleon; docker exec -it as2 bash; source /root/ws/install/setup.bash | |
+| Platform (Aerostack2 commands → MAVROS) | W4 | ros2 launch as2_platform_mavlink as2_platform_mavlink_launch.py namespace:=drone0 platform_config_file:=/root/ws/project_emulator/config/config.yaml | |
+| State estimator (position in earth frame) | W5 | ros2 launch as2_state_estimator state_estimator_launch.py namespace:=drone0 config_file:=/root/ws/project_emulator/config/config.yaml | |
+| Motion controller | W6 | ros2 launch as2_motion_controller controller_launch.py namespace:=drone0 config_file:=/root/ws/project_emulator/config/config.yaml plugin_name:=pid_speed_controller | |
+| Motion behaviors (takeoff, land, go_to) | W7 | ros2 launch as2_behaviors_motion motion_behaviors_launch.py namespace:=drone0 config_file:=/root/ws/project_emulator/config/config.yaml | |
+| Check the link | W8 | ros2 topic echo /drone0/mavros/state --once; ros2 topic echo /drone0/platform/info --once | connected: true, mode LAND; platform connected, DISARMED |
+| Check the position | W8 | ros2 topic echo /drone0/self_localization/pose --once | frame earth, x 10.0 y -0.5 z 0.32 |
+| Reset before each mission (on the ground) | W8 | ros2 service call /drone0/mavros/cmd/arming mavros_msgs/srv/CommandBool "{value: false}"; ros2 service call /drone0/mavros/set_mode mavros_msgs/srv/SetMode "{custom_mode: 'LAND'}" | success=True, mode_sent=True |
+| Take off to 5 m and land (offboard → arm → takeoff → 5 s → land) | W8 | cd /root/ws/project_emulator; python3 mission_takeoff_land.py -n drone0 | "Takeoff completed at 5.04 m", landed |
+| Record the position | W9 | ros2 topic echo /drone0/self_localization/pose --csv > /root/ws/notes/tests/T5.4_square_pose.csv | |
+| Fly a 10 m square at 5 m | W8 | python3 mission_square.py -n drone0 | |
+| Summarize the path (after Ctrl+C in W9) | W8 | python3 summarize_path.py /root/ws/notes/tests/T5.4_square_pose.csv | corners within 0.13 / 0.11 / 0.09 / 0.04 m, max z 5.06 m |
+| Stop | all | Ctrl+C in each window (stop MAVROS before aerpawlib: both use UDP 14550) | |
 
-✅ Stage 2 complete.
+Fixes needed to run it on our setup (each found by a failed test, logs in ws/notes/tests/T5.*):
+- Build link error with the AS2 1.1.3 binary (no tf2::doTransform for TrajectorySetpoints): platform rejects non-odom trajectory references.
+- MAVROS topics were /drone0/mavros/mavros/*: MAVROS launched in namespace drone0.
+- FCU URL empty after that: fcu_url / tgt_system are launch arguments.
+- Takeoff rejected, no earth frame (use_gps: true waits for an origin): use_gps: false, as in Stage 4.
+- Square cut two corners (go_to finished early): the mission waits until within 0.5 m of each corner.
 
-## Stage 3: Empty platform package
+Notes:
+- The AS2 1.1.3 binary returns FAILED for arm()/offboard() if already armed/GUIDED → reset before each mission.
+- Positions printed by the missions lag; use the recorded CSV.
+- Shortcuts: ws/project_emulator/launch_as2.bash starts W3–W7 in one tmux session; run_tests.bash runs build/check/reset/takeoff/square with logs.
+
+✅ Stage 5 complete (arm, GUIDED, takeoff, land, position moves).
+
+## Stage 4: Sensors (Oct 20, 2026)
+
+Changes (diffs): package.xml + CMakeLists.txt (nav_msgs, sensor_msgs);
+aerpaw_platform.hpp (includes, private members: frame ids, 4 sensors, 4 MAVROS subscriptions);
+aerpaw_platform.cpp (tf_utils include; configureSensors relays MAVROS → sensor_measurements).
+
+| Action | Window | Command | Result |
+|---|---|---|---|
+| MAVROS in drone namespace | W3 | ros2 launch mavros apm.launch fcu_url:=udp://:14550@ namespace:=drone0 | logs as drone0.mavros.* |
+| Build + run platform | W4 | cd /root/ws; colcon build --symlink-install; source install/setup.bash; ros2 launch as2_platform_aerpaw as2_platform_aerpaw_launch.py | "relaying MAVROS odom, imu, gps, battery" |
+| Compare odom | W6 | ros2 topic echo /drone0/mavros/local_position/odom --once; ros2 topic echo /drone0/sensor_measurements/odom --once | same values; frames map/base_link → drone0/odom, drone0/base_link |
+| State estimator | W5 | ros2 launch as2_state_estimator state_estimator_launch.py namespace:=drone0 plugin_name:=raw_odometry | "Earth to map set to 0, 0, 0" |
+| Self-localization (ground) | W6 | ros2 topic echo /drone0/self_localization/pose --once | frame earth; x 9.94, y -0.02, z 0.34 |
+| Fly by hand | W6 | /drone0/mavros/set_mode GUIDED; /drone0/mavros/cmd/arming true; /drone0/mavros/cmd/takeoff 5.0 | all success |
+| Self-localization (air) | W6 | ros2 topic echo /drone0/self_localization/pose --once | z 5.28 |
+| Land | W6 | /drone0/mavros/set_mode LAND | landed, auto-disarmed |
+
+Notes:
+- MAVROS topics now under /drone0/mavros/...; platform uses relative "mavros/..." names.
+- Local z ≈ 0.3 m on the ground (ArduPilot offset); Aerostack2 matches MAVROS exactly.
+- Harmless MAVROS warnings: "Unexpected command 11" (SET_MODE ack), "stale remote address 255.x" (QGC).
+
+✅ Stage 4 complete.
+
+## Stage 3: Empty platform package (Oct 19, 2026)
 
 Package: ~/aerostack2_aerpaw/ws/src/as2_platform_aerpaw
 Files: package.xml, CMakeLists.txt, include/as2_platform_aerpaw/aerpaw_platform.hpp,
@@ -84,95 +130,62 @@ Notes:
 
 ✅ Stage 3 complete.
 
-## Stage 4: Sensors
+## Stage 2: Fly by hand (MAVROS only) (Oct 18, 2026)
 
-Changes (diffs): package.xml + CMakeLists.txt (nav_msgs, sensor_msgs);
-aerpaw_platform.hpp (includes, private members: frame ids, 4 sensors, 4 MAVROS subscriptions);
-aerpaw_platform.cpp (tf_utils include; configureSensors relays MAVROS → sensor_measurements).
+Window: W4 (inside as2 container), MAVROS running in W3, QGC connected.
+
+| Action | Command | Result |
+|---|---|---|
+| Check state | ros2 topic echo /mavros/state --once | connected: true, armed: false |
+| GUIDED | ros2 service call /mavros/set_mode mavros_msgs/srv/SetMode "{custom_mode: 'GUIDED'}" | mode_sent=True |
+| Arm | ros2 service call /mavros/cmd/arming mavros_msgs/srv/CommandBool "{value: true}" | success=True, result=0 |
+| Take off 5 m | ros2 service call /mavros/cmd/takeoff mavros_msgs/srv/CommandTOL "{altitude: 5.0}" | success=True; rel_alt ≈ 5.00 |
+| Watch height | ros2 topic echo /mavros/global_position/rel_alt | 4.99–5.01 |
+| Move 10 m east | ros2 topic pub --once /mavros/setpoint_position/local geometry_msgs/msg/PoseStamped "{header: {frame_id: 'map'}, pose: {position: {x: 10.0, y: 0.0, z: 5.0}}}" | x=10.0, y=-0.04, z=5.01 |
+| Land | ros2 service call /mavros/set_mode mavros_msgs/srv/SetMode "{custom_mode: 'LAND'}" | landed, auto-disarmed |
+
+Observations:
+- Takeoff returns success immediately; must wait for altitude separately.
+- Takeoff while airborne fails with result=4 (MAV_RESULT_FAILED); use position setpoints to change height in flight.
+- A single position setpoint is enough for ArduPilot to fly to and hold a position.
+- LAND mode disarms automatically after touchdown.
+- MAVROS frame: x = east, y = north, z = up (meters from start).
+
+✅ Stage 2 complete.
+
+## Stage 1: Aerostack2 + MAVROS environment (Oct 18, 2026)
 
 | Action | Window | Command | Result |
 |---|---|---|---|
-| MAVROS in drone namespace | W3 | ros2 launch mavros apm.launch fcu_url:=udp://:14550@ namespace:=drone0 | logs as drone0.mavros.* |
-| Build + run platform | W4 | cd /root/ws; colcon build --symlink-install; source install/setup.bash; ros2 launch as2_platform_aerpaw as2_platform_aerpaw_launch.py | "relaying MAVROS odom, imu, gps, battery" |
-| Compare odom | W6 | ros2 topic echo /drone0/mavros/local_position/odom --once; ros2 topic echo /drone0/sensor_measurements/odom --once | same values; frames map/base_link → drone0/odom, drone0/base_link |
-| State estimator | W5 | ros2 launch as2_state_estimator state_estimator_launch.py namespace:=drone0 plugin_name:=raw_odometry | "Earth to map set to 0, 0, 0" |
-| Self-localization (ground) | W6 | ros2 topic echo /drone0/self_localization/pose --once | frame earth; x 9.94, y -0.02, z 0.34 |
-| Fly by hand | W6 | /drone0/mavros/set_mode GUIDED; /drone0/mavros/cmd/arming true; /drone0/mavros/cmd/takeoff 5.0 | all success |
-| Self-localization (air) | W6 | ros2 topic echo /drone0/self_localization/pose --once | z 5.28 |
-| Land | W6 | /drone0/mavros/set_mode LAND | landed, auto-disarmed |
+| Write Dockerfile | W2 | nano ~/aerostack2_aerpaw/docker/Dockerfile (ros:humble-ros-base + ros-humble-aerostack2, ros-humble-mavros, ros-humble-mavros-extras, geographiclib-tools, wget, tmux; geographiclib datasets script) | file saved |
+| Build image | W2 | cd ~/aerostack2_aerpaw; docker build -t as2-aerpaw docker | as2-aerpaw:latest built (536 s) |
+| Remove old container | W2 | docker ps -a --filter name=as2; docker rm as2 | leftover aerostack2/humble container removed |
+| Start container | W3 | docker run -it --rm --name as2 --network container:E-VM-X0841-M1 -v ~/aerostack2_aerpaw/ws:/root/ws as2-aerpaw bash | prompt root@e-vm-x0841-m1:~/ws# |
+| Start MAVROS | W3 | ros2 launch mavros apm.launch fcu_url:=udp://:14550@ | connected; param download log flood (harmless) |
+| Open 2nd shell | W4 | docker exec -it as2 bash | inside container |
+| Check state | W4 | ros2 topic echo /mavros/state --once | connected: true, armed: false, mode: LAND, system_status: 3 |
+| Check GPS | W4 | ros2 topic echo /mavros/global_position/global --once | lat 35.7274877, lon -78.6962707, alt -34.17 (ellipsoid height) |
+| Check local position | W4 | ros2 topic echo /mavros/local_position/pose --once | x 0.36, y 0.58, z 0.04, frame map |
 
-Notes:
-- MAVROS topics now under /drone0/mavros/...; platform uses relative "mavros/..." names.
-- Local z ≈ 0.3 m on the ground (ArduPilot offset); Aerostack2 matches MAVROS exactly.
-- Harmless MAVROS warnings: "Unexpected command 11" (SET_MODE ack), "stale remote address 255.x" (QGC).
+Observations:
+- Connection path: C-VM mavlink-router → E-VM address UDP 14550 → shared network (--network container:E-VM-X0841-M1) → MAVROS.
+- fcu_url default in apm.launch is a USB serial port; overridden with udp://:14550@.
+- MAVROS target system ID defaults to 1, matching the emulator drone.
+- Don't run aerpawlib experiments while MAVROS is running (both use UDP 14550).
 
-✅ Stage 4 complete.
-## Stage 5 (pivot): reuse as2_platform_mavlink with the ArduPilot profile
+✅ Stage 1 complete.
 
-Why: meeting Oct 20, 2026 — with the MAVROS adapter approach nothing is AERPAW-specific, so use
-as2_platform_mavlink (ArduPilot-fixed version from https://github.com/GQP3715/AS2_ardupilot, commit dea4310)
-instead of finishing as2_platform_aerpaw. That fork already implements stages 5–8 of our plan for ArduPilot:
-GUIDED as offboard, arm after GUIDED, MAV_CMD_NAV_TAKEOFF, LAND, position/velocity/trajectory setpoints, BRAKE hover.
-Both use Aerostack2 1.1.3, same as our as2-aerpaw image.
+## Stage 0: Test bench (Oct 18, 2026)
 
-Files:
-- ws/src/as2_platform_mavlink/ — from AS2_ardupilot dea4310 (BSD-3), AERPAW changes marked "AERPAW change" in the code
-- ws/project_emulator/config/config.yaml — emulator config (takeoff 5 m, position go_to, estimator without GPS)
-- ws/project_emulator/launch_as2.bash — tmux session as2_<ns>: mavros, platform, estimator, controller, behaviors, viewer; -u fcu_url -s tgt_system
-- ws/project_emulator/run_tests.bash — build / check / reset / takeoff / square, logs to ws/notes/tests/T5.x_*
-- ws/project_emulator/mission_takeoff_land.py, mission_square.py, summarize_path.py — missions and path summary
-- ws/src/as2_platform_aerpaw/ — kept for reference; earlier stage 5 WIP saved on branch stage5-aerpaw-platform-wip
+Window: W2 (Chameleon) unless noted.
 
-Changes needed to run it on our setup (each found by a failed test, logs kept):
-| Test that failed | Cause | Change |
+| Action | Command | Result |
 |---|---|---|
-| T5.1a build | AS2 1.1.3 binary has no tf2::doTransform for TrajectorySetpoints (link error) | mavlink_platform.cpp: reject non-odom trajectory references instead of converting |
-| T5.2 run1 | MAVROS topics were /drone0/mavros/mavros/* (node named mavros inside ns drone0/mavros) | mavros_launch.py: namespace drone0 → /drone0/mavros/* |
-| T5.2 run2 | FCU URL empty after the namespace change (YAML key no longer matched) | mavros_launch.py: fcu_url / tgt_system launch args; launch_as2.bash passes udp://:14550@, 1 |
-| T5.3 run1 | Takeoff goal rejected: "earth" frame missing, estimator "Waiting for origin" with use_gps: true | config.yaml: use_gps false (as in Stage 4) |
-| T5.4 run2 | go_to after a finished go_to/takeoff reports success at once → corners (10,0), (0,10) missed by 2.2–2.4 m | mission_square.py: fly_to() waits until within 0.5 m of the corner |
+| Project + reference clones | mkdir -p ~/aerostack2_aerpaw/reference ~/aerostack2_aerpaw/ws/src; cd ~/aerostack2_aerpaw/reference; git clone --branch 1.1.3 https://github.com/aerostack2/aerostack2.git; git clone --branch 1.1.0 https://github.com/aerostack2/as2_platform_mavlink.git | git describe --tags → 1.1.3, 1.1.0 |
+| Clone emulator | cd ~/aerostack2_aerpaw; git clone https://github.com/teaching-on-testbeds/aerpaw-emulator.git; cd aerpaw-emulator; git checkout 298ba60 | at commit 298ba60 |
+| Docker | docker --version (install via get.docker.com if missing; sudo usermod -aG docker cc; re-login) | docker run hello-world works |
+| Build + start emulator | tmux new -s emu; cd ~/aerostack2_aerpaw/aerpaw-emulator; docker compose -f docker-compose.uav.yml up --build -d | C-VM-X0841-M1 healthy; E-VM-X0841-M1, MAVLink-Gateway-X0841 up |
+| QGC tunnel (W1, Mac) | ssh -N -L 5760:127.0.0.1:5760 chameleon; QGC TCP link localhost:5760 | drone on ground in Raleigh, disarmed |
+| Test flight | cd ~/aerostack2_aerpaw/aerpaw-emulator; docker compose -f docker-compose.uav.yml exec node1-uav-evm run-aerpawlib demo_square | took off, flew 10 m square, landed |
 
-Known differences from the AS2_ardupilot setup:
-- Their Aerostack2 copy has a 2-line as2_core fix (arm/offboard return true when already in that state).
-  The 1.1.3 binary does not → run_tests.bash reset (disarm + LAND) before each mission.
-- No GCOPTER / trajectory generator: go_to uses go_to_plugin_position (ArduPilot does the tracking).
-- Harmless "Invalid transition" warnings (e.g. LANDED -> LANDED), also listed in the AS2_ardupilot README.
-
-Run on Chameleon, Nov 2–3, 2026 (UTC), as2 container started detached (docker run -d ... sleep infinity; docker exec).
-
-| Test | Command (in as2 container, ws/project_emulator) | Result |
-|---|---|---|
-| T5.1 build | ./run_tests.bash build | 1 package finished (52.4 s) after link fix |
-| Launch | ./launch_as2.bash | tmux as2_drone0; estimator "Earth to map set to 0, 0, 0" |
-| T5.2 link | ./run_tests.bash check | mavros connected: true, mode LAND; platform connected: true (from MAVROS, no longer hard-coded), DISARMED; self_localization frame earth |
-| T5.0 reset | ./run_tests.bash reset | arming success=True, mode_sent=True |
-| T5.3 takeoff + land | ./run_tests.bash takeoff | GUIDED OK, arm OK, takeoff OK ("Takeoff completed at 5.04 m"), land OK, final z 0.35 m |
-| T5.4 square | ./run_tests.bash square | all OK; corners reached within 0.13 / 0.11 / 0.09 / 0.04 m; max z 5.06 m; final z 0.02 m; 50.3 s |
-| Stop | ./launch_as2.bash -k | |
-
-Notes:
-- Positions printed by the missions come from DroneInterface; use T5.4_square_pose.csv / summary for the real path.
-- Don't run aerpawlib experiments while the stack (MAVROS) is running (both use UDP 14550).
-
-✅ Stage 5–7 equivalent complete on the emulator (arm, GUIDED, takeoff, land, position moves) using as2_platform_mavlink.
-
-## Stage 6: AERPAW mode (toward the real testbed)
-
-Why: on real AERPAW a MAVLink filter only allows GUIDED/LAND, takeoff to 20–110 m, global waypoints and yaw/speed
-changes; the safety pilot arms; landing within 5 m of takeoff. Our emulator has no filter, so stage 5 would abort
-on the testbed. Full research, plan and open questions: ws/notes/aerpaw_real_testbed_plan.md.
-
-Changes: as2_platform_mavlink aerpaw.enabled (src/aerpaw_mode.cpp), config_aerpaw.yaml + control_modes_aerpaw.yaml,
-launch_as2.bash -a (AERPAW mode) -S (screen sessions, as AERPAW stopexperiment.sh expects) -w (workspace),
-mission_aerpaw.py, mavlink_audit.py (records every message we send), test_aerpaw_emulator.sh,
-ws/aerpaw/install_evm.sh and startVehicle.sh for a real E-VM.
-
-| Test | Command (Chameleon host) | Result |
-|---|---|---|
-| T6 run 1 | ws/project_emulator/test_aerpaw_emulator.sh | takeoff refused, no GPS fix (remap); fixed |
-| T6 run 2 | ws/project_emulator/test_aerpaw_emulator.sh | ✅ waited for (simulated) pilot, takeoff 24.9 m, 20 m square at 22.5 m, landed 0.05 m from takeoff |
-| T6.3 audit | (in the test) | no arm/disarm sent; NAV_TAKEOFF, SET_MODE GUIDED/LAND, 19 SET_POSITION_TARGET_GLOBAL_INT + MAVROS housekeeping |
-| T6.5 baseline | aerpawlib demo_square through mavlink_audit.py | aerpawlib uses MISSION_ITEM current=2 for waypoints, DO_SET_MODE, plus its own housekeeping |
-
-Open: whether the real filter accepts SET_POSITION_TARGET_GLOBAL_INT (aerpawlib uses MISSION_ITEM current=2).
-Next: Hello AERPAW → Development session → install_evm.sh → audit run in the AERPAW virtual environment.
+✅ Stage 0 complete.
