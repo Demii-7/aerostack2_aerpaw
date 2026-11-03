@@ -111,9 +111,15 @@ def get_node(context, *args, **kwargs) -> list:
                             default_file=get_mavros_config_file()),
                         link_params,
                         ],
+            # AERPAW change: with namespace <ns> the topics are /<ns>/mavros/...,
+            # which the relative rules no longer match, so remap the full names too.
             remappings=[('imu/data', f'/{namespace}/sensor_measurements/imu'),
                         ('global_position/global', f'/{namespace}/sensor_measurements/gps'),
                         ('battery', f'/{namespace}/sensor_measurements/battery'),
+                        (f'/{ns}/mavros/imu/data', f'/{namespace}/sensor_measurements/imu'),
+                        (f'/{ns}/mavros/global_position/global',
+                         f'/{namespace}/sensor_measurements/gps'),
+                        (f'/{ns}/mavros/battery', f'/{namespace}/sensor_measurements/battery'),
                         ],
         )]
 
