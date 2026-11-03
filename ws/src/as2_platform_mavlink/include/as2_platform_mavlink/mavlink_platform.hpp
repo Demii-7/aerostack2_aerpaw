@@ -239,6 +239,7 @@ private:
 
   AerpawConfig aerpaw_;
   rclcpp::Subscription<sensor_msgs::msg::NavSatFix>::SharedPtr aerpaw_gps_sub_;
+  rclcpp::Subscription<sensor_msgs::msg::NavSatFix>::SharedPtr aerpaw_gps_raw_sub_;
   rclcpp::Subscription<std_msgs::msg::Float64>::SharedPtr aerpaw_rel_alt_sub_;
   rclcpp::Publisher<mavros_msgs::msg::GlobalPositionTarget>::SharedPtr aerpaw_global_pub_;
   sensor_msgs::msg::NavSatFix aerpaw_fix_;

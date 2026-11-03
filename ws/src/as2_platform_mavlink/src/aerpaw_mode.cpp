@@ -72,13 +72,17 @@ void MavlinkPlatform::setupAerpawCommunications(
   if (!aerpaw_.enabled) {
     return;
   }
-  // mavros_launch.py remaps global_position/global to sensor_measurements/gps.
-  aerpaw_gps_sub_ = this->create_subscription<sensor_msgs::msg::NavSatFix>(
-    "sensor_measurements/gps", rclcpp::SensorDataQoS(),
-    [this](const sensor_msgs::msg::NavSatFix::SharedPtr msg) {
+  // mavros_launch.py is meant to remap global_position/global to
+  // sensor_measurements/gps, but the remap does not match the MAVROS plugin
+  // sub-node topics with namespace <ns> (T6 run 1), so listen to both names.
+  auto gps_cb = [this](const sensor_msgs::msg::NavSatFix::SharedPtr msg) {
       aerpaw_fix_ = *msg;
       aerpaw_fix_received_ = true;
-    }, feedback_options);
+    };
+  aerpaw_gps_sub_ = this->create_subscription<sensor_msgs::msg::NavSatFix>(
+    "sensor_measurements/gps", rclcpp::SensorDataQoS(), gps_cb, feedback_options);
+  aerpaw_gps_raw_sub_ = this->create_subscription<sensor_msgs::msg::NavSatFix>(
+    "mavros/global_position/global", rclcpp::SensorDataQoS(), gps_cb, feedback_options);
   aerpaw_rel_alt_sub_ = this->create_subscription<std_msgs::msg::Float64>(
     "mavros/global_position/rel_alt", rclcpp::SensorDataQoS(),
     [this](const std_msgs::msg::Float64::SharedPtr msg) {aerpaw_rel_alt_ = msg->data;},
