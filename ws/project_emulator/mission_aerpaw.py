@@ -20,6 +20,8 @@ def main():
     parser.add_argument('-n', '--namespace', default='drone0')
     parser.add_argument('--side', type=float, default=20.0, help='square side (m)')
     parser.add_argument('--speed', type=float, default=3.0)
+    parser.add_argument('--alt', type=float, default=25.0,
+                        help='flying height (m above start, 20-110 on AERPAW)')
     args = parser.parse_args()
 
     rclpy.init()
@@ -37,7 +39,10 @@ def main():
     ok = ok and step('takeoff', drone.takeoff(height=25.0, speed=1.0))
 
     if ok:
-        x0, y0, z = drone.position
+        # DroneInterface.position lags right after takeoff (T6 run 2 read 22.5 m while the
+        # platform reported 25), so fly at the commanded height, not the measured one.
+        x0, y0, _ = drone.position
+        z = args.alt
         print(f'home (earth frame): x {x0:.2f} y {y0:.2f}, flying at z {z:.1f}', flush=True)
         s = args.side
         path = [[x0 + s, y0, z], [x0 + s, y0 + s, z], [x0, y0 + s, z], [x0, y0, z]]
