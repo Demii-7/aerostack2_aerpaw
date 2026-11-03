@@ -1,5 +1,11 @@
 # Documentation (newest first)
 
+Platform code: `ws/src/as2_platform_mavlink` is a git submodule of https://github.com/Demii-7/as2_platform_mavlink
+(fork of aerostack2/as2_platform_mavlink, branch `aerpaw`: 1.1.0 + ArduPilot support from GQP3715/AS2_ardupilot
++ our fixes and AERPAW mode). This repo keeps everything else (configs, missions, scripts, notes).
+Clone with `git clone --recurse-submodules ...`, or run `git submodule update --init` after a pull or checkout.
+To change the platform: commit inside ws/src/as2_platform_mavlink, push to the fork, then commit the new submodule commit here.
+
 ## Stage 6: AERPAW mode, flying by the real AERPAW rules (Nov 3, 2026)
 
 Why: on real AERPAW a MAVLink filter between the E-VM and the drone only allows GUIDED and LAND, takeoff to 20–110 m
@@ -13,7 +19,7 @@ GPS waypoint per move, refuses < 20 m or > 110 m, LAND only within 5 m of takeof
 
 | Action | Window | Command | Result |
 |---|---|---|---|
-| Get the latest code | W2 | cd ~/aerostack2_aerpaw; git pull | |
+| Get the latest code | W2 | cd ~/aerostack2_aerpaw; git pull; git submodule update --init | |
 | Start the as2 container | W3 | docker run -it --rm --name as2 --network container:E-VM-X0841-M1 -v ~/aerostack2_aerpaw/ws:/root/ws as2-aerpaw bash | |
 | Rebuild the platform | W3 | cd /root/ws; colcon build --symlink-install --packages-select as2_platform_mavlink --cmake-args -DBUILD_TESTING=OFF; source install/setup.bash | 1 package finished |
 | Start MAVROS, connected to the drone on UDP 14550 | W3 | ros2 launch as2_platform_mavlink mavros_launch.py namespace:=drone0 autopilot:=ardupilot fcu_url:=udp://:14550@ tgt_system:=1 mavros_config_file:=/root/ws/project_emulator/config/config_aerpaw.yaml | |
@@ -48,7 +54,7 @@ Our own as2_platform_aerpaw is kept for reference; its stage 5 WIP is on branch 
 
 | Action | Window | Command | Result |
 |---|---|---|---|
-| Get the branch | W2 | cd ~/aerostack2_aerpaw; git fetch; git checkout stage5-pivot-mavlink-platform | |
+| Get the branch | W2 | cd ~/aerostack2_aerpaw; git fetch; git checkout stage5-pivot-mavlink-platform; git submodule update --init | |
 | Start the as2 container | W3 | docker run -it --rm --name as2 --network container:E-VM-X0841-M1 -v ~/aerostack2_aerpaw/ws:/root/ws as2-aerpaw bash | |
 | Build the platform | W3 | cd /root/ws; colcon build --symlink-install --packages-select as2_platform_mavlink --cmake-args -DBUILD_TESTING=OFF; source install/setup.bash | 1 package finished (52.4 s) |
 | Start MAVROS, connected to the drone on UDP 14550 | W3 | ros2 launch as2_platform_mavlink mavros_launch.py namespace:=drone0 autopilot:=ardupilot fcu_url:=udp://:14550@ tgt_system:=1 mavros_config_file:=/root/ws/project_emulator/config/config.yaml | |

@@ -5,8 +5,9 @@
 # Docker image has). Then "Save" the experiment in the portal so the testbed
 # run uses the same image.
 #
-#   git clone https://github.com/Demii-7/aerostack2_aerpaw.git /root/aerostack2_aerpaw
-#   cd /root/aerostack2_aerpaw && git checkout stage5-pivot-mavlink-platform
+#   git clone --recurse-submodules https://github.com/Demii-7/aerostack2_aerpaw.git /root/aerostack2_aerpaw
+#   cd /root/aerostack2_aerpaw && git checkout stage5-pivot-mavlink-platform && git submodule update --init
+#   (ws/src/as2_platform_mavlink is a submodule: Demii-7/as2_platform_mavlink, branch aerpaw)
 #   ./ws/aerpaw/install_evm.sh
 #
 # Needs internet access from the E-VM (true in the emulator; check on AERPAW with

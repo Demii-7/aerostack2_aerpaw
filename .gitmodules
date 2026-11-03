@@ -1,0 +1,4 @@
+[submodule "ws/src/as2_platform_mavlink"]
+	path = ws/src/as2_platform_mavlink
+	url = https://github.com/Demii-7/as2_platform_mavlink.git
+	branch = aerpaw

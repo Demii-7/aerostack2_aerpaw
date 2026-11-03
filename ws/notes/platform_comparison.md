@@ -5,7 +5,8 @@ as2_platform_mavlink with ArduPilot support? If so, adopt it instead of rebuildi
 
 Sources compared:
 - ours: ws/src/as2_platform_aerpaw (stages 3–4, commit a596041)
-- theirs: ws/src/as2_platform_mavlink, copied from GQP3715/AS2_ardupilot dea4310
+- theirs: ws/src/as2_platform_mavlink (submodule: Demii-7/as2_platform_mavlink branch aerpaw, whose first commit
+  is the platform from GQP3715/AS2_ardupilot dea4310)
   (line numbers below refer to src/mavlink_platform.cpp)
 
 ## Our plan, job by job
