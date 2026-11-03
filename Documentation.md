@@ -155,3 +155,24 @@ Notes:
 - Don't run aerpawlib experiments while the stack (MAVROS) is running (both use UDP 14550).
 
 ✅ Stage 5–7 equivalent complete on the emulator (arm, GUIDED, takeoff, land, position moves) using as2_platform_mavlink.
+
+## Stage 6: AERPAW mode (toward the real testbed)
+
+Why: on real AERPAW a MAVLink filter only allows GUIDED/LAND, takeoff to 20–110 m, global waypoints and yaw/speed
+changes; the safety pilot arms; landing within 5 m of takeoff. Our emulator has no filter, so stage 5 would abort
+on the testbed. Full research, plan and open questions: ws/notes/aerpaw_real_testbed_plan.md.
+
+Changes: as2_platform_mavlink aerpaw.enabled (src/aerpaw_mode.cpp), config_aerpaw.yaml + control_modes_aerpaw.yaml,
+launch_as2.bash -a (AERPAW mode) -S (screen sessions, as AERPAW stopexperiment.sh expects) -w (workspace),
+mission_aerpaw.py, mavlink_audit.py (records every message we send), test_aerpaw_emulator.sh,
+ws/aerpaw/install_evm.sh and startVehicle.sh for a real E-VM.
+
+| Test | Command (Chameleon host) | Result |
+|---|---|---|
+| T6 run 1 | ws/project_emulator/test_aerpaw_emulator.sh | takeoff refused, no GPS fix (remap); fixed |
+| T6 run 2 | ws/project_emulator/test_aerpaw_emulator.sh | ✅ waited for (simulated) pilot, takeoff 24.9 m, 20 m square at 22.5 m, landed 0.05 m from takeoff |
+| T6.3 audit | (in the test) | no arm/disarm sent; NAV_TAKEOFF, SET_MODE GUIDED/LAND, 19 SET_POSITION_TARGET_GLOBAL_INT + MAVROS housekeeping |
+| T6.5 baseline | aerpawlib demo_square through mavlink_audit.py | aerpawlib uses MISSION_ITEM current=2 for waypoints, DO_SET_MODE, plus its own housekeeping |
+
+Open: whether the real filter accepts SET_POSITION_TARGET_GLOBAL_INT (aerpawlib uses MISSION_ITEM current=2).
+Next: Hello AERPAW → Development session → install_evm.sh → audit run in the AERPAW virtual environment.
