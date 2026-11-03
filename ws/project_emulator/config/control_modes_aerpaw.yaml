@@ -1,0 +1,10 @@
+# Control modes for AERPAW mode (platform aerpaw.enabled: true).
+# The AERPAW MAVLink filter only accepts global waypoints, so only HOVER and
+# POSITION are offered; SPEED and TRAJECTORY would need velocity / local
+# setpoints, which the filter rejects. Codes: see the as2_platform_mavlink
+# config/control_modes.yaml header.
+available_modes:
+  - 0b00000000 # UNSET
+  - 0b00010000 # HOVER
+  - 0b01100001 # POSITION with yaw ANGLE
+  - 0b01100101 # POSITION with yaw SPEED (yaw is not sent in AERPAW mode)

@@ -1,0 +1,69 @@
+# Aerostack2 config for AERPAW mode: the restrictions of the real AERPAW MAVLink filter
+# (pilot arms, GUIDED/LAND only, global waypoints, 20-110 m AGL, land within 5 m of takeoff).
+# Used by launch_as2.bash -a, on the emulator and on a real AERPAW E-VM.
+# Based on config.yaml.
+# Adapted from GQP3715/AS2_ardupilot src/project_mavlink/config/config.yaml (dea4310).
+# Changes: MAVROS fcu_url points at the E-VM UDP port, takeoff height 25 m,
+# go_to/follow_path use position plugins (no trajectory generator needed).
+/**:
+  ros__parameters:
+    tf_timeout_threshold: 0.05
+
+  # Platform (as2_platform_mavlink, ArduPilot profile)
+  platform:
+    ros__parameters:
+      cmd_freq: 50.0
+      info_freq: 10.0
+      autopilot: "ardupilot"
+      vehicle_type: "copter"
+      modes:
+        offboard: "GUIDED"
+        manual: "LOITER"
+        hold: "BRAKE"
+      connection:
+        timeout: 8.0
+      control:
+        command_timeout: 0.5
+        mode_change_timeout: 5.0
+      # Sent as MAV_CMD_NAV_TAKEOFF. The Takeoff action goal height is NOT
+      # forwarded by takeoff_plugin_platform, so this is the real takeoff height.
+      takeoff:
+        height: 25.0
+        height_tolerance: 1.0
+        timeout: 60.0
+        blocking: true
+      land:
+        timeout: 120.0
+      aerpaw:
+        enabled: true
+        arm_wait_timeout: 300.0  # s to wait for the safety pilot to arm
+        min_alt: 20.0  # m AGL, filter limits
+        max_alt: 110.0
+        land_radius: 5.0  # m from the takeoff point
+        resend_period: 2.0  # s, repeat the current waypoint
+        min_target_change: 0.5  # m
+
+  # State estimator: MAVROS local odom (ENU, anchored at ArduPilot EKF origin)
+  # use_gps: true (AS2_ardupilot setting) waits forever for an origin with the
+  # 1.1.3 binary ("Waiting for origin to be set"); Stage 4 defaults set earth at once.
+  state_estimator:
+    ros__parameters:
+      plugin_name: "raw_odometry"
+      use_gps: false
+
+  # Motion behaviors
+  TakeoffBehavior:
+    ros__parameters:
+      takeoff_plugin_name: "takeoff_plugin_platform"
+  LandBehavior:
+    ros__parameters:
+      land_plugin_name: "land_plugin_platform"
+  GoToBehavior:
+    ros__parameters:
+      go_to_plugin_name: "go_to_plugin_position"
+  FollowPathBehavior:
+    ros__parameters:
+      follow_path_plugin_name: "follow_path_plugin_position"
+
+# MAVROS link (fcu_url, tgt_system) is passed by launch_as2.bash -u / -s,
+# default udp://:14550@ and system 1 (same link as Stage 1).
