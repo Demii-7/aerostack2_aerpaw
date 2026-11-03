@@ -45,9 +45,15 @@ case "$1" in
     ;;
   square)
     cd "${here}"
+    # Record the flown path (sec,nanosec,frame,x,y,z,...) as evidence; the
+    # positions printed by the mission come from DroneInterface and lag ~1 waypoint.
+    ros2 topic echo /${ns}/self_localization/pose --csv > "${out}/T5.4_square_pose.csv" &
+    rec=$!
     log T5.4_square.txt python3 mission_square.py -n ${ns}
+    kill ${rec}
+    python3 "${here}/summarize_path.py" "${out}/T5.4_square_pose.csv" | tee "${out}/T5.4_square_summary.txt"
     ;;
   *)
-    sed -n 2,9p "$0"; exit 1
+    sed -n 2,11p "$0"; exit 1
     ;;
 esac
