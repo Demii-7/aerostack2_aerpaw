@@ -1,0 +1,19 @@
+{
+  "documented_allowed": {
+    "HEARTBEAT": 83,
+    "SET_MODE:GUIDED": 1
+  },
+  "duration_s": 86.2,
+  "housekeeping_ask_aerpaw": {
+    "MISSION_ACK": 3,
+    "MISSION_REQUEST_LIST": 7,
+    "PARAM_REQUEST_LIST": 1,
+    "PARAM_REQUEST_READ": 1262,
+    "SYSTEM_TIME": 83,
+    "TIMESYNC": 835
+  },
+  "not_in_filter_list": {
+    "COMMAND_LONG:GET_HOME_POSITION": 1,
+    "COMMAND_LONG:REQUEST_MESSAGE": 1
+  }
+}

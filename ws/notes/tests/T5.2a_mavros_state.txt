@@ -1,14 +1,14 @@
-# 2026-11-03T08:03:47Z  echo1 /drone0/mavros/state
+# 2026-11-03T13:51:25Z  echo1 /drone0/mavros/state
 header:
   stamp:
-    sec: 1793693030
-    nanosec: 55365970
+    sec: 1793713891
+    nanosec: 678599844
   frame_id: ''
 connected: true
-armed: true
-guided: true
+armed: false
+guided: false
 manual_input: true
-mode: GUIDED
+mode: LAND
 system_status: 3
 ---
 # exit=0

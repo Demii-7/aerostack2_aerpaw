@@ -1,0 +1,22 @@
+{
+  "documented_allowed": {
+    "COMMAND_LONG:NAV_TAKEOFF": 1,
+    "HEARTBEAT": 175,
+    "SET_MODE:GUIDED": 1,
+    "SET_MODE:LAND": 1,
+    "SET_POSITION_TARGET_GLOBAL_INT": 19
+  },
+  "duration_s": 178.6,
+  "housekeeping_ask_aerpaw": {
+    "MISSION_ACK": 3,
+    "MISSION_REQUEST_LIST": 7,
+    "PARAM_REQUEST_LIST": 1,
+    "PARAM_REQUEST_READ": 930,
+    "SYSTEM_TIME": 175,
+    "TIMESYNC": 1767
+  },
+  "not_in_filter_list": {
+    "COMMAND_LONG:GET_HOME_POSITION": 1,
+    "COMMAND_LONG:REQUEST_MESSAGE": 1
+  }
+}

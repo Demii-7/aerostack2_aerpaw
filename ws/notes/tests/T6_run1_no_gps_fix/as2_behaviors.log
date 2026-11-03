@@ -1,0 +1,19 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-11-03-09-47-37-038966-e-vm-x0841-m1-3782
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [follow_path_behavior_node-1]: process started with pid [3784]
+[INFO] [go_to_behavior_node-2]: process started with pid [3786]
+[INFO] [land_behavior_node-3]: process started with pid [3788]
+[INFO] [takeoff_behavior_node-4]: process started with pid [3790]
+[land_behavior_node-3] [0m[INFO] [1793699257.269447170] [drone0.LandBehavior]: Construct with name [LandBehavior][0m
+[land_behavior_node-3] [0m[INFO] [1793699257.302841683] [drone0.LandBehavior]: LAND BEHAVIOR PLUGIN LOADED: land_plugin_platform::Plugin[0m
+[follow_path_behavior_node-1] [0m[INFO] [1793699257.591413250] [drone0.FollowPathBehavior]: Construct with name [FollowPathBehavior][0m
+[takeoff_behavior_node-4] [0m[INFO] [1793699257.619155562] [drone0.TakeoffBehavior]: Construct with name [TakeoffBehavior][0m
+[go_to_behavior_node-2] [0m[INFO] [1793699257.622308517] [drone0.GoToBehavior]: Construct with name [GoToBehavior][0m
+[follow_path_behavior_node-1] [0m[INFO] [1793699257.690775886] [drone0.FollowPathBehavior]: FOLLOW PATH PLUGIN LOADED: follow_path_plugin_position::Plugin[0m
+[go_to_behavior_node-2] [0m[INFO] [1793699257.706041161] [drone0.GoToBehavior]: GO TO BEHAVIOR PLUGIN LOADED: go_to_plugin_position::Plugin[0m
+[takeoff_behavior_node-4] [0m[INFO] [1793699257.730012162] [drone0.TakeoffBehavior]: TAKEOFF BEHAVIOR PLUGIN LOADED: takeoff_plugin_platform::Plugin[0m
+[takeoff_behavior_node-4] [0m[INFO] [1793699327.735518358] [drone0.TakeoffBehavior]: START[0m
+[takeoff_behavior_node-4] [0m[INFO] [1793699327.869121970] [drone0.TakeoffBehavior]: FAILURE[0m
+[takeoff_behavior_node-4] [0m[INFO] [1793699327.876855548] [drone0.TakeoffBehavior]: Takeoff end[0m
+[land_behavior_node-3] [0m[INFO] [1793699328.338669755] [drone0.LandBehavior]: START[0m
+[land_behavior_node-3] [31m[ERROR] [1793699328.347174179] [drone0.LandBehavior]: LandBehavior: Could not set FSM to land[0m

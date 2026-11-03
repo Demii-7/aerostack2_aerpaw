@@ -1,0 +1,11 @@
+2026-11-03T09:48:29Z
+[INFO] [1793699310.163590445] [drone0.drone0_interface]: Starting drone0
+[INFO] [1793699311.001794100] [drone0.drone0_interface]: drone0 interface initialized
+[WARN] [1793699312.091411562] [drone0.drone0_interface]: TakeoffBehavior Not Available
+waiting for the safety pilot to arm...
+arm (by pilot): OK
+offboard (GUIDED): OK
+takeoff: FAILED
+[WARN] [1793699328.809846615] [drone0.drone0_interface]: Goal Rejected
+land: FAILED
+final position: [-0.03, -0.03, -0.02]

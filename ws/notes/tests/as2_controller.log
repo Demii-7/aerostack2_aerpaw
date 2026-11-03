@@ -1,0 +1,36 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-11-03-13-46-06-519606-e-vm-x0841-m1-4972
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [as2_motion_controller_node-1]: process started with pid [4987]
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.663869379] [drone0.controller_manager]: Construct with name [controller_manager][0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.694602674] [drone0.controller_manager]: PLUGIN LOADED [pid_speed_controller::Plugin][0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.695839606] [drone0.controller_manager]: ==========================================================[0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696191208] [drone0.controller_manager]: AVAILABLE INPUT MODES: [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696225959] [drone0.controller_manager]: 	 - UNSET [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696398457] [drone0.controller_manager]: 	 - HOVER YAW_ANGLE BODY_FLU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696431811] [drone0.controller_manager]: 	 - SPEED YAW_ANGLE BODY_FLU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696458198] [drone0.controller_manager]: 	 - SPEED YAW_ANGLE LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696482574] [drone0.controller_manager]: 	 - SPEED YAW_SPEED BODY_FLU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696506495] [drone0.controller_manager]: 	 - SPEED YAW_SPEED LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696717878] [drone0.controller_manager]: 	 - SPEED_IN_A_PLANE YAW_ANGLE BODY_FLU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696749108] [drone0.controller_manager]: 	 - SPEED_IN_A_PLANE YAW_ANGLE LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696774167] [drone0.controller_manager]: 	 - SPEED_IN_A_PLANE YAW_SPEED BODY_FLU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696797968] [drone0.controller_manager]: 	 - SPEED_IN_A_PLANE YAW_SPEED LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696822019] [drone0.controller_manager]: 	 - POSITION YAW_ANGLE LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696845788] [drone0.controller_manager]: 	 - POSITION YAW_SPEED LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696869758] [drone0.controller_manager]: 	 - TRAJECTORY YAW_ANGLE LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.696893539] [drone0.controller_manager]: 	 - TRAJECTORY YAW_SPEED LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.698083198] [drone0.controller_manager]: AVAILABLE OUTPUT MODES: [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.698149625] [drone0.controller_manager]: 	 -UNSET [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.698181393] [drone0.controller_manager]: 	 -SPEED YAW_SPEED BODY_FLU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.698207728] [drone0.controller_manager]: 	 -SPEED YAW_SPEED LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713566.698230949] [drone0.controller_manager]: ==========================================================[0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713638.204784024] [drone0.controller_manager]: Control mode not established[0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713648.214679468] [drone0.controller_manager]: Control mode not established[0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713652.007293297] [drone0.controller_manager]: Bypassing controller[0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713652.010834218] [drone0.controller_manager]: input_mode:[POSITION YAW_ANGLE LOCAL_ENU_FRAME ][0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713652.011718130] [drone0.controller_manager]: output_mode:[POSITION YAW_ANGLE LOCAL_ENU_FRAME ][0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713652.011767521] [drone0.controller_manager]: input_pose_frame_id:[drone0/odom][0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713652.011789888] [drone0.controller_manager]: input_twist_frame_id:[drone0/odom][0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713652.011808164] [drone0.controller_manager]: output_pose_frame_id:[drone0/odom][0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713652.011825674] [drone0.controller_manager]: output_twist_frame_id:[drone0/odom][0m
+[as2_motion_controller_node-1] [0m[INFO] [1793713652.012218164] [drone0.controller_manager]: Waiting for motion reference[0m

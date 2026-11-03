@@ -1,0 +1,753 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-11-03-09-47-28-232828-e-vm-x0841-m1-3700
+[INFO] [launch]: Default logging verbosity is set to INFO
+Namespace: drone0
+FCU URL: udp://:14570@127.0.0.1:14550, target system: 1
+[INFO] [mavros_node-1]: process started with pid [3714]
+[mavros_node-1] [INFO] [1793699248.387822147] [drone0.mavros_node]: Starting mavros_node container
+[mavros_node-1] [INFO] [1793699248.387971418] [drone0.mavros_node]: FCU URL: udp://:14570@127.0.0.1:14550
+[mavros_node-1] [INFO] [1793699248.387990700] [drone0.mavros_node]: GCS URL: 
+[mavros_node-1] [INFO] [1793699248.388000484] [drone0.mavros_node]: UAS Prefix: /uas1
+[mavros_node-1] [INFO] [1793699248.388009040] [drone0.mavros_node]: Starting mavros router node
+[mavros_node-1] [INFO] [1793699248.401925720] [drone0.mavros_router]: Built-in SIMD instructions: SSE, SSE2
+[mavros_node-1] [INFO] [1793699248.401970208] [drone0.mavros_router]: Built-in MAVLink package version: 2026.9.9
+[mavros_node-1] [INFO] [1793699248.401998594] [drone0.mavros_router]: Known MAVLink dialects: common ardupilotmega ASLUAV AVSSUAS all csAirLink cubepilot development icarous loweheiser marsh paparazzi standard stemstudios storm32 uAvionix
+[mavros_node-1] [INFO] [1793699248.402010471] [drone0.mavros_router]: MAVROS Router started
+[mavros_node-1] [INFO] [1793699248.402118616] [drone0.mavros_node]: Starting mavros uas node
+[mavros_node-1] [INFO] [1793699248.470518863] [drone0.mavros_router]: Requested to add endpoint: type: 0, url: udp://:14570@127.0.0.1:14550
+[mavros_node-1] [INFO] [1793699248.470604192] [drone0.mavros_router]: Endpoint link[1000] created
+[mavros_node-1] [INFO] [1793699248.470997625] [drone0.mavros_router]: link[1000] opened successfully
+[mavros_node-1] [INFO] [1793699248.471028283] [drone0.mavros_router]: Requested to add endpoint: type: 2, url: /uas1
+[mavros_node-1] [INFO] [1793699248.471051318] [drone0.mavros_router]: Endpoint link[1001] created
+[mavros_node-1] [INFO] [1793699248.473859374] [drone0.mavros_router]: link[1001] opened successfully
+[mavros_node-1] [INFO] [1793699248.480677124] [drone0.mavros]: UAS Executor started, threads: 4
+[mavros_node-1] [WARN] [1793699248.480685664] [drone0.mavros]: plugin_denylist pattern 'image_pub' does not match any declared plugin
+[mavros_node-1] [WARN] [1793699248.480964750] [drone0.mavros]: plugin_denylist pattern 'vision_speed_estimate' does not match any declared plugin
+[mavros_node-1] [INFO] [1793699248.480996260] [drone0.mavros]: Plugin actuator_control ignored
+[mavros_node-1] [INFO] [1793699248.527150619] [drone0.mavros]: Plugin adsb created
+[mavros_node-1] [INFO] [1793699248.527219595] [drone0.mavros]: Plugin adsb initialized
+[mavros_node-1] [INFO] [1793699248.527238403] [drone0.mavros]: Plugin altitude ignored
+[mavros_node-1] [INFO] [1793699248.532682276] [drone0.mavros_router]: link[1000] detected remote address 1.1
+[mavros_node-1] [INFO] [1793699248.535517906] [drone0.mavros]: Plugin cam_imu_sync created
+[mavros_node-1] [INFO] [1793699248.535593646] [drone0.mavros]: Plugin cam_imu_sync initialized
+[mavros_node-1] [INFO] [1793699248.545050071] [drone0.mavros]: Plugin camera created
+[mavros_node-1] [INFO] [1793699248.545101286] [drone0.mavros]: Plugin camera initialized
+[mavros_node-1] [INFO] [1793699248.553847226] [drone0.mavros]: Plugin cellular_status created
+[mavros_node-1] [INFO] [1793699248.553890905] [drone0.mavros]: Plugin cellular_status initialized
+[mavros_node-1] [INFO] [1793699248.593729162] [drone0.mavros]: Plugin command created
+[mavros_node-1] [INFO] [1793699248.593796078] [drone0.mavros]: Plugin command initialized
+[mavros_node-1] [INFO] [1793699248.603675597] [drone0.mavros]: Plugin companion_process_status created
+[mavros_node-1] [INFO] [1793699248.603718073] [drone0.mavros]: Plugin companion_process_status initialized
+[mavros_node-1] [INFO] [1793699248.603732434] [drone0.mavros]: Plugin debug_value ignored
+[mavros_node-1] [INFO] [1793699248.614591392] [drone0.mavros.distance_sensor]: DS: rangefinder_pub: Loading config: id: 0
+[mavros_node-1] frame_id: lidar
+[mavros_node-1] field_of_view: 0.0
+[mavros_node-1] send_tf: false
+[mavros_node-1] sensor_position: {x: 0.0, y: 0.0, z: -0.1}
+[mavros_node-1] [INFO] [1793699248.616272537] [drone0.mavros.distance_sensor]: DS: rangefinder_sub: Loading config: subscriber: true
+[mavros_node-1] id: 1
+[mavros_node-1] orientation: PITCH_270
+[mavros_node-1] [INFO] [1793699248.616858180] [drone0.mavros]: Plugin distance_sensor created
+[mavros_node-1] [INFO] [1793699248.616897918] [drone0.mavros]: Plugin distance_sensor initialized
+[mavros_node-1] [INFO] [1793699248.627631984] [drone0.mavros]: Plugin esc_status created
+[mavros_node-1] [INFO] [1793699248.627680835] [drone0.mavros]: Plugin esc_status initialized
+[mavros_node-1] [INFO] [1793699248.637976634] [drone0.mavros]: Plugin esc_telemetry created
+[mavros_node-1] [INFO] [1793699248.638033074] [drone0.mavros]: Plugin esc_telemetry initialized
+[mavros_node-1] [INFO] [1793699248.652188406] [drone0.mavros]: Plugin fake_gps created
+[mavros_node-1] [INFO] [1793699248.652243736] [drone0.mavros]: Plugin fake_gps initialized
+[mavros_node-1] [INFO] [1793699248.652259534] [drone0.mavros]: Plugin ftp ignored
+[mavros_node-1] [INFO] [1793699248.667249829] [drone0.mavros]: Plugin geofence created
+[mavros_node-1] [INFO] [1793699248.667362391] [drone0.mavros]: Plugin geofence initialized
+[mavros_node-1] [INFO] [1793699248.687598291] [drone0.mavros]: Plugin gimbal_control created
+[mavros_node-1] [INFO] [1793699248.687827870] [drone0.mavros]: Plugin gimbal_control initialized
+[mavros_node-1] [INFO] [1793699248.708613027] [drone0.mavros]: Plugin global_position created
+[mavros_node-1] [INFO] [1793699248.708671303] [drone0.mavros]: Plugin global_position initialized
+[mavros_node-1] [INFO] [1793699248.720759965] [drone0.mavros]: Plugin gps_input created
+[mavros_node-1] [INFO] [1793699248.720801083] [drone0.mavros]: Plugin gps_input initialized
+[mavros_node-1] [INFO] [1793699248.733523344] [drone0.mavros]: Plugin gps_rtk created
+[mavros_node-1] [INFO] [1793699248.733586146] [drone0.mavros]: Plugin gps_rtk initialized
+[mavros_node-1] [INFO] [1793699248.748198155] [drone0.mavros]: Plugin gps_status created
+[mavros_node-1] [INFO] [1793699248.748316715] [drone0.mavros]: Plugin gps_status initialized
+[mavros_node-1] [INFO] [1793699248.762081993] [drone0.mavros]: Plugin guided_target created
+[mavros_node-1] [INFO] [1793699248.762128860] [drone0.mavros]: Plugin guided_target initialized
+[mavros_node-1] [INFO] [1793699248.762143360] [drone0.mavros]: Plugin hil ignored
+[mavros_node-1] [INFO] [1793699248.776798204] [drone0.mavros]: Plugin home_position created
+[mavros_node-1] [INFO] [1793699248.776872081] [drone0.mavros]: Plugin home_position initialized
+[mavros_node-1] [INFO] [1793699248.794823719] [drone0.mavros]: Plugin imu created
+[mavros_node-1] [INFO] [1793699248.794890486] [drone0.mavros]: Plugin imu initialized
+[mavros_node-1] [INFO] [1793699248.813224089] [drone0.mavros]: Plugin landing_target created
+[mavros_node-1] [INFO] [1793699248.813283116] [drone0.mavros]: Plugin landing_target initialized
+[mavros_node-1] [INFO] [1793699248.832243085] [drone0.mavros]: Plugin local_position created
+[mavros_node-1] [INFO] [1793699248.832304823] [drone0.mavros]: Plugin local_position initialized
+[mavros_node-1] [INFO] [1793699248.851639489] [drone0.mavros]: Plugin log_transfer created
+[mavros_node-1] [INFO] [1793699248.851694500] [drone0.mavros]: Plugin log_transfer initialized
+[mavros_node-1] [INFO] [1793699248.869829157] [drone0.mavros]: Plugin mag_calibration_status created
+[mavros_node-1] [INFO] [1793699248.869921430] [drone0.mavros]: Plugin mag_calibration_status initialized
+[mavros_node-1] [INFO] [1793699248.886618361] [drone0.mavros]: Plugin manual_control created
+[mavros_node-1] [INFO] [1793699248.886699976] [drone0.mavros]: Plugin manual_control initialized
+[mavros_node-1] [INFO] [1793699248.904131213] [drone0.mavros]: Plugin mocap_pose_estimate created
+[mavros_node-1] [INFO] [1793699248.904183175] [drone0.mavros]: Plugin mocap_pose_estimate initialized
+[mavros_node-1] [INFO] [1793699248.923944548] [drone0.mavros]: Plugin mount_control created
+[mavros_node-1] [INFO] [1793699248.923997371] [drone0.mavros]: Plugin mount_control initialized
+[mavros_node-1] [INFO] [1793699248.940512801] [drone0.mavros]: Plugin nav_controller_output created
+[mavros_node-1] [INFO] [1793699248.940582397] [drone0.mavros]: Plugin nav_controller_output initialized
+[mavros_node-1] [INFO] [1793699248.958624907] [drone0.mavros]: Plugin obstacle_distance created
+[mavros_node-1] [INFO] [1793699248.958696699] [drone0.mavros]: Plugin obstacle_distance initialized
+[mavros_node-1] [INFO] [1793699248.979694870] [drone0.mavros]: Plugin obstacle_distance_3d created
+[mavros_node-1] [INFO] [1793699248.979738049] [drone0.mavros]: Plugin obstacle_distance_3d initialized
+[mavros_node-1] [INFO] [1793699248.999712383] [drone0.mavros]: Plugin odometry created
+[mavros_node-1] [INFO] [1793699248.999774269] [drone0.mavros]: Plugin odometry initialized
+[mavros_node-1] [INFO] [1793699249.018288464] [drone0.mavros]: Plugin onboard_computer_status created
+[mavros_node-1] [INFO] [1793699249.018448065] [drone0.mavros]: Plugin onboard_computer_status initialized
+[mavros_node-1] [INFO] [1793699249.056919306] [drone0.mavros]: Plugin open_drone_id created
+[mavros_node-1] [INFO] [1793699249.056990059] [drone0.mavros]: Plugin open_drone_id initialized
+[mavros_node-1] [INFO] [1793699249.077017662] [drone0.mavros]: Plugin optical_flow created
+[mavros_node-1] [INFO] [1793699249.077078351] [drone0.mavros]: Plugin optical_flow initialized
+[mavros_node-1] [INFO] [1793699249.096629957] [drone0.mavros]: Plugin param created
+[mavros_node-1] [INFO] [1793699249.096706286] [drone0.mavros]: Plugin param initialized
+[mavros_node-1] [INFO] [1793699249.118507328] [drone0.mavros]: Plugin play_tune created
+[mavros_node-1] [INFO] [1793699249.118574660] [drone0.mavros]: Plugin play_tune initialized
+[mavros_node-1] [INFO] [1793699249.118593149] [drone0.mavros]: Plugin px4flow ignored
+[mavros_node-1] [INFO] [1793699249.147518998] [drone0.mavros]: Plugin rallypoint created
+[mavros_node-1] [INFO] [1793699249.147642796] [drone0.mavros]: Plugin rallypoint initialized
+[mavros_node-1] [INFO] [1793699249.170577034] [drone0.mavros]: Plugin rangefinder created
+[mavros_node-1] [INFO] [1793699249.170638734] [drone0.mavros]: Plugin rangefinder initialized
+[mavros_node-1] [INFO] [1793699249.196829923] [drone0.mavros]: Plugin rc_io created
+[mavros_node-1] [INFO] [1793699249.196888941] [drone0.mavros]: Plugin rc_io initialized
+[mavros_node-1] [INFO] [1793699249.221121645] [drone0.mavros]: Plugin setpoint_accel created
+[mavros_node-1] [INFO] [1793699249.221165128] [drone0.mavros]: Plugin setpoint_accel initialized
+[mavros_node-1] [INFO] [1793699249.248269957] [drone0.mavros]: Plugin setpoint_attitude created
+[mavros_node-1] [INFO] [1793699249.248325795] [drone0.mavros]: Plugin setpoint_attitude initialized
+[mavros_node-1] [INFO] [1793699249.278341012] [drone0.mavros]: Plugin setpoint_position created
+[mavros_node-1] [INFO] [1793699249.278391205] [drone0.mavros]: Plugin setpoint_position initialized
+[mavros_node-1] [INFO] [1793699249.311157878] [drone0.mavros]: Plugin setpoint_raw created
+[mavros_node-1] [INFO] [1793699249.311215333] [drone0.mavros]: Plugin setpoint_raw initialized
+[mavros_node-1] [INFO] [1793699249.343266008] [drone0.mavros]: Plugin setpoint_trajectory created
+[mavros_node-1] [INFO] [1793699249.343889555] [drone0.mavros]: Plugin setpoint_trajectory initialized
+[mavros_node-1] [INFO] [1793699249.374545843] [drone0.mavros]: Plugin setpoint_velocity created
+[mavros_node-1] [INFO] [1793699249.374621252] [drone0.mavros]: Plugin setpoint_velocity initialized
+[mavros_node-1] [INFO] [1793699249.405643862] [drone0.mavros]: Plugin sim_state created
+[mavros_node-1] [INFO] [1793699249.405698336] [drone0.mavros]: Plugin sim_state initialized
+[mavros_node-1] [INFO] [1793699249.449898943] [drone0.mavros]: Plugin sys_status created
+[mavros_node-1] [INFO] [1793699249.449980175] [drone0.mavros]: Plugin sys_status initialized
+[mavros_node-1] [INFO] [1793699249.478067529] [drone0.mavros.time]: TM: Timesync mode: MAVLINK
+[mavros_node-1] [INFO] [1793699249.486188482] [drone0.mavros]: Plugin sys_time created
+[mavros_node-1] [INFO] [1793699249.486239857] [drone0.mavros]: Plugin sys_time initialized
+[mavros_node-1] [INFO] [1793699249.516742094] [drone0.mavros]: Plugin tdr_radio created
+[mavros_node-1] [INFO] [1793699249.516797279] [drone0.mavros]: Plugin tdr_radio initialized
+[mavros_node-1] [INFO] [1793699249.552220584] [drone0.mavros]: Plugin terrain created
+[mavros_node-1] [INFO] [1793699249.552729232] [drone0.mavros]: Plugin terrain initialized
+[mavros_node-1] [INFO] [1793699249.588225066] [drone0.mavros]: Plugin trajectory created
+[mavros_node-1] [INFO] [1793699249.588659157] [drone0.mavros]: Plugin trajectory initialized
+[mavros_node-1] [INFO] [1793699249.620405947] [drone0.mavros]: Plugin tunnel created
+[mavros_node-1] [INFO] [1793699249.620576713] [drone0.mavros]: Plugin tunnel initialized
+[mavros_node-1] [INFO] [1793699249.653836078] [drone0.mavros]: Plugin vfr_hud created
+[mavros_node-1] [INFO] [1793699249.653894733] [drone0.mavros]: Plugin vfr_hud initialized
+[mavros_node-1] [INFO] [1793699249.653911212] [drone0.mavros]: Plugin vibration ignored
+[mavros_node-1] [INFO] [1793699249.692420353] [drone0.mavros]: Plugin vision_pose created
+[mavros_node-1] [INFO] [1793699249.692471584] [drone0.mavros]: Plugin vision_pose initialized
+[mavros_node-1] [INFO] [1793699249.729185506] [drone0.mavros]: Plugin vision_speed created
+[mavros_node-1] [INFO] [1793699249.729280454] [drone0.mavros]: Plugin vision_speed initialized
+[mavros_node-1] [INFO] [1793699249.777946291] [drone0.mavros]: Plugin waypoint created
+[mavros_node-1] [INFO] [1793699249.778035935] [drone0.mavros]: Plugin waypoint initialized
+[mavros_node-1] [INFO] [1793699249.778056142] [drone0.mavros]: Plugin wheel_odometry ignored
+[mavros_node-1] [INFO] [1793699249.813295632] [drone0.mavros]: Plugin wind_estimation created
+[mavros_node-1] [INFO] [1793699249.813350028] [drone0.mavros]: Plugin wind_estimation initialized
+[mavros_node-1] [INFO] [1793699249.816185461] [drone0.mavros]: Built-in SIMD instructions: SSE, SSE2
+[mavros_node-1] [INFO] [1793699249.816218422] [drone0.mavros]: Built-in MAVLink package version: 2026.9.9
+[mavros_node-1] [INFO] [1793699249.816228697] [drone0.mavros]: Known MAVLink dialects: common ardupilotmega ASLUAV AVSSUAS all csAirLink cubepilot development icarous loweheiser marsh paparazzi standard stemstudios storm32 uAvionix
+[mavros_node-1] [INFO] [1793699249.816237172] [drone0.mavros]: MAVROS UAS via /uas1 started. MY ID 1.191, TARGET ID 1.1
+[mavros_node-1] [INFO] [1793699249.880443151] [drone0.mavros_router]: link[1001] detected remote address 1.191
+[mavros_node-1] [INFO] [1793699250.037660355] [drone0.mavros.rc]: RC_CHANNELS message detected!
+[mavros_node-1] [INFO] [1793699250.038475996] [drone0.mavros.imu]: IMU: Raw IMU message used.
+[mavros_node-1] [WARN] [1793699250.038640677] [drone0.mavros.imu]: IMU: linear acceleration on RAW_IMU known on APM only.
+[mavros_node-1] [WARN] [1793699250.038677287] [drone0.mavros.imu]: IMU: ~imu/data_raw stores unscaled raw acceleration report.
+[mavros_node-1] [INFO] [1793699250.083787951] [drone0.mavros]: CON: Got HEARTBEAT, connected. FCU: ArduPilot
+[mavros_node-1] [INFO] [1793699250.083954525] [drone0.mavros.mission]: WP: detected enable_partial_push: 1
+[mavros_node-1] [INFO] [1793699250.289122924] [drone0.mavros.rc]: RC_CHANNELS message detected!
+[mavros_node-1] [INFO] [1793699250.289336887] [drone0.mavros.imu]: IMU: Raw IMU message used.
+[mavros_node-1] [WARN] [1793699251.098726630] [drone0.mavros.cmd]: CMD: Unexpected command 512, result 0
+[mavros_node-1] [INFO] [1793699251.099053894] [drone0.mavros.geofence]: GF: Using MISSION_ITEM_INT
+[mavros_node-1] [INFO] [1793699251.099144815] [drone0.mavros.rallypoint]: RP: Using MISSION_ITEM_INT
+[mavros_node-1] [INFO] [1793699251.099173838] [drone0.mavros.mission]: WP: Using MISSION_ITEM_INT
+[mavros_node-1] [INFO] [1793699251.099197945] [drone0.mavros.sys]: VER: 1.1: Capabilities         0x000000000000fbef
+[mavros_node-1] [INFO] [1793699251.099236352] [drone0.mavros.sys]: VER: 1.1: Flight software:     040306ff (5b597044)
+[mavros_node-1] [INFO] [1793699251.099257202] [drone0.mavros.sys]: VER: 1.1: Middleware software: 00000000 (        )
+[mavros_node-1] [INFO] [1793699251.099275003] [drone0.mavros.sys]: VER: 1.1: OS software:         00000000 (        )
+[mavros_node-1] [INFO] [1793699251.099291852] [drone0.mavros.sys]: VER: 1.1: Board hardware:      00000000
+[mavros_node-1] [INFO] [1793699251.099309125] [drone0.mavros.sys]: VER: 1.1: VID/PID:             0000:0000
+[mavros_node-1] [INFO] [1793699251.099327629] [drone0.mavros.sys]: VER: 1.1: UID:                 0000000000000000
+[mavros_node-1] [INFO] [1793699260.084186854] [drone0.mavros.home_position]: HP: requesting home position
+[mavros_node-1] [INFO] [1793699260.096861710] [drone0.mavros.sys]: FCU: ArduCopter V4.3.6 (5b597044)
+[mavros_node-1] [INFO] [1793699260.097233919] [drone0.mavros.sys]: FCU: c-vm-x0841-m1
+[mavros_node-1] [INFO] [1793699260.097634423] [drone0.mavros.sys]: FCU: Frame: QUAD/X
+[mavros_node-1] [WARN] [1793699266.097886873] [drone0.mavros.mission]: WP: timeout, retries left 2
+[mavros_node-1] [WARN] [1793699267.099418013] [drone0.mavros.mission]: WP: timeout, retries left 1
+[mavros_node-1] [WARN] [1793699268.100751784] [drone0.mavros.mission]: WP: timeout, retries left 0
+[mavros_node-1] [ERROR] [1793699269.106784562] [drone0.mavros.mission]: WP: timed out.
+[mavros_node-1] [WARN] [1793699269.185764853] [drone0.mavros.time]: TM: RTT too high for timesync: 7804.50 ms.
+[mavros_node-1] [WARN] [1793699269.192472811] [drone0.mavros.time]: TM: RTT too high for timesync: 6709.48 ms.
+[mavros_node-1] [WARN] [1793699269.203209662] [drone0.mavros.time]: TM: RTT too high for timesync: 5621.93 ms.
+[mavros_node-1] [WARN] [1793699269.213168015] [drone0.mavros.time]: TM: RTT too high for timesync: 4532.23 ms.
+[mavros_node-1] [INFO] [1793699269.216385385] [drone0.mavros.mission]: WP: seems GCS requesting mission
+[mavros_node-1] [INFO] [1793699269.216433950] [drone0.mavros.mission]: WP: scheduling pull after GCS is done
+[mavros_node-1] [WARN] [1793699269.224540845] [drone0.mavros.time]: TM: RTT too high for timesync: 3443.01 ms.
+[mavros_node-1] [INFO] [1793699269.226155223] [drone0.mavros.mission]: WP: seems GCS requesting mission
+[mavros_node-1] [INFO] [1793699269.226198226] [drone0.mavros.mission]: WP: scheduling pull after GCS is done
+[mavros_node-1] [WARN] [1793699269.231596622] [drone0.mavros.time]: TM: RTT too high for timesync: 2350.22 ms.
+[mavros_node-1] [INFO] [1793699269.232973069] [drone0.mavros.mission]: WP: seems GCS requesting mission
+[mavros_node-1] [INFO] [1793699269.233014300] [drone0.mavros.mission]: WP: scheduling pull after GCS is done
+[mavros_node-1] [WARN] [1793699269.239095417] [drone0.mavros.time]: TM: RTT too high for timesync: 1257.64 ms.
+[mavros_node-1] [INFO] [1793699269.239314650] [drone0.mavros.mission]: WP: seems GCS requesting mission
+[mavros_node-1] [INFO] [1793699269.239348600] [drone0.mavros.mission]: WP: scheduling pull after GCS is done
+[mavros_node-1] [WARN] [1793699269.244416386] [drone0.mavros.time]: TM: RTT too high for timesync: 163.11 ms.
+[mavros_node-1] [INFO] [1793699270.089938755] [drone0.mavros.rallypoint]: RP: mission received
+[mavros_node-1] [WARN] [1793699270.177907226] [drone0.mavros.param]: PR: request param #49 timeout, retries left 2, and 731 params still missing
+[mavros_node-1] [INFO] [1793699274.247403812] [drone0.mavros.mission]: WP: mission received
+[mavros_node-1] [INFO] [1793699275.088762937] [drone0.mavros.geofence]: GF: mission received
+[mavros_node-1] [INFO] [1793699286.314433695] [drone0.mavros.param]: PR: got an unsolicited param value idx=65535, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699286.367938365] [drone0.mavros.param]: PR: got an unsolicited param value idx=344, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699286.383210971] [drone0.mavros.param]: PR: got an unsolicited param value idx=345, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699286.473482860] [drone0.mavros.param]: PR: got an unsolicited param value idx=346, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699286.568212589] [drone0.mavros.param]: PR: got an unsolicited param value idx=347, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699286.668410064] [drone0.mavros.param]: PR: got an unsolicited param value idx=348, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699286.675092268] [drone0.mavros.param]: PR: got an unsolicited param value idx=349, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699286.772354018] [drone0.mavros.param]: PR: got an unsolicited param value idx=359, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699286.872033318] [drone0.mavros.param]: PR: got an unsolicited param value idx=360, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699286.968492751] [drone0.mavros.param]: PR: got an unsolicited param value idx=361, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699286.974721108] [drone0.mavros.param]: PR: got an unsolicited param value idx=362, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699287.071239945] [drone0.mavros.param]: PR: got an unsolicited param value idx=363, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699287.170406199] [drone0.mavros.param]: PR: got an unsolicited param value idx=364, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699287.177444758] [drone0.mavros.param]: PR: got an unsolicited param value idx=365, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699287.274340090] [drone0.mavros.param]: PR: got an unsolicited param value idx=366, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699287.371320813] [drone0.mavros.param]: PR: got an unsolicited param value idx=367, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699287.467141871] [drone0.mavros.param]: PR: got an unsolicited param value idx=368, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699287.479464532] [drone0.mavros.param]: PR: got an unsolicited param value idx=369, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699287.568538235] [drone0.mavros.param]: PR: got an unsolicited param value idx=370, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699287.670537417] [drone0.mavros.param]: PR: got an unsolicited param value idx=372, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699287.677612474] [drone0.mavros.param]: PR: got an unsolicited param value idx=373, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699287.776610771] [drone0.mavros.param]: PR: got an unsolicited param value idx=374, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699287.870878289] [drone0.mavros.param]: PR: got an unsolicited param value idx=375, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699287.877169914] [drone0.mavros.param]: PR: got an unsolicited param value idx=376, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699287.969393211] [drone0.mavros.param]: PR: got an unsolicited param value idx=377, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699288.078188679] [drone0.mavros.param]: PR: got an unsolicited param value idx=378, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699288.173862307] [drone0.mavros.param]: PR: got an unsolicited param value idx=397, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699288.272484099] [drone0.mavros.param]: PR: got an unsolicited param value idx=398, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699288.370661241] [drone0.mavros.param]: PR: got an unsolicited param value idx=399, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699288.468235019] [drone0.mavros.param]: PR: got an unsolicited param value idx=400, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699288.478213489] [drone0.mavros.param]: PR: got an unsolicited param value idx=401, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699288.574288664] [drone0.mavros.param]: PR: got an unsolicited param value idx=402, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699288.672420170] [drone0.mavros.param]: PR: got an unsolicited param value idx=403, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699288.773875717] [drone0.mavros.param]: PR: got an unsolicited param value idx=404, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699288.884186547] [drone0.mavros.param]: PR: got an unsolicited param value idx=405, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699288.972377183] [drone0.mavros.param]: PR: got an unsolicited param value idx=406, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699289.069184138] [drone0.mavros.param]: PR: got an unsolicited param value idx=407, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699289.075543923] [drone0.mavros.param]: PR: got an unsolicited param value idx=420, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699289.175279380] [drone0.mavros.param]: PR: got an unsolicited param value idx=421, not resetting retries count 3
+[mavros_node-1] [WARN] [1793699289.226073080] [drone0.mavros.time]: TM: RTT too high for timesync: 39.72 ms.
+[mavros_node-1] [INFO] [1793699289.269309994] [drone0.mavros.param]: PR: got an unsolicited param value idx=422, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699289.282185675] [drone0.mavros.param]: PR: got an unsolicited param value idx=423, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699289.373723757] [drone0.mavros.param]: PR: got an unsolicited param value idx=424, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699289.473025425] [drone0.mavros.param]: PR: got an unsolicited param value idx=425, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699289.478134306] [drone0.mavros.param]: PR: got an unsolicited param value idx=426, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699289.574706744] [drone0.mavros.param]: PR: got an unsolicited param value idx=427, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699289.679019923] [drone0.mavros.param]: PR: got an unsolicited param value idx=428, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699289.772588349] [drone0.mavros.param]: PR: got an unsolicited param value idx=429, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699289.871084546] [drone0.mavros.param]: PR: got an unsolicited param value idx=430, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699289.876909698] [drone0.mavros.param]: PR: got an unsolicited param value idx=431, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699289.983237688] [drone0.mavros.param]: PR: got an unsolicited param value idx=432, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699290.072633309] [drone0.mavros.param]: PR: got an unsolicited param value idx=433, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699290.175740966] [drone0.mavros.param]: PR: got an unsolicited param value idx=434, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699290.270665213] [drone0.mavros.param]: PR: got an unsolicited param value idx=435, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699290.276002296] [drone0.mavros.param]: PR: got an unsolicited param value idx=452, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699290.370531104] [drone0.mavros.param]: PR: got an unsolicited param value idx=453, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699290.376159994] [drone0.mavros.param]: PR: got an unsolicited param value idx=454, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699290.480992028] [drone0.mavros.param]: PR: got an unsolicited param value idx=455, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699290.573863256] [drone0.mavros.param]: PR: got an unsolicited param value idx=456, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699290.671359730] [drone0.mavros.param]: PR: got an unsolicited param value idx=457, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699290.770949090] [drone0.mavros.param]: PR: got an unsolicited param value idx=458, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699290.786334943] [drone0.mavros.param]: PR: got an unsolicited param value idx=459, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699290.873576181] [drone0.mavros.param]: PR: got an unsolicited param value idx=460, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699290.971061086] [drone0.mavros.param]: PR: got an unsolicited param value idx=461, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699290.978646236] [drone0.mavros.param]: PR: got an unsolicited param value idx=462, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699291.074726098] [drone0.mavros.param]: PR: got an unsolicited param value idx=463, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699291.173708081] [drone0.mavros.param]: PR: got an unsolicited param value idx=476, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699291.281866985] [drone0.mavros.param]: PR: got an unsolicited param value idx=477, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699291.374237949] [drone0.mavros.param]: PR: got an unsolicited param value idx=478, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699291.471261883] [drone0.mavros.param]: PR: got an unsolicited param value idx=480, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699291.570798741] [drone0.mavros.param]: PR: got an unsolicited param value idx=481, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699291.580975542] [drone0.mavros.param]: PR: got an unsolicited param value idx=482, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699291.669774691] [drone0.mavros.param]: PR: got an unsolicited param value idx=483, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699291.769070395] [drone0.mavros.param]: PR: got an unsolicited param value idx=484, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699291.776224890] [drone0.mavros.param]: PR: got an unsolicited param value idx=485, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699291.875985437] [drone0.mavros.param]: PR: got an unsolicited param value idx=486, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699291.973396858] [drone0.mavros.param]: PR: got an unsolicited param value idx=487, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699292.068353510] [drone0.mavros.param]: PR: got an unsolicited param value idx=488, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699292.080026055] [drone0.mavros.param]: PR: got an unsolicited param value idx=489, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699292.169503390] [drone0.mavros.param]: PR: got an unsolicited param value idx=490, not resetting retries count 3
+[mavros_node-1] [WARN] [1793699292.223219811] [drone0.mavros.time]: TM: RTT too high for timesync: 40.67 ms.
+[mavros_node-1] [INFO] [1793699292.271730519] [drone0.mavros.param]: PR: got an unsolicited param value idx=491, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699292.282094340] [drone0.mavros.param]: PR: got an unsolicited param value idx=492, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699292.371078323] [drone0.mavros.param]: PR: got an unsolicited param value idx=506, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699292.466947486] [drone0.mavros.param]: PR: got an unsolicited param value idx=507, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699292.484593500] [drone0.mavros.param]: PR: got an unsolicited param value idx=508, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699292.571803384] [drone0.mavros.param]: PR: got an unsolicited param value idx=509, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699292.671932735] [drone0.mavros.param]: PR: got an unsolicited param value idx=510, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699292.678475414] [drone0.mavros.param]: PR: got an unsolicited param value idx=511, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699292.775151385] [drone0.mavros.param]: PR: got an unsolicited param value idx=512, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699292.871480035] [drone0.mavros.param]: PR: got an unsolicited param value idx=513, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699292.877733536] [drone0.mavros.param]: PR: got an unsolicited param value idx=514, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699292.971297288] [drone0.mavros.param]: PR: got an unsolicited param value idx=515, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699293.070341982] [drone0.mavros.param]: PR: got an unsolicited param value idx=516, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699293.076865150] [drone0.mavros.param]: PR: got an unsolicited param value idx=517, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699293.176276009] [drone0.mavros.param]: PR: got an unsolicited param value idx=518, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699293.274065678] [drone0.mavros.param]: PR: got an unsolicited param value idx=519, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699293.371013208] [drone0.mavros.param]: PR: got an unsolicited param value idx=520, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699293.375787322] [drone0.mavros.param]: PR: got an unsolicited param value idx=521, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699293.472919326] [drone0.mavros.param]: PR: got an unsolicited param value idx=537, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699293.570504471] [drone0.mavros.param]: PR: got an unsolicited param value idx=538, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699293.577622932] [drone0.mavros.param]: PR: got an unsolicited param value idx=539, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699293.677022144] [drone0.mavros.param]: PR: got an unsolicited param value idx=540, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699293.771826753] [drone0.mavros.param]: PR: got an unsolicited param value idx=541, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699293.872258567] [drone0.mavros.param]: PR: got an unsolicited param value idx=542, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699293.879738480] [drone0.mavros.param]: PR: got an unsolicited param value idx=543, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699293.979139319] [drone0.mavros.param]: PR: got an unsolicited param value idx=544, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699294.071136916] [drone0.mavros.param]: PR: got an unsolicited param value idx=545, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699294.075289790] [drone0.mavros.param]: PR: got an unsolicited param value idx=546, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699294.171155734] [drone0.mavros.param]: PR: got an unsolicited param value idx=547, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699294.270675819] [drone0.mavros.param]: PR: got an unsolicited param value idx=548, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699294.276649909] [drone0.mavros.param]: PR: got an unsolicited param value idx=549, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699294.376423896] [drone0.mavros.param]: PR: got an unsolicited param value idx=565, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699294.469568442] [drone0.mavros.param]: PR: got an unsolicited param value idx=566, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699294.475425472] [drone0.mavros.param]: PR: got an unsolicited param value idx=567, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699294.572482517] [drone0.mavros.param]: PR: got an unsolicited param value idx=568, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699294.672330229] [drone0.mavros.param]: PR: got an unsolicited param value idx=569, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699294.769787714] [drone0.mavros.param]: PR: got an unsolicited param value idx=570, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699294.776003192] [drone0.mavros.param]: PR: got an unsolicited param value idx=571, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699294.873280066] [drone0.mavros.param]: PR: got an unsolicited param value idx=572, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699294.971512898] [drone0.mavros.param]: PR: got an unsolicited param value idx=573, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699295.073463048] [drone0.mavros.param]: PR: got an unsolicited param value idx=574, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699295.170847647] [drone0.mavros.param]: PR: got an unsolicited param value idx=575, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699295.179186365] [drone0.mavros.param]: PR: got an unsolicited param value idx=576, not resetting retries count 3
+[mavros_node-1] [WARN] [1793699295.227603632] [drone0.mavros.time]: TM: RTT too high for timesync: 47.44 ms.
+[mavros_node-1] [INFO] [1793699295.277199347] [drone0.mavros.param]: PR: got an unsolicited param value idx=577, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699295.376321006] [drone0.mavros.param]: PR: got an unsolicited param value idx=578, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699295.475508836] [drone0.mavros.param]: PR: got an unsolicited param value idx=585, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699295.570275949] [drone0.mavros.param]: PR: got an unsolicited param value idx=586, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699295.577605998] [drone0.mavros.param]: PR: got an unsolicited param value idx=587, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699295.673190531] [drone0.mavros.param]: PR: got an unsolicited param value idx=588, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699295.771388347] [drone0.mavros.param]: PR: got an unsolicited param value idx=590, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699295.777437640] [drone0.mavros.param]: PR: got an unsolicited param value idx=591, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699295.874614080] [drone0.mavros.param]: PR: got an unsolicited param value idx=592, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699295.975034450] [drone0.mavros.param]: PR: got an unsolicited param value idx=593, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699296.073919506] [drone0.mavros.param]: PR: got an unsolicited param value idx=594, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699296.175184647] [drone0.mavros.param]: PR: got an unsolicited param value idx=595, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699296.181835852] [drone0.mavros.param]: PR: got an unsolicited param value idx=596, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699296.275240430] [drone0.mavros.param]: PR: got an unsolicited param value idx=597, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699296.374035576] [drone0.mavros.param]: PR: got an unsolicited param value idx=598, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699296.468448606] [drone0.mavros.param]: PR: got an unsolicited param value idx=599, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699296.480683100] [drone0.mavros.param]: PR: got an unsolicited param value idx=600, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699296.577410514] [drone0.mavros.param]: PR: got an unsolicited param value idx=601, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699296.671849110] [drone0.mavros.param]: PR: got an unsolicited param value idx=602, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699296.771547595] [drone0.mavros.param]: PR: got an unsolicited param value idx=603, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699296.777599977] [drone0.mavros.param]: PR: got an unsolicited param value idx=604, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699296.874430124] [drone0.mavros.param]: PR: got an unsolicited param value idx=605, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699296.968846539] [drone0.mavros.param]: PR: got an unsolicited param value idx=606, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699296.975973402] [drone0.mavros.param]: PR: got an unsolicited param value idx=607, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699297.072615519] [drone0.mavros.param]: PR: got an unsolicited param value idx=633, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699297.168191022] [drone0.mavros.param]: PR: got an unsolicited param value idx=634, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699297.188072294] [drone0.mavros.param]: PR: got an unsolicited param value idx=635, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699297.276600768] [drone0.mavros.param]: PR: got an unsolicited param value idx=636, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699297.373432602] [drone0.mavros.param]: PR: got an unsolicited param value idx=652, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699297.473646913] [drone0.mavros.param]: PR: got an unsolicited param value idx=653, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699297.572469247] [drone0.mavros.param]: PR: got an unsolicited param value idx=654, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699297.580533948] [drone0.mavros.param]: PR: got an unsolicited param value idx=655, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699297.673993600] [drone0.mavros.param]: PR: got an unsolicited param value idx=656, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699297.773502687] [drone0.mavros.param]: PR: got an unsolicited param value idx=657, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699297.872920854] [drone0.mavros.param]: PR: got an unsolicited param value idx=658, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699297.973950583] [drone0.mavros.param]: PR: got an unsolicited param value idx=659, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699298.071451791] [drone0.mavros.param]: PR: got an unsolicited param value idx=660, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699298.076467634] [drone0.mavros.param]: PR: got an unsolicited param value idx=661, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699298.174261017] [drone0.mavros.param]: PR: got an unsolicited param value idx=662, not resetting retries count 3
+[mavros_node-1] [WARN] [1793699298.222062801] [drone0.mavros.time]: TM: RTT too high for timesync: 37.83 ms.
+[mavros_node-1] [INFO] [1793699298.273008208] [drone0.mavros.param]: PR: got an unsolicited param value idx=663, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699298.279677148] [drone0.mavros.param]: PR: got an unsolicited param value idx=664, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699298.373090207] [drone0.mavros.param]: PR: got an unsolicited param value idx=674, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699298.470314436] [drone0.mavros.param]: PR: got an unsolicited param value idx=675, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699298.476549881] [drone0.mavros.param]: PR: got an unsolicited param value idx=676, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699298.574523282] [drone0.mavros.param]: PR: got an unsolicited param value idx=677, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699298.672482007] [drone0.mavros.param]: PR: got an unsolicited param value idx=678, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699298.770809354] [drone0.mavros.param]: PR: got an unsolicited param value idx=679, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699298.777934602] [drone0.mavros.param]: PR: got an unsolicited param value idx=680, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699298.874991329] [drone0.mavros.param]: PR: got an unsolicited param value idx=681, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699298.978451972] [drone0.mavros.param]: PR: got an unsolicited param value idx=682, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699299.070438174] [drone0.mavros.param]: PR: got an unsolicited param value idx=683, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699299.076468907] [drone0.mavros.param]: PR: got an unsolicited param value idx=684, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699299.174286160] [drone0.mavros.param]: PR: got an unsolicited param value idx=685, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699299.269350288] [drone0.mavros.param]: PR: got an unsolicited param value idx=686, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699299.281212197] [drone0.mavros.param]: PR: got an unsolicited param value idx=688, not resetting retries count 3
+[mavros_node-1] [WARN] [1793699299.324716614] [drone0.mavros.time]: TM: RTT too high for timesync: 43.22 ms.
+[mavros_node-1] [INFO] [1793699299.376358366] [drone0.mavros.param]: PR: got an unsolicited param value idx=689, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699299.472269944] [drone0.mavros.param]: PR: got an unsolicited param value idx=690, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699299.571660765] [drone0.mavros.param]: PR: got an unsolicited param value idx=691, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699299.586738000] [drone0.mavros.param]: PR: got an unsolicited param value idx=692, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699299.698516833] [drone0.mavros.param]: PR: got an unsolicited param value idx=693, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699299.772840389] [drone0.mavros.param]: PR: got an unsolicited param value idx=709, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699299.779186263] [drone0.mavros.param]: PR: got an unsolicited param value idx=710, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699299.874137344] [drone0.mavros.param]: PR: got an unsolicited param value idx=711, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699299.971302239] [drone0.mavros.param]: PR: got an unsolicited param value idx=712, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699299.977158935] [drone0.mavros.param]: PR: got an unsolicited param value idx=713, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699300.074132946] [drone0.mavros.param]: PR: got an unsolicited param value idx=714, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699300.172982941] [drone0.mavros.param]: PR: got an unsolicited param value idx=715, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699300.181728961] [drone0.mavros.param]: PR: got an unsolicited param value idx=716, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699300.275994322] [drone0.mavros.param]: PR: got an unsolicited param value idx=717, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699300.374268573] [drone0.mavros.param]: PR: got an unsolicited param value idx=718, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699300.473796713] [drone0.mavros.param]: PR: got an unsolicited param value idx=719, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699300.571213531] [drone0.mavros.param]: PR: got an unsolicited param value idx=720, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699300.578805679] [drone0.mavros.param]: PR: got an unsolicited param value idx=721, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699300.678855529] [drone0.mavros.param]: PR: got an unsolicited param value idx=722, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699300.772407260] [drone0.mavros.param]: PR: got an unsolicited param value idx=744, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699300.776735311] [drone0.mavros.param]: PR: got an unsolicited param value idx=745, not resetting retries count 3
+[mavros_node-1] [WARN] [1793699300.820822851] [drone0.mavros.time]: TM: RTT too high for timesync: 39.52 ms.
+[mavros_node-1] [INFO] [1793699300.870688192] [drone0.mavros.param]: PR: got an unsolicited param value idx=746, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699300.973500192] [drone0.mavros.param]: PR: got an unsolicited param value idx=747, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699301.073370238] [drone0.mavros.param]: PR: got an unsolicited param value idx=748, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699301.168877989] [drone0.mavros.param]: PR: got an unsolicited param value idx=749, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699301.182296446] [drone0.mavros.param]: PR: got an unsolicited param value idx=750, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699301.271536351] [drone0.mavros.param]: PR: got an unsolicited param value idx=751, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699301.280908924] [drone0.mavros.param]: PR: got an unsolicited param value idx=767, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699301.384762874] [drone0.mavros.param]: PR: got an unsolicited param value idx=768, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699301.473714960] [drone0.mavros.param]: PR: got an unsolicited param value idx=769, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699301.573628711] [drone0.mavros.param]: PR: got an unsolicited param value idx=770, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699301.674760478] [drone0.mavros.param]: PR: got an unsolicited param value idx=771, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699301.771999828] [drone0.mavros.param]: PR: got an unsolicited param value idx=772, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699301.787161321] [drone0.mavros.param]: PR: got an unsolicited param value idx=773, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699301.872258831] [drone0.mavros.param]: PR: got an unsolicited param value idx=774, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699301.974163122] [drone0.mavros.param]: PR: got an unsolicited param value idx=775, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699302.070327674] [drone0.mavros.param]: PR: got an unsolicited param value idx=776, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699302.084114451] [drone0.mavros.param]: PR: got an unsolicited param value idx=777, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699302.174003426] [drone0.mavros.param]: PR: got an unsolicited param value idx=778, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699302.273470145] [drone0.mavros.param]: PR: got an unsolicited param value idx=779, not resetting retries count 3
+[mavros_node-1] [WARN] [1793699302.318107784] [drone0.mavros.time]: TM: RTT too high for timesync: 35.16 ms.
+[mavros_node-1] [INFO] [1793699302.374506524] [drone0.mavros.param]: PR: got an unsolicited param value idx=790, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699302.472941664] [drone0.mavros.param]: PR: got an unsolicited param value idx=791, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699302.480065839] [drone0.mavros.param]: PR: got an unsolicited param value idx=792, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699302.585494960] [drone0.mavros.param]: PR: got an unsolicited param value idx=793, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699302.671043317] [drone0.mavros.param]: PR: got an unsolicited param value idx=794, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699302.684168299] [drone0.mavros.param]: PR: got an unsolicited param value idx=795, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699302.777992723] [drone0.mavros.param]: PR: got an unsolicited param value idx=796, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699302.885810081] [drone0.mavros.param]: PR: got an unsolicited param value idx=797, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699302.982939257] [drone0.mavros.param]: PR: got an unsolicited param value idx=798, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699303.072040347] [drone0.mavros.param]: PR: got an unsolicited param value idx=799, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699303.174446176] [drone0.mavros.param]: PR: got an unsolicited param value idx=800, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699303.270914523] [drone0.mavros.param]: PR: got an unsolicited param value idx=801, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699303.278892897] [drone0.mavros.param]: PR: got an unsolicited param value idx=802, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699303.379974788] [drone0.mavros.param]: PR: got an unsolicited param value idx=803, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699303.473299443] [drone0.mavros.param]: PR: got an unsolicited param value idx=804, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699303.495109646] [drone0.mavros.param]: PR: got an unsolicited param value idx=805, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699303.580652561] [drone0.mavros.param]: PR: got an unsolicited param value idx=806, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699303.675828053] [drone0.mavros.param]: PR: got an unsolicited param value idx=807, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699303.772234302] [drone0.mavros.param]: PR: got an unsolicited param value idx=808, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699303.781775675] [drone0.mavros.param]: PR: got an unsolicited param value idx=833, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699303.875412221] [drone0.mavros.param]: PR: got an unsolicited param value idx=834, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699303.970460641] [drone0.mavros.param]: PR: got an unsolicited param value idx=835, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699303.985667937] [drone0.mavros.param]: PR: got an unsolicited param value idx=836, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699304.082522730] [drone0.mavros.param]: PR: got an unsolicited param value idx=838, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699304.175286311] [drone0.mavros.param]: PR: got an unsolicited param value idx=853, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699304.274934624] [drone0.mavros.param]: PR: got an unsolicited param value idx=854, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699304.375269520] [drone0.mavros.param]: PR: got an unsolicited param value idx=855, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699304.472959786] [drone0.mavros.param]: PR: got an unsolicited param value idx=856, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699304.480834025] [drone0.mavros.param]: PR: got an unsolicited param value idx=857, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699304.577321866] [drone0.mavros.param]: PR: got an unsolicited param value idx=858, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699304.680945221] [drone0.mavros.param]: PR: got an unsolicited param value idx=859, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699304.780432844] [drone0.mavros.param]: PR: got an unsolicited param value idx=860, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699304.874732375] [drone0.mavros.param]: PR: got an unsolicited param value idx=861, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699304.970987055] [drone0.mavros.param]: PR: got an unsolicited param value idx=862, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699304.979940277] [drone0.mavros.param]: PR: got an unsolicited param value idx=863, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699305.073199440] [drone0.mavros.param]: PR: got an unsolicited param value idx=864, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699305.171550103] [drone0.mavros.param]: PR: got an unsolicited param value idx=865, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699305.177809961] [drone0.mavros.param]: PR: got an unsolicited param value idx=866, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699305.272504070] [drone0.mavros.param]: PR: got an unsolicited param value idx=892, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699305.371119863] [drone0.mavros.param]: PR: got an unsolicited param value idx=893, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699305.377891586] [drone0.mavros.param]: PR: got an unsolicited param value idx=894, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699305.483891772] [drone0.mavros.param]: PR: got an unsolicited param value idx=905, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699305.574618156] [drone0.mavros.param]: PR: got an unsolicited param value idx=906, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699305.680946328] [drone0.mavros.param]: PR: got an unsolicited param value idx=907, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699305.775822605] [drone0.mavros.param]: PR: got an unsolicited param value idx=908, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699305.874684292] [drone0.mavros.param]: PR: got an unsolicited param value idx=909, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699305.974488527] [drone0.mavros.param]: PR: got an unsolicited param value idx=910, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699306.071014927] [drone0.mavros.param]: PR: got an unsolicited param value idx=911, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699306.079792811] [drone0.mavros.param]: PR: got an unsolicited param value idx=912, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699306.176931233] [drone0.mavros.param]: PR: got an unsolicited param value idx=913, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699306.272011977] [drone0.mavros.param]: PR: got an unsolicited param value idx=914, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699306.371000281] [drone0.mavros.param]: PR: got an unsolicited param value idx=915, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699306.382693406] [drone0.mavros.param]: PR: got an unsolicited param value idx=916, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699306.477004241] [drone0.mavros.param]: PR: got an unsolicited param value idx=917, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699306.573457217] [drone0.mavros.param]: PR: got an unsolicited param value idx=918, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699306.673367287] [drone0.mavros.param]: PR: got an unsolicited param value idx=919, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699306.679095645] [drone0.mavros.param]: PR: got an unsolicited param value idx=920, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699306.774753950] [drone0.mavros.param]: PR: got an unsolicited param value idx=921, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699306.870530224] [drone0.mavros.param]: PR: got an unsolicited param value idx=922, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699306.882419343] [drone0.mavros.param]: PR: got an unsolicited param value idx=939, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699306.974156383] [drone0.mavros.param]: PR: got an unsolicited param value idx=940, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699307.089730307] [drone0.mavros.param]: PR: got an unsolicited param value idx=941, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699307.171987742] [drone0.mavros.param]: PR: got an unsolicited param value idx=942, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699307.183398867] [drone0.mavros.param]: PR: got an unsolicited param value idx=943, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699307.272840789] [drone0.mavros.param]: PR: got an unsolicited param value idx=944, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699307.374950962] [drone0.mavros.param]: PR: got an unsolicited param value idx=945, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699307.474402501] [drone0.mavros.param]: PR: got an unsolicited param value idx=946, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699307.574427082] [drone0.mavros.param]: PR: got an unsolicited param value idx=947, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699307.670209974] [drone0.mavros.param]: PR: got an unsolicited param value idx=948, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699307.677467642] [drone0.mavros.param]: PR: got an unsolicited param value idx=949, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699307.778797895] [drone0.mavros.param]: PR: got an unsolicited param value idx=950, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699307.882096374] [drone0.mavros.param]: PR: got an unsolicited param value idx=951, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699307.976833971] [drone0.mavros.param]: PR: got an unsolicited param value idx=952, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699308.070513717] [drone0.mavros.param]: PR: got an unsolicited param value idx=953, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699308.084102588] [drone0.mavros.param]: PR: got an unsolicited param value idx=960, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699308.173619504] [drone0.mavros.param]: PR: got an unsolicited param value idx=961, not resetting retries count 3
+[mavros_node-1] [WARN] [1793699308.222107707] [drone0.mavros.time]: TM: RTT too high for timesync: 38.79 ms.
+[mavros_node-1] [INFO] [1793699308.276076108] [drone0.mavros.param]: PR: got an unsolicited param value idx=962, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699308.372838349] [drone0.mavros.param]: PR: got an unsolicited param value idx=963, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699308.380233226] [drone0.mavros.param]: PR: got an unsolicited param value idx=964, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699308.474491062] [drone0.mavros.param]: PR: got an unsolicited param value idx=965, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699308.573922515] [drone0.mavros.param]: PR: got an unsolicited param value idx=966, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699308.579078655] [drone0.mavros.param]: PR: got an unsolicited param value idx=967, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699308.673925642] [drone0.mavros.param]: PR: got an unsolicited param value idx=968, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699308.775253034] [drone0.mavros.param]: PR: got an unsolicited param value idx=970, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699308.873809562] [drone0.mavros.param]: PR: got an unsolicited param value idx=971, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699308.879381798] [drone0.mavros.param]: PR: got an unsolicited param value idx=972, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699308.976066859] [drone0.mavros.param]: PR: got an unsolicited param value idx=973, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699309.076955191] [drone0.mavros.param]: PR: got an unsolicited param value idx=974, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699309.173078851] [drone0.mavros.param]: PR: got an unsolicited param value idx=975, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699309.273918816] [drone0.mavros.param]: PR: got an unsolicited param value idx=976, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699309.280243165] [drone0.mavros.param]: PR: got an unsolicited param value idx=977, not resetting retries count 3
+[mavros_node-1] [WARN] [1793699309.325944191] [drone0.mavros.time]: TM: RTT too high for timesync: 45.02 ms.
+[mavros_node-1] [INFO] [1793699309.375370361] [drone0.mavros.param]: PR: got an unsolicited param value idx=978, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699309.474410729] [drone0.mavros.param]: PR: got an unsolicited param value idx=979, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699309.575196622] [drone0.mavros.param]: PR: got an unsolicited param value idx=980, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699309.672388603] [drone0.mavros.param]: PR: got an unsolicited param value idx=981, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699309.772818213] [drone0.mavros.param]: PR: got an unsolicited param value idx=982, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699309.783108498] [drone0.mavros.param]: PR: got an unsolicited param value idx=994, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699309.884042497] [drone0.mavros.param]: PR: got an unsolicited param value idx=995, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699309.974014058] [drone0.mavros.param]: PR: got an unsolicited param value idx=996, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699309.981484843] [drone0.mavros.param]: PR: got an unsolicited param value idx=997, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699310.076515317] [drone0.mavros.param]: PR: got an unsolicited param value idx=998, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699310.479306899] [drone0.mavros.param]: PR: got an unsolicited param value idx=999, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699310.581990349] [drone0.mavros.param]: PR: got an unsolicited param value idx=1000, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699310.676059803] [drone0.mavros.param]: PR: got an unsolicited param value idx=1001, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699310.772253961] [drone0.mavros.param]: PR: got an unsolicited param value idx=1002, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699310.777811058] [drone0.mavros.param]: PR: got an unsolicited param value idx=1003, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699310.877871666] [drone0.mavros.param]: PR: got an unsolicited param value idx=1004, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699310.975805860] [drone0.mavros.param]: PR: got an unsolicited param value idx=1005, not resetting retries count 3
+[mavros_node-1] [WARN] [1793699311.025767684] [drone0.mavros.time]: TM: RTT too high for timesync: 45.94 ms.
+[mavros_node-1] [INFO] [1793699311.073189378] [drone0.mavros.param]: PR: got an unsolicited param value idx=1006, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699311.078251354] [drone0.mavros.param]: PR: got an unsolicited param value idx=1007, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699311.182603345] [drone0.mavros.param]: PR: got an unsolicited param value idx=1008, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699311.276301286] [drone0.mavros.param]: PR: got an unsolicited param value idx=1009, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699311.371287023] [drone0.mavros.param]: PR: got an unsolicited param value idx=1010, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699311.384190497] [drone0.mavros.param]: PR: got an unsolicited param value idx=1026, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699311.471631228] [drone0.mavros.param]: PR: got an unsolicited param value idx=1027, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699311.572699902] [drone0.mavros.param]: PR: got an unsolicited param value idx=1028, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699311.579153644] [drone0.mavros.param]: PR: got an unsolicited param value idx=1029, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699311.680377379] [drone0.mavros.param]: PR: got an unsolicited param value idx=1030, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699311.779894631] [drone0.mavros.param]: PR: got an unsolicited param value idx=1031, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699311.877256328] [drone0.mavros.param]: PR: got an unsolicited param value idx=1032, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699311.977039730] [drone0.mavros.param]: PR: got an unsolicited param value idx=1033, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699312.077906435] [drone0.mavros.param]: PR: got an unsolicited param value idx=1034, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699312.172845858] [drone0.mavros.param]: PR: got an unsolicited param value idx=1035, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699312.181018550] [drone0.mavros.param]: PR: got an unsolicited param value idx=1036, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699312.274700425] [drone0.mavros.param]: PR: got an unsolicited param value idx=1037, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699312.374188152] [drone0.mavros.param]: PR: got an unsolicited param value idx=1038, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699312.382344896] [drone0.mavros.param]: PR: got an unsolicited param value idx=1039, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699312.479022016] [drone0.mavros.param]: PR: got an unsolicited param value idx=1063, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699312.574446879] [drone0.mavros.param]: PR: got an unsolicited param value idx=1064, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699312.670650412] [drone0.mavros.param]: PR: got an unsolicited param value idx=1065, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699312.678779727] [drone0.mavros.param]: PR: got an unsolicited param value idx=1066, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699312.773874188] [drone0.mavros.param]: PR: got an unsolicited param value idx=1067, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699312.873281662] [drone0.mavros.param]: PR: got an unsolicited param value idx=1068, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699312.879403662] [drone0.mavros.param]: PR: got an unsolicited param value idx=1069, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699312.981139717] [drone0.mavros.param]: PR: got an unsolicited param value idx=1082, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699313.076421286] [drone0.mavros.param]: PR: got an unsolicited param value idx=1083, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699313.173865299] [drone0.mavros.param]: PR: got an unsolicited param value idx=1084, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699313.178432337] [drone0.mavros.param]: PR: got an unsolicited param value idx=1085, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699313.281930135] [drone0.mavros.param]: PR: got an unsolicited param value idx=1086, not resetting retries count 3
+[mavros_node-1] [WARN] [1793699313.323811228] [drone0.mavros.time]: TM: RTT too high for timesync: 42.21 ms.
+[mavros_node-1] [INFO] [1793699313.376985795] [drone0.mavros.param]: PR: got an unsolicited param value idx=1087, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699313.474072730] [drone0.mavros.param]: PR: got an unsolicited param value idx=1088, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699313.480079014] [drone0.mavros.param]: PR: got an unsolicited param value idx=1089, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699313.572430725] [drone0.mavros.param]: PR: got an unsolicited param value idx=1090, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699313.673446899] [drone0.mavros.param]: PR: got an unsolicited param value idx=1091, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699313.774522905] [drone0.mavros.param]: PR: got an unsolicited param value idx=1092, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699313.870793972] [drone0.mavros.param]: PR: got an unsolicited param value idx=1093, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699313.880417896] [drone0.mavros.param]: PR: got an unsolicited param value idx=1094, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699313.984541460] [drone0.mavros.param]: PR: got an unsolicited param value idx=1095, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699314.084960624] [drone0.mavros.param]: PR: got an unsolicited param value idx=1096, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699314.175882003] [drone0.mavros.param]: PR: got an unsolicited param value idx=1097, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699314.274579844] [drone0.mavros.param]: PR: got an unsolicited param value idx=1098, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699314.375687858] [drone0.mavros.param]: PR: got an unsolicited param value idx=1110, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699314.477727573] [drone0.mavros.param]: PR: got an unsolicited param value idx=1111, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699314.575318140] [drone0.mavros.param]: PR: got an unsolicited param value idx=1112, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699314.582336840] [drone0.mavros.param]: PR: got an unsolicited param value idx=1113, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699314.681538310] [drone0.mavros.param]: PR: got an unsolicited param value idx=1114, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699314.772820664] [drone0.mavros.param]: PR: got an unsolicited param value idx=1115, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699314.780648470] [drone0.mavros.param]: PR: got an unsolicited param value idx=1116, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699314.872082925] [drone0.mavros.param]: PR: got an unsolicited param value idx=1117, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699314.881492645] [drone0.mavros.param]: PR: got an unsolicited param value idx=1118, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699314.973475633] [drone0.mavros.param]: PR: got an unsolicited param value idx=1119, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699314.979828080] [drone0.mavros.param]: PR: got an unsolicited param value idx=1120, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699315.072526762] [drone0.mavros.param]: PR: got an unsolicited param value idx=1121, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699315.172851424] [drone0.mavros.param]: PR: got an unsolicited param value idx=1122, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699315.181447192] [drone0.mavros.param]: PR: got an unsolicited param value idx=1123, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699315.275344094] [drone0.mavros.param]: PR: got an unsolicited param value idx=1124, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699315.377521696] [drone0.mavros.param]: PR: got an unsolicited param value idx=1125, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699315.474534175] [drone0.mavros.param]: PR: got an unsolicited param value idx=1139, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699315.487521092] [drone0.mavros.param]: PR: got an unsolicited param value idx=1140, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699315.573519492] [drone0.mavros.param]: PR: got an unsolicited param value idx=1141, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699315.673771446] [drone0.mavros.param]: PR: got an unsolicited param value idx=1142, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699315.680174073] [drone0.mavros.param]: PR: got an unsolicited param value idx=1143, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699315.776706876] [drone0.mavros.param]: PR: got an unsolicited param value idx=1144, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699315.882532059] [drone0.mavros.param]: PR: got an unsolicited param value idx=1145, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699315.977630341] [drone0.mavros.param]: PR: got an unsolicited param value idx=1146, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699316.072924134] [drone0.mavros.param]: PR: got an unsolicited param value idx=1147, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699316.176830387] [drone0.mavros.param]: PR: got an unsolicited param value idx=1148, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699316.274319965] [drone0.mavros.param]: PR: got an unsolicited param value idx=1149, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699316.280654842] [drone0.mavros.param]: PR: got an unsolicited param value idx=1150, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699316.378934808] [drone0.mavros.param]: PR: got an unsolicited param value idx=1151, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699316.478737953] [drone0.mavros.param]: PR: got an unsolicited param value idx=1152, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699316.581441130] [drone0.mavros.param]: PR: got an unsolicited param value idx=1153, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699316.678690765] [drone0.mavros.param]: PR: got an unsolicited param value idx=1154, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699316.771938859] [drone0.mavros.param]: PR: got an unsolicited param value idx=1167, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699316.784405882] [drone0.mavros.param]: PR: got an unsolicited param value idx=1168, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699316.881254219] [drone0.mavros.param]: PR: got an unsolicited param value idx=1169, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699316.978073152] [drone0.mavros.param]: PR: got an unsolicited param value idx=1170, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.077894484] [drone0.mavros.param]: PR: got an unsolicited param value idx=1171, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.175275673] [drone0.mavros.param]: PR: got an unsolicited param value idx=1172, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.181878163] [drone0.mavros.param]: PR: got an unsolicited param value idx=1173, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.276128840] [drone0.mavros.param]: PR: got an unsolicited param value idx=1174, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.319532452] [drone0.mavros.param]: PR: got an unsolicited param value idx=65535, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.375985306] [drone0.mavros.param]: PR: got an unsolicited param value idx=1175, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.378362806] [drone0.mavros.param]: PR: got an unsolicited param value idx=1175, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.383178337] [drone0.mavros.param]: PR: got an unsolicited param value idx=1176, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.475145030] [drone0.mavros.param]: PR: got an unsolicited param value idx=1176, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.481752753] [drone0.mavros.param]: PR: got an unsolicited param value idx=1177, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.484105110] [drone0.mavros.param]: PR: got an unsolicited param value idx=1177, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.582371472] [drone0.mavros.param]: PR: got an unsolicited param value idx=1178, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.583334191] [drone0.mavros.param]: PR: got an unsolicited param value idx=1178, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.671845795] [drone0.mavros.param]: PR: got an unsolicited param value idx=1179, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.678761306] [drone0.mavros.param]: PR: got an unsolicited param value idx=1179, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.683259921] [drone0.mavros.param]: PR: got an unsolicited param value idx=1180, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.775895381] [drone0.mavros.param]: PR: got an unsolicited param value idx=1180, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.778520110] [drone0.mavros.param]: PR: got an unsolicited param value idx=1181, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.876213802] [drone0.mavros.param]: PR: got an unsolicited param value idx=1181, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.878052799] [drone0.mavros.param]: PR: got an unsolicited param value idx=1182, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.973233789] [drone0.mavros.param]: PR: got an unsolicited param value idx=1182, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.979582084] [drone0.mavros.param]: PR: got an unsolicited param value idx=1183, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699317.980636905] [drone0.mavros.param]: PR: got an unsolicited param value idx=1183, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.075313669] [drone0.mavros.param]: PR: got an unsolicited param value idx=1184, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.080030482] [drone0.mavros.param]: PR: got an unsolicited param value idx=1184, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.175799480] [drone0.mavros.param]: PR: got an unsolicited param value idx=1202, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.182944907] [drone0.mavros.param]: PR: got an unsolicited param value idx=1202, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.186172922] [drone0.mavros.param]: PR: got an unsolicited param value idx=1203, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.273308613] [drone0.mavros.param]: PR: got an unsolicited param value idx=1203, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.281852988] [drone0.mavros.param]: PR: got an unsolicited param value idx=1204, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.282789303] [drone0.mavros.param]: PR: got an unsolicited param value idx=1204, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.375265447] [drone0.mavros.param]: PR: got an unsolicited param value idx=1205, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.377391919] [drone0.mavros.param]: PR: got an unsolicited param value idx=1205, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.477672500] [drone0.mavros.param]: PR: got an unsolicited param value idx=1206, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.478638158] [drone0.mavros.param]: PR: got an unsolicited param value idx=1206, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.573495638] [drone0.mavros.param]: PR: got an unsolicited param value idx=1207, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.574831176] [drone0.mavros.param]: PR: got an unsolicited param value idx=1207, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.580850740] [drone0.mavros.param]: PR: got an unsolicited param value idx=1208, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.672952895] [drone0.mavros.param]: PR: got an unsolicited param value idx=1208, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.676255721] [drone0.mavros.param]: PR: got an unsolicited param value idx=1209, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.680845257] [drone0.mavros.param]: PR: got an unsolicited param value idx=1209, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.777797397] [drone0.mavros.param]: PR: got an unsolicited param value idx=1210, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.779988127] [drone0.mavros.param]: PR: got an unsolicited param value idx=1210, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.880062051] [drone0.mavros.param]: PR: got an unsolicited param value idx=1211, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.883462153] [drone0.mavros.param]: PR: got an unsolicited param value idx=1211, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.973395518] [drone0.mavros.param]: PR: got an unsolicited param value idx=1212, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.974472818] [drone0.mavros.param]: PR: got an unsolicited param value idx=1212, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.981272394] [drone0.mavros.param]: PR: got an unsolicited param value idx=1226, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699318.984899278] [drone0.mavros.param]: PR: got an unsolicited param value idx=1226, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.074397213] [drone0.mavros.param]: PR: got an unsolicited param value idx=1227, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.075209679] [drone0.mavros.param]: PR: got an unsolicited param value idx=1227, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.085875129] [drone0.mavros.param]: PR: got an unsolicited param value idx=1228, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.086648061] [drone0.mavros.param]: PR: got an unsolicited param value idx=1228, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.174656052] [drone0.mavros.param]: PR: got an unsolicited param value idx=1229, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.175883575] [drone0.mavros.param]: PR: got an unsolicited param value idx=1229, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.183134074] [drone0.mavros.param]: PR: got an unsolicited param value idx=1230, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.183977021] [drone0.mavros.param]: PR: got an unsolicited param value idx=1230, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.280503442] [drone0.mavros.param]: PR: got an unsolicited param value idx=1231, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.282838758] [drone0.mavros.param]: PR: got an unsolicited param value idx=1231, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.376418530] [drone0.mavros.param]: PR: got an unsolicited param value idx=1232, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.377625851] [drone0.mavros.param]: PR: got an unsolicited param value idx=1232, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.475422169] [drone0.mavros.param]: PR: got an unsolicited param value idx=1233, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.476967619] [drone0.mavros.param]: PR: got an unsolicited param value idx=1233, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.485808316] [drone0.mavros.param]: PR: got an unsolicited param value idx=1234, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.571478810] [drone0.mavros.param]: PR: got an unsolicited param value idx=1234, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.584435408] [drone0.mavros.param]: PR: got an unsolicited param value idx=1235, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.587199121] [drone0.mavros.param]: PR: got an unsolicited param value idx=1235, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.672830291] [drone0.mavros.param]: PR: got an unsolicited param value idx=1236, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.674363422] [drone0.mavros.param]: PR: got an unsolicited param value idx=1236, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.682495927] [drone0.mavros.param]: PR: got an unsolicited param value idx=1237, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.684105149] [drone0.mavros.param]: PR: got an unsolicited param value idx=1237, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.775825651] [drone0.mavros.param]: PR: got an unsolicited param value idx=1238, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.777492746] [drone0.mavros.param]: PR: got an unsolicited param value idx=1238, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.877669841] [drone0.mavros.param]: PR: got an unsolicited param value idx=1239, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.882606947] [drone0.mavros.param]: PR: got an unsolicited param value idx=1239, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.977306799] [drone0.mavros.param]: PR: got an unsolicited param value idx=1240, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699319.981259507] [drone0.mavros.param]: PR: got an unsolicited param value idx=1240, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.072966277] [drone0.mavros.param]: PR: got an unsolicited param value idx=1241, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.079105977] [drone0.mavros.param]: PR: got an unsolicited param value idx=1241, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.083010385] [drone0.mavros.param]: PR: got an unsolicited param value idx=1256, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.172552070] [drone0.mavros.param]: PR: got an unsolicited param value idx=1256, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.174074790] [drone0.mavros.param]: PR: got an unsolicited param value idx=1257, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.179317738] [drone0.mavros.param]: PR: got an unsolicited param value idx=1257, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.286648897] [drone0.mavros.param]: PR: got an unsolicited param value idx=1258, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.289074104] [drone0.mavros.param]: PR: got an unsolicited param value idx=1258, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.385946829] [drone0.mavros.param]: PR: got an unsolicited param value idx=1259, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.392374384] [drone0.mavros.param]: PR: got an unsolicited param value idx=1259, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.474615365] [drone0.mavros.param]: PR: got an unsolicited param value idx=1260, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.476280258] [drone0.mavros.param]: PR: got an unsolicited param value idx=1260, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.488175208] [drone0.mavros.param]: PR: got an unsolicited param value idx=1261, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.572804982] [drone0.mavros.param]: PR: got an unsolicited param value idx=1261, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.582285957] [drone0.mavros.param]: PR: got an unsolicited param value idx=1262, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.583657930] [drone0.mavros.param]: PR: got an unsolicited param value idx=1262, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.677152442] [drone0.mavros.param]: PR: got an unsolicited param value idx=1263, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.678661649] [drone0.mavros.param]: PR: got an unsolicited param value idx=1263, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.778096515] [drone0.mavros.param]: PR: got an unsolicited param value idx=1264, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.779016306] [drone0.mavros.param]: PR: got an unsolicited param value idx=1264, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.874323622] [drone0.mavros.param]: PR: got an unsolicited param value idx=1265, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.876398191] [drone0.mavros.param]: PR: got an unsolicited param value idx=1265, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.974457662] [drone0.mavros.param]: PR: got an unsolicited param value idx=1266, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699320.980955425] [drone0.mavros.param]: PR: got an unsolicited param value idx=1266, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.074057349] [drone0.mavros.param]: PR: got an unsolicited param value idx=1267, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.075027357] [drone0.mavros.param]: PR: got an unsolicited param value idx=1267, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.081753957] [drone0.mavros.param]: PR: got an unsolicited param value idx=1268, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.085106532] [drone0.mavros.param]: PR: got an unsolicited param value idx=1268, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.175030524] [drone0.mavros.param]: PR: got an unsolicited param value idx=1269, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.181615448] [drone0.mavros.param]: PR: got an unsolicited param value idx=1269, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.187646463] [drone0.mavros.param]: PR: got an unsolicited param value idx=1270, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.273983538] [drone0.mavros.param]: PR: got an unsolicited param value idx=1270, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.278357901] [drone0.mavros.param]: PR: got an unsolicited param value idx=1281, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.281623013] [drone0.mavros.param]: PR: got an unsolicited param value idx=1281, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.283946651] [drone0.mavros.param]: PR: got an unsolicited param value idx=1282, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.377975314] [drone0.mavros.param]: PR: got an unsolicited param value idx=1282, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.386087156] [drone0.mavros.param]: PR: got an unsolicited param value idx=1283, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.473801370] [drone0.mavros.param]: PR: got an unsolicited param value idx=1283, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.475595397] [drone0.mavros.param]: PR: got an unsolicited param value idx=1284, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.480671439] [drone0.mavros.param]: PR: got an unsolicited param value idx=1284, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.578051794] [drone0.mavros.param]: PR: got an unsolicited param value idx=1285, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.580675951] [drone0.mavros.param]: PR: got an unsolicited param value idx=1285, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.676000466] [drone0.mavros.param]: PR: got an unsolicited param value idx=1286, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.677775874] [drone0.mavros.param]: PR: got an unsolicited param value idx=1286, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.684490846] [drone0.mavros.param]: PR: got an unsolicited param value idx=1287, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.774284008] [drone0.mavros.param]: PR: got an unsolicited param value idx=1287, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.777069103] [drone0.mavros.param]: PR: got an unsolicited param value idx=1288, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.782199578] [drone0.mavros.param]: PR: got an unsolicited param value idx=1288, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.785170403] [drone0.mavros.param]: PR: got an unsolicited param value idx=1289, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.875054520] [drone0.mavros.param]: PR: got an unsolicited param value idx=1289, not resetting retries count 3
+[mavros_node-1] [INFO] [1793699321.876450358] [drone0.mavros.param]: PR: parameters list received
+[mavros_node-1] [WARN] [1793699325.102155249] [drone0.mavros.cmd]: CMD: Unexpected command 176, result 0
+[mavros_node-1] [WARN] [1793699325.110071823] [drone0.mavros.sys]: FCU: Warning: Arming Checks Disabled
+[mavros_node-1] [WARN] [1793699325.110404435] [drone0.mavros.sys]: FCU: Terrain: clamping offset -114 to -15
+[mavros_node-1] [INFO] [1793699325.110778663] [drone0.mavros.sys]: FCU: Arming motors

@@ -1,0 +1,5 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-11-03-09-47-35-073164-e-vm-x0841-m1-3751
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [as2_state_estimator_node-1]: process started with pid [3755]
+[as2_state_estimator_node-1] [0m[INFO] [1793699255.549333735] [drone0.state_estimator]: Construct with name [state_estimator][0m
+[as2_state_estimator_node-1] [0m[INFO] [1793699255.598583459] [drone0.state_estimator]: Earth to map set to 0.000000, 0.000000, 0.000000[0m

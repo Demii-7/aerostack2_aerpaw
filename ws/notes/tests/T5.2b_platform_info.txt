@@ -1,12 +1,12 @@
-# 2026-11-03T08:03:50Z  echo1 /drone0/platform/info
+# 2026-11-03T13:51:31Z  echo1 /drone0/platform/info
 header:
   stamp:
-    sec: 1793693031
-    nanosec: 862744463
+    sec: 1793713893
+    nanosec: 415101838
   frame_id: ''
 connected: true
-armed: true
-offboard: true
+armed: false
+offboard: false
 status:
   state: 0
 current_control_mode:

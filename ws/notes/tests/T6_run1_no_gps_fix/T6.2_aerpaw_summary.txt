@@ -1,0 +1,5 @@
+samples: 90, duration: 21.9 s
+start (earth): x -0.02 y -0.03 z -0.01
+x: -0.01 .. 0.00 m   y: -0.01 .. 0.00 m (from start)
+max height: 0.02 m above start; cruise height min 0.02 m
+final: height -0.02 m, 0.01 m from the takeoff point (OK the 5 m AERPAW limit)

@@ -1,0 +1,28 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-11-03-09-47-35-235158-e-vm-x0841-m1-3753
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [as2_motion_controller_node-1]: process started with pid [3767]
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.358597105] [drone0.controller_manager]: Construct with name [controller_manager][0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.376487905] [drone0.controller_manager]: PLUGIN LOADED [pid_speed_controller::Plugin][0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377674493] [drone0.controller_manager]: ==========================================================[0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377710236] [drone0.controller_manager]: AVAILABLE INPUT MODES: [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377728931] [drone0.controller_manager]: 	 - UNSET [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377743216] [drone0.controller_manager]: 	 - HOVER YAW_ANGLE BODY_FLU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377755013] [drone0.controller_manager]: 	 - SPEED YAW_ANGLE BODY_FLU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377765549] [drone0.controller_manager]: 	 - SPEED YAW_ANGLE LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377775957] [drone0.controller_manager]: 	 - SPEED YAW_SPEED BODY_FLU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377786209] [drone0.controller_manager]: 	 - SPEED YAW_SPEED LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377797175] [drone0.controller_manager]: 	 - SPEED_IN_A_PLANE YAW_ANGLE BODY_FLU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377807544] [drone0.controller_manager]: 	 - SPEED_IN_A_PLANE YAW_ANGLE LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377817812] [drone0.controller_manager]: 	 - SPEED_IN_A_PLANE YAW_SPEED BODY_FLU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377827989] [drone0.controller_manager]: 	 - SPEED_IN_A_PLANE YAW_SPEED LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377838557] [drone0.controller_manager]: 	 - POSITION YAW_ANGLE LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377849307] [drone0.controller_manager]: 	 - POSITION YAW_SPEED LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377859631] [drone0.controller_manager]: 	 - TRAJECTORY YAW_ANGLE LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.377869735] [drone0.controller_manager]: 	 - TRAJECTORY YAW_SPEED LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.379341544] [drone0.controller_manager]: AVAILABLE OUTPUT MODES: [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.379399577] [drone0.controller_manager]: 	 -UNSET [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.379431517] [drone0.controller_manager]: 	 -SPEED YAW_SPEED BODY_FLU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.379457697] [drone0.controller_manager]: 	 -SPEED YAW_SPEED LOCAL_ENU_FRAME [0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699255.379482077] [drone0.controller_manager]: ==========================================================[0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699326.906669620] [drone0.controller_manager]: Control mode not established[0m
+[as2_motion_controller_node-1] [0m[INFO] [1793699336.916614921] [drone0.controller_manager]: Control mode not established[0m

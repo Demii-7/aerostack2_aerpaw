@@ -1,0 +1,18 @@
+{
+  "documented_allowed": {
+    "COMMAND_LONG:NAV_TAKEOFF": 1,
+    "HEARTBEAT": 40,
+    "MISSION_ITEM(current=2)": 4
+  },
+  "duration_s": 46.0,
+  "housekeeping_ask_aerpaw": {
+    "MISSION_REQUEST": 1,
+    "MISSION_REQUEST_LIST": 1,
+    "PARAM_REQUEST_LIST": 1,
+    "REQUEST_DATA_STREAM": 1
+  },
+  "not_in_filter_list": {
+    "COMMAND_LONG:DO_SET_MODE": 2,
+    "COMMAND_LONG:REQUEST_AUTOPILOT_CAPABILITIES": 1
+  }
+}

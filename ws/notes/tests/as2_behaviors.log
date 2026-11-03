@@ -1,0 +1,81 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-11-03-13-46-08-190320-e-vm-x0841-m1-5001
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [follow_path_behavior_node-1]: process started with pid [5003]
+[INFO] [go_to_behavior_node-2]: process started with pid [5005]
+[INFO] [land_behavior_node-3]: process started with pid [5007]
+[INFO] [takeoff_behavior_node-4]: process started with pid [5009]
+[land_behavior_node-3] [0m[INFO] [1793713568.395741190] [drone0.LandBehavior]: Construct with name [LandBehavior][0m
+[takeoff_behavior_node-4] [0m[INFO] [1793713568.425237162] [drone0.TakeoffBehavior]: Construct with name [TakeoffBehavior][0m
+[go_to_behavior_node-2] [0m[INFO] [1793713568.439717212] [drone0.GoToBehavior]: Construct with name [GoToBehavior][0m
+[land_behavior_node-3] [0m[INFO] [1793713568.499913672] [drone0.LandBehavior]: LAND BEHAVIOR PLUGIN LOADED: land_plugin_platform::Plugin[0m
+[follow_path_behavior_node-1] [0m[INFO] [1793713568.518518387] [drone0.FollowPathBehavior]: Construct with name [FollowPathBehavior][0m
+[go_to_behavior_node-2] [0m[INFO] [1793713568.575769624] [drone0.GoToBehavior]: GO TO BEHAVIOR PLUGIN LOADED: go_to_plugin_position::Plugin[0m
+[takeoff_behavior_node-4] [0m[INFO] [1793713568.617205603] [drone0.TakeoffBehavior]: TAKEOFF BEHAVIOR PLUGIN LOADED: takeoff_plugin_platform::Plugin[0m
+[follow_path_behavior_node-1] [0m[INFO] [1793713568.639184978] [drone0.FollowPathBehavior]: FOLLOW PATH PLUGIN LOADED: follow_path_plugin_position::Plugin[0m
+[takeoff_behavior_node-4] [0m[INFO] [1793713638.723503633] [drone0.TakeoffBehavior]: START[0m
+[takeoff_behavior_node-4] [0m[INFO] [1793713638.856433707] [drone0.TakeoffBehavior]: RUNNING[0m
+[takeoff_behavior_node-4] [0m[INFO] [1793713643.956457642] [drone0.TakeoffBehavior]: RUNNING[0m
+[takeoff_behavior_node-4] [0m[INFO] [1793713649.056763083] [drone0.TakeoffBehavior]: RUNNING[0m
+[takeoff_behavior_node-4] [0m[INFO] [1793713651.656888521] [drone0.TakeoffBehavior]: SUCCESS[0m
+[takeoff_behavior_node-4] [31m[ERROR] [1793713651.660826890] [drone0.TakeoffBehavior]: TakeoffBehavior: Could not set FSM to Took OFF[0m
+[takeoff_behavior_node-4] [0m[INFO] [1793713651.660921463] [drone0.TakeoffBehavior]: Takeoff end[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713651.855243712] [drone0.GoToBehavior]: START[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713651.855619605] [drone0.GoToBehavior]: Yaw mode KEEP_YAW[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713651.855766679] [drone0.GoToBehavior]: GoTo goal accepted[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713651.855820913] [drone0.GoToBehavior]: GoTo to position: 19.975472, -0.035065, 22.516890[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713651.855896513] [drone0.GoToBehavior]: GoTo to speed: 3.000000[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713651.855952193] [drone0.GoToBehavior]: GoTo to angle: -0.078156[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713651.989308399] [drone0.GoToBehavior]: Setting control mode to [POSITION YAW_ANGLE UNDEFINED_FRAME ][0m
+[go_to_behavior_node-2] [0m[INFO] [1793713652.114886142] [drone0.GoToBehavior]: RUNNING[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713657.183396989] [drone0.GoToBehavior]: RUNNING[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713658.183726137] [drone0.GoToBehavior]: Goal succeeded[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713658.183888431] [drone0.GoToBehavior]: SUCCESS[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713658.184315833] [drone0.GoToBehavior]: GoTo end[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713659.949801658] [drone0.GoToBehavior]: START[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713659.950028076] [drone0.GoToBehavior]: Yaw mode KEEP_YAW[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713659.950078862] [drone0.GoToBehavior]: GoTo goal accepted[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713659.950106565] [drone0.GoToBehavior]: GoTo to position: 19.975472, 19.964935, 22.516890[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713659.950185404] [drone0.GoToBehavior]: GoTo to speed: 3.000000[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713659.950213606] [drone0.GoToBehavior]: GoTo to angle: 0.002550[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713662.183441605] [drone0.GoToBehavior]: RUNNING[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713667.183548578] [drone0.GoToBehavior]: RUNNING[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713668.183320642] [drone0.GoToBehavior]: Goal succeeded[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713668.183443500] [drone0.GoToBehavior]: SUCCESS[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713668.183640141] [drone0.GoToBehavior]: GoTo end[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713669.483311275] [drone0.GoToBehavior]: START[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713669.483684833] [drone0.GoToBehavior]: Yaw mode KEEP_YAW[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713669.483853241] [drone0.GoToBehavior]: GoTo goal accepted[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713669.483900358] [drone0.GoToBehavior]: GoTo to position: -0.024528, 19.964935, 22.516890[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713669.483990279] [drone0.GoToBehavior]: GoTo to speed: 3.000000[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713669.484030865] [drone0.GoToBehavior]: GoTo to angle: 1.573995[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713669.616485706] [drone0.GoToBehavior]: Goal succeeded[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713669.616638369] [drone0.GoToBehavior]: SUCCESS[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713669.616792070] [drone0.GoToBehavior]: GoTo end[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713677.616616173] [drone0.GoToBehavior]: START[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713677.616876127] [drone0.GoToBehavior]: Yaw mode KEEP_YAW[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713677.616928888] [drone0.GoToBehavior]: GoTo goal accepted[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713677.616952097] [drone0.GoToBehavior]: GoTo to position: -0.024528, -0.035065, 22.516890[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713677.616983845] [drone0.GoToBehavior]: GoTo to speed: 3.000000[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713677.617004241] [drone0.GoToBehavior]: GoTo to angle: -3.130455[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713677.749889987] [drone0.GoToBehavior]: RUNNING[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713682.749997195] [drone0.GoToBehavior]: RUNNING[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713683.949894281] [drone0.GoToBehavior]: Goal succeeded[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713683.949984455] [drone0.GoToBehavior]: SUCCESS[0m
+[go_to_behavior_node-2] [0m[INFO] [1793713683.950095302] [drone0.GoToBehavior]: GoTo end[0m
+[land_behavior_node-3] [0m[INFO] [1793713686.213166072] [drone0.LandBehavior]: START[0m
+[land_behavior_node-3] [0m[INFO] [1793713686.347239663] [drone0.LandBehavior]: RUNNING[0m
+[land_behavior_node-3] [0m[INFO] [1793713691.445845981] [drone0.LandBehavior]: RUNNING[0m
+[land_behavior_node-3] [0m[INFO] [1793713696.445979116] [drone0.LandBehavior]: RUNNING[0m
+[land_behavior_node-3] [0m[INFO] [1793713701.546650778] [drone0.LandBehavior]: RUNNING[0m
+[land_behavior_node-3] [0m[INFO] [1793713706.645892741] [drone0.LandBehavior]: RUNNING[0m
+[land_behavior_node-3] [0m[INFO] [1793713711.746088244] [drone0.LandBehavior]: RUNNING[0m
+[land_behavior_node-3] [0m[INFO] [1793713716.746242533] [drone0.LandBehavior]: RUNNING[0m
+[land_behavior_node-3] [0m[INFO] [1793713721.846638950] [drone0.LandBehavior]: RUNNING[0m
+[land_behavior_node-3] [0m[INFO] [1793713726.945857226] [drone0.LandBehavior]: RUNNING[0m
+[land_behavior_node-3] [0m[INFO] [1793713731.945868307] [drone0.LandBehavior]: RUNNING[0m
+[land_behavior_node-3] [0m[INFO] [1793713733.645878804] [drone0.LandBehavior]: SUCCESS[0m
+[land_behavior_node-3] [0m[INFO] [1793713733.646356507] [drone0.LandBehavior]: LandBehavior: Land successful[0m
+[land_behavior_node-3] [31m[ERROR] [1793713733.652640744] [drone0.LandBehavior]: LandBehavior: Could not set FSM to Landed[0m
+[land_behavior_node-3] [0m[INFO] [1793713733.652739691] [drone0.LandBehavior]: Disarming platform[0m
+[land_behavior_node-3] [31m[ERROR] [1793713733.658055695] [drone0.LandBehavior]: LandBehavior: Could not disarm[0m
+[land_behavior_node-3] [0m[INFO] [1793713733.658215226] [drone0.LandBehavior]: Land end[0m

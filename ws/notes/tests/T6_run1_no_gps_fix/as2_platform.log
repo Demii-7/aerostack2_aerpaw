@@ -1,0 +1,28 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-11-03-09-47-33-151498-e-vm-x0841-m1-3733
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [as2_platform_mavlink_node-1]: process started with pid [3735]
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699253.483245557] [drone0.platform]: Construct with name [platform][0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699253.487944346] [as2_mode]: Control mode: UNSET [0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699253.487993522] [as2_mode]: Control mode: HOVER YAW_ANGLE BODY_FLU_FRAME [0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699253.488014058] [as2_mode]: Control mode: POSITION YAW_ANGLE LOCAL_ENU_FRAME [0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699253.488030841] [as2_mode]: Control mode: POSITION YAW_SPEED LOCAL_ENU_FRAME [0m
+[as2_platform_mavlink_node-1] [33m[WARN] [1793699253.503864937] [drone0.platform]: AERPAW mode: pilot arms, GUIDED/LAND only, global waypoints, altitude 20-110 m, land within 5 m of takeoff[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699253.519301730] [drone0.platform]: MAVLink platform configured for autopilot 'ardupilot' (vehicle: copter)[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699253.519364752] [drone0.platform]: Flight modes: offboard 'GUIDED', manual 'LOITER', hold 'BRAKE'[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699253.519383475] [drone0.platform]: Simulation mode: false[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699253.519396365] [drone0.platform]: External odometry mode: false[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699255.099694957] [drone0.platform]: Autopilot link established[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699255.100643226] [drone0.platform]: Autopilot flight mode changed: '' -> 'LAND'[0m
+[as2_platform_mavlink_node-1] [31m[ERROR] [1793699268.117243306] [drone0.platform]: No MAVROS state received for 8.0 s, marking the platform as disconnected[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699269.197313385] [drone0.platform]: Autopilot link established[0m
+[as2_platform_mavlink_node-1] [33m[WARN] [1793699312.338205546] [drone0.platform]: AERPAW mode: waiting up to 300 s for the safety pilot to arm[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699325.103245675] [drone0.platform]: Autopilot flight mode changed: 'LAND' -> 'STABILIZE'[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699326.096892337] [drone0.platform]: AERPAW mode: vehicle armed by the safety pilot[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699326.096991178] [drone0.platform]: Transition [ARM] : New State [LANDED][0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699326.834242196] [drone0.platform]: Switching to offboard control mode 'GUIDED'[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699326.848974486] [drone0.platform]: Autopilot flight mode changed: 'STABILIZE' -> 'GUIDED'[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699327.742966631] [drone0.platform]: Transition [TAKE_OFF] : New State [TAKING_OFF][0m
+[as2_platform_mavlink_node-1] [31m[ERROR] [1793699327.746746458] [drone0.platform]: AERPAW mode: no GPS fix, cannot record the takeoff point[0m
+[as2_platform_mavlink_node-1] [31m[ERROR] [1793699327.747609772] [drone0.platform]: Unable to takeoff[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1793699327.876134672] [drone0.platform]: Transition [EMERGENCY] : New State [EMERGENCY][0m
+[as2_platform_mavlink_node-1] [33m[WARN] [1793699328.346765862] [drone0.platform]: Invalid transition: EMERGENCY -> LAND[0m

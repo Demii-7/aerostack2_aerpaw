@@ -1,0 +1,64 @@
+== stop any running stack (vehicle must be landed and disarmed)
+vehicle disarmed
+== audit proxy on :14550, MAVROS on :14570, stack in AERPAW mode (screen)
+Started screen sessions as2_drone0_*. List: screen -ls
+Mode: AERPAW, config /root/ws/project_emulator/config/config_aerpaw.yaml
+	4844.as2_drone0_estimator	(11/03/26 13:45:58)	(Detached)
+	4837.as2_drone0_mavros	(11/03/26 13:45:58)	(Detached)
+	4840.as2_drone0_platform	(11/03/26 13:45:58)	(Detached)
+	4848.as2_drone0_controller	(11/03/26 13:45:58)	(Detached)
+	4855.as2_drone0_behaviors	(11/03/26 13:45:58)	(Detached)
+	4804.as2_audit	(11/03/26 13:45:57)	(Detached)
+[as2_platform_mavlink_node-1] [33m[WARN] [1793713564.801470450] [drone0.platform]: AERPAW mode: pilot arms, GUIDED/LAND only, global waypoints, altitude 20-110 m, land within 5 m of takeoff[0m
+== mission (waits for pilot) + path recording
+== simulated safety pilot arms (STABILIZE)
+vehicle armed
+== waiting for the mission to finish (max 10 min)
+No screen session found.
+2026-11-03T13:47:00Z
+[INFO] [1793713622.212575234] [drone0.drone0_interface]: Starting drone0
+[INFO] [1793713622.745848580] [drone0.drone0_interface]: drone0 interface initialized
+waiting for the safety pilot to arm...
+arm (by pilot): OK
+offboard (GUIDED): OK
+takeoff: OK
+home (earth frame): x -0.02 y -0.04, flying at z 22.5
+go_to [20.0, -0.0, 22.5]: OK
+  position: [19.49, -0.06, 22.6]
+go_to [20.0, 20.0, 22.5]: OK
+  position: [20.18, 20.16, 22.6]
+go_to [-0.0, 20.0, 22.5]: OK
+  position: [0.81, 20.14, 22.57]
+go_to [-0.0, -0.0, 22.5]: OK
+  position: [-0.08, 0.11, 22.55]
+land: OK
+final position: [0.0, -0.06, 0.13]
+
+samples: 459, duration: 114.5 s
+start (earth): x -0.00 y -0.01 z -0.03
+x: -0.37 .. 20.58 m   y: -0.43 .. 20.24 m (from start)
+max height: 24.94 m above start; cruise height min 22.49 m
+final: height 0.09 m, 0.05 m from the takeoff point (OK the 5 m AERPAW limit)
+
+{
+  "documented_allowed": {
+    "COMMAND_LONG:NAV_TAKEOFF": 1,
+    "HEARTBEAT": 175,
+    "SET_MODE:GUIDED": 1,
+    "SET_MODE:LAND": 1,
+    "SET_POSITION_TARGET_GLOBAL_INT": 19
+  },
+  "duration_s": 178.6,
+  "housekeeping_ask_aerpaw": {
+    "MISSION_ACK": 3,
+    "MISSION_REQUEST_LIST": 7,
+    "PARAM_REQUEST_LIST": 1,
+    "PARAM_REQUEST_READ": 930,
+    "SYSTEM_TIME": 175,
+    "TIMESYNC": 1767
+  },
+  "not_in_filter_list": {
+    "COMMAND_LONG:GET_HOME_POSITION": 1,
+    "COMMAND_LONG:REQUEST_MESSAGE": 1
+  }
+}== done; logs in ws/notes/tests/T6.*
