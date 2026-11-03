@@ -89,6 +89,15 @@ def get_node(context, *args, **kwargs) -> list:
     ns = namespace
     print(f'Namespace: {ns}')
 
+    # AERPAW change: fcu_url / tgt_system launch arguments override the config
+    # file, so the link can be set per drone without namespaced YAML keys.
+    link_params = {}
+    fcu_url = LaunchConfiguration('fcu_url').perform(context)
+    if fcu_url:
+        link_params['fcu_url'] = fcu_url
+        link_params['tgt_system'] = int(LaunchConfiguration('tgt_system').perform(context))
+        print(f'FCU URL: {fcu_url}, target system: {link_params["tgt_system"]}')
+
     return [
         Node(
             package='mavros',
@@ -99,7 +108,8 @@ def get_node(context, *args, **kwargs) -> list:
                         pluginlists_yaml,
                         LaunchConfigurationFromConfigFile(
                             'mavros_config_file',
-                            default_file=get_mavros_config_file())
+                            default_file=get_mavros_config_file()),
+                        link_params,
                         ],
             remappings=[('imu/data', f'/{namespace}/sensor_measurements/imu'),
                         ('global_position/global', f'/{namespace}/sensor_measurements/gps'),
@@ -122,6 +132,16 @@ def generate_launch_description():
             default_value='ardupilot',
             choices=['ardupilot', 'px4'],
             description='Autopilot family, selects the MAVROS plugin list and config'
+        ),
+        DeclareLaunchArgument(
+            'fcu_url',
+            default_value='',
+            description='MAVLink connection, e.g. udp://:14550@ (empty: use the config file)'
+        ),
+        DeclareLaunchArgument(
+            'tgt_system',
+            default_value='1',
+            description='MAVLink system ID of the vehicle (used with fcu_url)'
         ),
         DeclareLaunchArgumentsFromConfigFile(name='mavros_config_file',
                                              source_file=get_mavros_config_file(),

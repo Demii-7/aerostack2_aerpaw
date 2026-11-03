@@ -6,13 +6,19 @@
 #   ./launch_as2.bash -k         kill the tmux session
 # Attach with: tmux attach -t as2_<namespace>
 
+#   ./launch_as2.bash -u udp://:14560@ -s 2   other MAVLink link / system ID
+
 ns="drone0"
+fcu_url="udp://:14550@"  # Stage 1: C-VM mavlink-router -> E-VM UDP 14550
+tgt_system="1"
 kill_only="false"
-while getopts "n:k" opt; do
+while getopts "n:u:s:k" opt; do
   case ${opt} in
     n ) ns="${OPTARG}" ;;
+    u ) fcu_url="${OPTARG}" ;;
+    s ) tgt_system="${OPTARG}" ;;
     k ) kill_only="true" ;;
-    * ) echo "usage: $0 [-n namespace] [-k]"; exit 1 ;;
+    * ) echo "usage: $0 [-n namespace] [-u fcu_url] [-s tgt_system] [-k]"; exit 1 ;;
   esac
 done
 
@@ -25,7 +31,7 @@ cfg="${here}/config/config.yaml"
 src="source /opt/ros/humble/setup.bash; source /root/ws/install/setup.bash; cd ${here}"
 
 windows=(
-  "mavros|ros2 launch as2_platform_mavlink mavros_launch.py namespace:=${ns} autopilot:=ardupilot mavros_config_file:=${cfg}"
+  "mavros|ros2 launch as2_platform_mavlink mavros_launch.py namespace:=${ns} autopilot:=ardupilot mavros_config_file:=${cfg} fcu_url:=${fcu_url} tgt_system:=${tgt_system}"
   "platform|sleep 5; ros2 launch as2_platform_mavlink as2_platform_mavlink_launch.py namespace:=${ns} platform_config_file:=${cfg}"
   "estimator|sleep 7; ros2 launch as2_state_estimator state_estimator_launch.py namespace:=${ns} config_file:=${cfg}"
   "controller|sleep 7; ros2 launch as2_motion_controller controller_launch.py namespace:=${ns} config_file:=${cfg} plugin_name:=pid_speed_controller"

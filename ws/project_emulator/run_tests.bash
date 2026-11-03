@@ -26,10 +26,12 @@ case "$1" in
       --cmake-args -DBUILD_TESTING=OFF
     ;;
   check)
-    log T5.2a_mavros_state.txt timeout 10 ros2 topic echo /${ns}/mavros/state --once
-    log T5.2b_platform_info.txt timeout 10 ros2 topic echo /${ns}/platform/info --once
-    log T5.2c_self_loc.txt timeout 10 ros2 topic echo /${ns}/self_localization/pose --once
-    log T5.2d_nodes.txt ros2 node list
+    # A timed-out echo leaves the ros2 CLI daemon broken (!rclpy.ok), so restart it each time
+    echo1() { ros2 daemon stop >/dev/null 2>&1; timeout 20 ros2 topic echo "$1" --once; }
+    log T5.2a_mavros_state.txt echo1 /${ns}/mavros/state
+    log T5.2b_platform_info.txt echo1 /${ns}/platform/info
+    log T5.2c_self_loc.txt echo1 /${ns}/self_localization/pose
+    log T5.2d_nodes.txt ros2 node list --no-daemon
     ;;
   takeoff)
     cd "${here}"

@@ -53,10 +53,5 @@
     ros__parameters:
       follow_path_plugin_name: "follow_path_plugin_position"
 
-# MAVROS: same link as Stage 1 (C-VM mavlink-router -> E-VM UDP 14550)
-# Node is /drone0/mavros_node (see mavros_launch.py namespace note)
-drone0:
-  mavros_node:
-    ros__parameters:
-      fcu_url: "udp://:14550@"
-      tgt_system: 1
+# MAVROS link (fcu_url, tgt_system) is passed by launch_as2.bash -u / -s,
+# default udp://:14550@ and system 1 (same link as Stage 1).
