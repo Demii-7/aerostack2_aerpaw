@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
         geographiclib-tools \
         wget \
         tmux \
+        screen \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget -q https://raw.githubusercontent.com/mavlink/mavros/ros2/mavros/scripts/install_geographiclib_datasets.sh \
