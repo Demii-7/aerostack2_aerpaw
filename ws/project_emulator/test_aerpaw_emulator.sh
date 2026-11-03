@@ -17,6 +17,9 @@ in_as2() { docker exec "${as2}" bash -c "source /opt/ros/humble/setup.bash; sour
 echo "== stop any running stack (vehicle must be landed and disarmed)"
 # pkill patterns are anchored so they do not match this bash -c command line itself
 in_as2 "./launch_as2.bash -k; ./launch_as2.bash -k -S; pkill -INT -f '^python3 mavlink_audit'; true"
+# the simulated pilot disarms in case an earlier run left the vehicle armed on the ground
+docker exec "${evm}" python3 /opt/standalone/tools/auto_arm.py \
+  --connect udp:0.0.0.0:14551 --action disarm --timeout 30 || true
 sleep 3
 
 echo "== audit proxy on :14550, MAVROS on :14570, stack in AERPAW mode (screen)"
