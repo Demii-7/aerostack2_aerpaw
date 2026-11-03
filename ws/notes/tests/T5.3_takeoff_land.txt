@@ -1,0 +1,10 @@
+# 2026-11-03T08:05:58Z  python3 mission_takeoff_land.py -n drone0
+[INFO] [1793693159.689790480] [drone0.drone0_interface]: Starting drone0
+[INFO] [1793693160.243119642] [drone0.drone0_interface]: drone0 interface initialized
+offboard (GUIDED): OK
+arm: OK
+takeoff: OK
+position after takeoff: [10.181163787841797, -0.5675850510597229, 4.0705037117004395]
+land: OK
+position after land: [10.02027416229248, -0.5306626558303833, 0.3481732904911041]
+# exit=0

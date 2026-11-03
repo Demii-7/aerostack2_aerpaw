@@ -1,0 +1,14 @@
+# 2026-11-03T08:03:47Z  echo1 /drone0/mavros/state
+header:
+  stamp:
+    sec: 1793693030
+    nanosec: 55365970
+  frame_id: ''
+connected: true
+armed: true
+guided: true
+manual_input: true
+mode: GUIDED
+system_status: 3
+---
+# exit=0

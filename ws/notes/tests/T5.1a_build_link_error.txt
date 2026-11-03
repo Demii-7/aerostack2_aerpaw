@@ -1,0 +1,18 @@
+# 2026-11-02T21:55:18Z  colcon build --symlink-install --packages-select as2_platform_mavlink --cmake-args -DBUILD_TESTING=OFF
+Starting >>> as2_platform_mavlink
+--- stderr: as2_platform_mavlink
+/usr/bin/ld: CMakeFiles/as2_platform_mavlink_node.dir/src/mavlink_platform.cpp.o: in function `bool as2::tf::TfHandler::tryConvert<as2_msgs::msg::TrajectorySetpoints_<std::allocator<void> > >(as2_msgs::msg::TrajectorySetpoints_<std::allocator<void> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> >)':
+mavlink_platform.cpp:(.text._ZN3as22tf9TfHandler10tryConvertIN8as2_msgs3msg20TrajectorySetpoints_ISaIvEEEEEbRT_RKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENSt6chrono8durationIlSt5ratioILl1ELl1000000000EEEE[_ZN3as22tf9TfHandler10tryConvertIN8as2_msgs3msg20TrajectorySetpoints_ISaIvEEEEEbRT_RKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENSt6chrono8durationIlSt5ratioILl1ELl1000000000EEEE]+0x1cc): undefined reference to `void tf2::doTransform<as2_msgs::msg::TrajectorySetpoints_<std::allocator<void> > >(as2_msgs::msg::TrajectorySetpoints_<std::allocator<void> > const&, as2_msgs::msg::TrajectorySetpoints_<std::allocator<void> >&, geometry_msgs::msg::TransformStamped_<std::allocator<void> > const&)'
+/usr/bin/ld: mavlink_platform.cpp:(.text._ZN3as22tf9TfHandler10tryConvertIN8as2_msgs3msg20TrajectorySetpoints_ISaIvEEEEEbRT_RKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENSt6chrono8durationIlSt5ratioILl1ELl1000000000EEEE[_ZN3as22tf9TfHandler10tryConvertIN8as2_msgs3msg20TrajectorySetpoints_ISaIvEEEEEbRT_RKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENSt6chrono8durationIlSt5ratioILl1ELl1000000000EEEE]+0x40e): undefined reference to `void tf2::doTransform<as2_msgs::msg::TrajectorySetpoints_<std::allocator<void> > >(as2_msgs::msg::TrajectorySetpoints_<std::allocator<void> > const&, as2_msgs::msg::TrajectorySetpoints_<std::allocator<void> >&, geometry_msgs::msg::TransformStamped_<std::allocator<void> > const&)'
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [CMakeFiles/as2_platform_mavlink_node.dir/build.make:298: as2_platform_mavlink_node] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/as2_platform_mavlink_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2
+---
+Failed   <<< as2_platform_mavlink [56.6s, exited with code 2]
+[Processing: as2_platform_mavlink]
+
+Summary: 0 packages finished [57.1s]
+  1 package failed: as2_platform_mavlink
+  1 package had stderr output: as2_platform_mavlink
+# exit=2

@@ -1,0 +1,16 @@
+# 2026-11-03T08:13:02Z  python3 mission_square.py -n drone0
+[INFO] [1793693583.830438434] [drone0.drone0_interface]: Starting drone0
+[INFO] [1793693584.463265305] [drone0.drone0_interface]: drone0 interface initialized
+offboard (GUIDED): OK
+arm: OK
+takeoff: OK
+go_to [10.0, 0.0, 5.0]: OK
+  position: [9.879046440124512, 0.04606947302818298, 5.029489994049072]
+go_to [10.0, 10.0, 5.0]: OK
+  position: [9.964415550231934, 9.903249740600586, 5.022594928741455]
+go_to [0.0, 10.0, 5.0]: OK
+  position: [0.011687258258461952, 9.974899291992188, 4.91729736328125]
+go_to [0.0, 0.0, 5.0]: OK
+  position: [0.012691850773990154, -0.0689663514494896, 4.970059394836426]
+land: OK
+# exit=0

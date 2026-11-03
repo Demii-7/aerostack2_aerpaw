@@ -1,0 +1,7 @@
+# 2026-11-02T21:58:14Z  colcon build --symlink-install --packages-select as2_platform_mavlink --cmake-args -DBUILD_TESTING=OFF
+Starting >>> as2_platform_mavlink
+[Processing: as2_platform_mavlink]
+Finished <<< as2_platform_mavlink [52.4s]
+
+Summary: 1 package finished [52.9s]
+# exit=0

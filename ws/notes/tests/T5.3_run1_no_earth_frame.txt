@@ -1,0 +1,11 @@
+# 2026-11-03T08:01:19Z  python3 mission_takeoff_land.py -n drone0
+[INFO] [1793692880.830802273] [drone0.drone0_interface]: Starting drone0
+[INFO] [1793692881.408233737] [drone0.drone0_interface]: drone0 interface initialized
+offboard (GUIDED): OK
+arm: OK
+[WARN] [1793692883.148149759] [drone0.drone0_interface]: Goal Rejected
+takeoff: FAILED
+[WARN] [1793692883.651878666] [drone0.drone0_interface]: Goal Rejected
+land: FAILED
+position after land: [9.996238708496094, -0.543718695640564, 0.2700809836387634]
+# exit=0

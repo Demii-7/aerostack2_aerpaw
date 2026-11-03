@@ -1,0 +1,7 @@
+samples: 202, duration: 50.3 s
+x: -0.38 .. 10.38 m   y: -0.37 .. 10.38 m
+max z: 5.06 m (target 5.0 m), final z: 0.02 m
+corner [10.0, 0.0, 5.0]: closest 0.13 m at t=14.0 s
+corner [10.0, 10.0, 5.0]: closest 0.11 m at t=20.8 s
+corner [0.0, 10.0, 5.0]: closest 0.09 m at t=27.8 s
+corner [0.0, 0.0, 5.0]: closest 0.04 m at t=10.0 s

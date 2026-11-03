@@ -1,0 +1,19 @@
+# 2026-11-03T07:49:48Z  ros2 node list
+Traceback (most recent call last):
+  File "/opt/ros/humble/bin/ros2", line 33, in <module>
+    sys.exit(load_entry_point('ros2cli==0.18.20', 'console_scripts', 'ros2')())
+  File "/opt/ros/humble/lib/python3.10/site-packages/ros2cli/cli.py", line 91, in main
+    rc = extension.main(parser=parser, args=args)
+  File "/opt/ros/humble/lib/python3.10/site-packages/ros2node/command/node.py", line 37, in main
+    return extension.main(args=args)
+  File "/opt/ros/humble/lib/python3.10/site-packages/ros2node/verb/list.py", line 38, in main
+    node_names = get_node_names(node=node, include_hidden_nodes=args.all)
+  File "/opt/ros/humble/lib/python3.10/site-packages/ros2node/api/__init__.py", line 60, in get_node_names
+    node_names_and_namespaces = node.get_node_names_and_namespaces()
+  File "/usr/lib/python3.10/xmlrpc/client.py", line 1122, in __call__
+    return self.__send(self.__name, args)
+  File "/usr/lib/python3.10/xmlrpc/client.py", line 1464, in __request
+    response = self.__transport.request(
+  File "/usr/lib/python3.10/xmlrpc/client.py", line 1166, in request
+    return self.single_request(host, handler, request_body, verbose)
+  File "/usr/lib/python3.10/xmlrpc/client.py", line 1182, in single_request

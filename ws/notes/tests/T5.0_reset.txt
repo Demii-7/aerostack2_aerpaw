@@ -1,0 +1,14 @@
+# 2026-11-03T08:12:53Z  bash -c ros2 service call /drone0/mavros/cmd/arming mavros_msgs/srv/CommandBool '{value: false}' && ros2 service call /drone0/mavros/set_mode mavros_msgs/srv/SetMode '{custom_mode: LAND}'
+waiting for service to become available...
+requester: making request: mavros_msgs.srv.CommandBool_Request(value=False)
+
+response:
+mavros_msgs.srv.CommandBool_Response(success=True, result=0)
+
+waiting for service to become available...
+requester: making request: mavros_msgs.srv.SetMode_Request(base_mode=0, custom_mode='LAND')
+
+response:
+mavros_msgs.srv.SetMode_Response(mode_sent=True)
+
+# exit=0

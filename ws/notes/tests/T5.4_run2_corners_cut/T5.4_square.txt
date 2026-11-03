@@ -1,0 +1,17 @@
+# 2026-11-03T08:10:58Z  python3 mission_square.py -n drone0
+[INFO] [1793693459.939878111] [drone0.drone0_interface]: Starting drone0
+[INFO] [1793693460.469508740] [drone0.drone0_interface]: drone0 interface initialized
+[WARN] [1793693461.524002847] [drone0.drone0_interface]: GoToBehavior Not Available
+offboard (GUIDED): OK
+arm: OK
+takeoff: OK
+go_to [10.0, 0.0, 5.0]: OK
+  position: [0.06438140571117401, -0.1232825368642807, 4.581019401550293]
+go_to [10.0, 10.0, 5.0]: OK
+  position: [10.107596397399902, 10.334153175354004, 5.021413803100586]
+go_to [0.0, 10.0, 5.0]: OK
+  position: [10.064366340637207, 10.124107360839844, 5.013974189758301]
+go_to [0.0, 0.0, 5.0]: OK
+  position: [-0.12615978717803955, -0.3081448972225189, 4.959885597229004]
+land: OK
+# exit=0
