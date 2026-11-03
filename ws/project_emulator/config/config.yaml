@@ -33,11 +33,12 @@
         timeout: 60.0
 
   # State estimator: MAVROS local odom (ENU, anchored at ArduPilot EKF origin)
+  # use_gps: true (AS2_ardupilot setting) waits forever for an origin with the
+  # 1.1.3 binary ("Waiting for origin to be set"); Stage 4 defaults set earth at once.
   state_estimator:
     ros__parameters:
       plugin_name: "raw_odometry"
-      use_gps: true
-      set_origin_on_start: true
+      use_gps: false
 
   # Motion behaviors
   TakeoffBehavior:
