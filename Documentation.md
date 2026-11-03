@@ -17,7 +17,7 @@ GPS waypoint per move, refuses < 20 m or > 110 m, LAND only within 5 m of takeof
 | Start the as2 container | W3 | docker run -it --rm --name as2 --network container:E-VM-X0841-M1 -v ~/aerostack2_aerpaw/ws:/root/ws as2-aerpaw bash | |
 | Rebuild the platform | W3 | cd /root/ws; colcon build --symlink-install --packages-select as2_platform_mavlink --cmake-args -DBUILD_TESTING=OFF; source install/setup.bash | 1 package finished |
 | Start MAVROS, connected to the drone on UDP 14550 | W3 | ros2 launch as2_platform_mavlink mavros_launch.py namespace:=drone0 autopilot:=ardupilot fcu_url:=udp://:14550@ tgt_system:=1 mavros_config_file:=/root/ws/project_emulator/config/config_aerpaw.yaml | |
-| New container shell (W4–W8) | W4–W8 | ssh chameleon; docker exec -it as2 bash; source /root/ws/install/setup.bash | |
+| New container shell (W4–W8), workspace loaded | W4–W8 | ssh chameleon; docker exec -it as2 bash -c "source /root/ws/install/setup.bash && exec bash" | (if you type the source line separately, wait for the root@e-vm prompt first, or ROS reports "Package 'as2_platform_mavlink' not found") |
 | Platform (Aerostack2 commands → MAVROS) | W4 | ros2 launch as2_platform_mavlink as2_platform_mavlink_launch.py namespace:=drone0 platform_config_file:=/root/ws/project_emulator/config/config_aerpaw.yaml control_modes_file:=/root/ws/project_emulator/config/control_modes_aerpaw.yaml | |
 | State estimator (position in earth frame) | W5 | ros2 launch as2_state_estimator state_estimator_launch.py namespace:=drone0 config_file:=/root/ws/project_emulator/config/config_aerpaw.yaml | |
 | Motion controller | W6 | ros2 launch as2_motion_controller controller_launch.py namespace:=drone0 config_file:=/root/ws/project_emulator/config/config_aerpaw.yaml plugin_name:=pid_speed_controller | |
@@ -52,7 +52,7 @@ Our own as2_platform_aerpaw is kept for reference; its stage 5 WIP is on branch 
 | Start the as2 container | W3 | docker run -it --rm --name as2 --network container:E-VM-X0841-M1 -v ~/aerostack2_aerpaw/ws:/root/ws as2-aerpaw bash | |
 | Build the platform | W3 | cd /root/ws; colcon build --symlink-install --packages-select as2_platform_mavlink --cmake-args -DBUILD_TESTING=OFF; source install/setup.bash | 1 package finished (52.4 s) |
 | Start MAVROS, connected to the drone on UDP 14550 | W3 | ros2 launch as2_platform_mavlink mavros_launch.py namespace:=drone0 autopilot:=ardupilot fcu_url:=udp://:14550@ tgt_system:=1 mavros_config_file:=/root/ws/project_emulator/config/config.yaml | |
-| New container shell (W4–W8) | W4–W8 | ssh chameleon; docker exec -it as2 bash; source /root/ws/install/setup.bash | |
+| New container shell (W4–W8), workspace loaded | W4–W8 | ssh chameleon; docker exec -it as2 bash -c "source /root/ws/install/setup.bash && exec bash" | (if you type the source line separately, wait for the root@e-vm prompt first, or ROS reports "Package 'as2_platform_mavlink' not found") |
 | Platform (Aerostack2 commands → MAVROS) | W4 | ros2 launch as2_platform_mavlink as2_platform_mavlink_launch.py namespace:=drone0 platform_config_file:=/root/ws/project_emulator/config/config.yaml | |
 | State estimator (position in earth frame) | W5 | ros2 launch as2_state_estimator state_estimator_launch.py namespace:=drone0 config_file:=/root/ws/project_emulator/config/config.yaml | |
 | Motion controller | W6 | ros2 launch as2_motion_controller controller_launch.py namespace:=drone0 config_file:=/root/ws/project_emulator/config/config.yaml plugin_name:=pid_speed_controller | |
