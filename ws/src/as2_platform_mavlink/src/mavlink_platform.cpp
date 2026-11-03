@@ -194,6 +194,8 @@ void MavlinkPlatform::declareParameters()
       trajectory_sampling_dt_);
     trajectory_sampling_dt_ = 0.01;
   }
+
+  declareAerpawParameters();
 }
 
 void MavlinkPlatform::setupCommunications()
@@ -222,6 +224,8 @@ void MavlinkPlatform::setupCommunications()
     "mavros/extended_state", rclcpp::SensorDataQoS(),
     std::bind(&MavlinkPlatform::mavlinkExtendedStateCb, this, std::placeholders::_1),
     feedback_options);
+
+  setupAerpawCommunications(feedback_options);
 
   // The feedback executor is pumped from the node executor during normal
   // operation and from waitFor() while a blocking command is running.
@@ -462,6 +466,9 @@ bool MavlinkPlatform::sendCommandLong(
 
 bool MavlinkPlatform::ownSetArmingState(bool state)
 {
+  if (aerpaw_.enabled) {
+    return aerpawSetArmingState(state);
+  }
   if (state) {
     if (!this->getConnectedStatus()) {
       RCLCPP_ERROR(this->get_logger(), "Refusing to arm: no autopilot connection");
@@ -506,6 +513,12 @@ bool MavlinkPlatform::ownSetArmingState(bool state)
 bool MavlinkPlatform::ownSetOffboardControl(bool offboard)
 {
   if (!offboard) {
+    if (aerpaw_.enabled) {
+      RCLCPP_ERROR(
+        this->get_logger(),
+        "AERPAW mode: leaving GUIDED is not allowed (only GUIDED and LAND), use land instead");
+      return false;
+    }
     if (autopilot_.manual_mode.empty()) {
       RCLCPP_ERROR(
         this->get_logger(), "Leaving offboard control is disabled (modes.manual is empty)");
@@ -542,6 +555,17 @@ bool MavlinkPlatform::ownSetPlatformControlMode(const as2_msgs::msg::ControlMode
 {
   has_mode_settled_ = false;
   hover_setpoint_latched_ = false;
+
+  if (aerpaw_.enabled && msg.control_mode != as2_msgs::msg::ControlMode::UNSET &&
+    msg.control_mode != as2_msgs::msg::ControlMode::HOVER &&
+    msg.control_mode != as2_msgs::msg::ControlMode::POSITION)
+  {
+    RCLCPP_ERROR(
+      this->get_logger(),
+      "AERPAW mode: control mode %d is not allowed by the MAVLink filter (HOVER and POSITION "
+      "only)", msg.control_mode);
+    return false;
+  }
 
   switch (msg.control_mode) {
     case as2_msgs::msg::ControlMode::UNSET:
@@ -629,6 +653,22 @@ bool MavlinkPlatform::ownTakeoff()
     RCLCPP_ERROR(this->get_logger(), "Cannot take off: the vehicle is not armed");
     return false;
   }
+  if (aerpaw_.enabled) {
+    if (takeoff_height_ < aerpaw_.min_alt || takeoff_height_ > aerpaw_.max_alt) {
+      RCLCPP_ERROR(
+        this->get_logger(), "AERPAW mode: takeoff height %.1f m is outside %.0f-%.0f m",
+        takeoff_height_, aerpaw_.min_alt, aerpaw_.max_alt);
+      return false;
+    }
+    if (!aerpaw_fix_received_) {
+      RCLCPP_ERROR(this->get_logger(), "AERPAW mode: no GPS fix, cannot record the takeoff point");
+      return false;
+    }
+    aerpaw_home_lat_ = aerpaw_fix_.latitude;
+    aerpaw_home_lon_ = aerpaw_fix_.longitude;
+    aerpaw_home_set_ = true;
+    aerpaw_target_sent_ = false;
+  }
 
   const double target_height = last_odom_pose_.pose.position.z + takeoff_height_;
   RCLCPP_INFO(this->get_logger(), "Taking off %.2f m (MAV_CMD_NAV_TAKEOFF)", takeoff_height_);
@@ -680,6 +720,9 @@ bool MavlinkPlatform::ownTakeoff()
 
 bool MavlinkPlatform::ownLand()
 {
+  if (aerpaw_.enabled) {
+    return aerpawLand();
+  }
   RCLCPP_INFO(this->get_logger(), "Landing (MAV_CMD_NAV_LAND)");
 
   auto request = std::make_shared<mavros_msgs::srv::CommandTOL::Request>();
@@ -721,6 +764,12 @@ bool MavlinkPlatform::ownLand()
 void MavlinkPlatform::ownKillSwitch()
 {
   RCLCPP_ERROR(this->get_logger(), "KILL SWITCH TRIGGERED");
+  if (aerpaw_.enabled) {
+    // A forced disarm is not allowed through the AERPAW filter; LAND is.
+    RCLCPP_ERROR(this->get_logger(), "AERPAW mode: kill switch lands instead of disarming");
+    setFlightMode("LAND", false);
+    return;
+  }
   if (!sendCommandLong(kMavCmdComponentArmDisarm, 0.0f, kForceArmDisarmMagic)) {
     RCLCPP_ERROR(this->get_logger(), "Failed to force disarm the vehicle");
   }
@@ -734,6 +783,14 @@ void MavlinkPlatform::ownStopPlatform()
     return;
   }
   stop_requested_ = true;
+  if (aerpaw_.enabled && odometry_received_) {
+    // BRAKE is not allowed through the AERPAW filter: hold the current
+    // position with a GUIDED waypoint instead.
+    RCLCPP_WARN(this->get_logger(), "AERPAW mode: emergency hover at the current position");
+    aerpaw_target_sent_ = false;
+    aerpawSendWaypoint(last_odom_pose_.pose.position);
+    return;
+  }
   RCLCPP_WARN(
     this->get_logger(), "Emergency hover requested, switching to '%s'",
     autopilot_.hold_mode.c_str());
@@ -987,6 +1044,9 @@ bool MavlinkPlatform::ownSendCommand()
   }
 
   const as2_msgs::msg::ControlMode & mode = this->getControlMode();
+  if (aerpaw_.enabled) {
+    return aerpawSendCommand(mode);
+  }
   switch (mode.control_mode) {
     case as2_msgs::msg::ControlMode::HOVER:
       return sendHoverSetpoint();

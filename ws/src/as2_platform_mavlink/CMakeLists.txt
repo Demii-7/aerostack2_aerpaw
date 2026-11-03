@@ -45,6 +45,7 @@ include_directories(
 set(SOURCE_CPP_FILES
   src/autopilot_profile.cpp
   src/mavlink_platform.cpp
+  src/aerpaw_mode.cpp
 )
 
 # Create the node executable

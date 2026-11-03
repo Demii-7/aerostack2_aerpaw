@@ -52,8 +52,12 @@
 #include <geometry_msgs/msg/twist_stamped.hpp>
 #include <nav_msgs/msg/odometry.hpp>
 
+#include <sensor_msgs/msg/nav_sat_fix.hpp>
+#include <std_msgs/msg/float64.hpp>
+
 #include <mavros_msgs/msg/attitude_target.hpp>
 #include <mavros_msgs/msg/extended_state.hpp>
+#include <mavros_msgs/msg/global_position_target.hpp>
 #include <mavros_msgs/msg/position_target.hpp>
 #include <mavros_msgs/msg/state.hpp>
 #include <mavros_msgs/srv/command_bool.hpp>
@@ -199,6 +203,53 @@ private:
   void publishPositionTarget(const mavros_msgs::msg::PositionTarget & msg);
 
   void publishVisualOdometry();
+
+  /* -------------------------------------------------------------------- */
+  /* AERPAW mode (src/aerpaw_mode.cpp)                                     */
+  /* -------------------------------------------------------------------- */
+
+  /**
+   * On the real AERPAW testbed a MAVLink filter sits between the E-VM and the
+   * autopilot. It only lets through: GUIDED / LAND mode changes, takeoff to
+   * 20-110 m AGL, global waypoints (lat, lon, alt) and yaw changes. Arming is
+   * done by the safety pilot, and any other mode change aborts the experiment.
+   * With aerpaw.enabled the platform restricts itself to those commands.
+   * See https://sites.google.com/ncsu.edu/aerpaw-user-manual (5.1.3 MAVLink Filter).
+   */
+  struct AerpawConfig
+  {
+    bool enabled = false;
+    double arm_wait_timeout = 300.0;   // s to wait for the safety pilot to arm
+    double min_alt = 20.0;             // m AGL, filter minimum
+    double max_alt = 110.0;            // m AGL, filter maximum
+    double land_radius = 5.0;          // m, must land this close to the takeoff point
+    double resend_period = 2.0;        // s, repeat the current waypoint (UDP loss)
+    double min_target_change = 0.5;    // m, smaller changes are not re-sent
+  };
+
+  void declareAerpawParameters();
+  void setupAerpawCommunications(const rclcpp::SubscriptionOptions & feedback_options);
+  bool aerpawSetArmingState(bool state);
+  bool aerpawLand();
+  /// Send @p target (odom ENU) as a global waypoint if it changed or is due for resend.
+  bool aerpawSendWaypoint(const geometry_msgs::msg::Point & target);
+  bool aerpawSendCommand(const as2_msgs::msg::ControlMode & mode);
+  /// Horizontal distance (m) between the current GPS fix and the takeoff point.
+  double aerpawDistanceToHome() const;
+
+  AerpawConfig aerpaw_;
+  rclcpp::Subscription<sensor_msgs::msg::NavSatFix>::SharedPtr aerpaw_gps_sub_;
+  rclcpp::Subscription<std_msgs::msg::Float64>::SharedPtr aerpaw_rel_alt_sub_;
+  rclcpp::Publisher<mavros_msgs::msg::GlobalPositionTarget>::SharedPtr aerpaw_global_pub_;
+  sensor_msgs::msg::NavSatFix aerpaw_fix_;
+  double aerpaw_rel_alt_ = 0.0;
+  bool aerpaw_fix_received_ = false;
+  bool aerpaw_home_set_ = false;
+  double aerpaw_home_lat_ = 0.0;
+  double aerpaw_home_lon_ = 0.0;
+  bool aerpaw_target_sent_ = false;
+  geometry_msgs::msg::Point aerpaw_last_target_;
+  rclcpp::Time aerpaw_last_send_time_ {0, 0, RCL_ROS_TIME};
 
   /* -------------------------------------------------------------------- */
   /* Members                                                               */
