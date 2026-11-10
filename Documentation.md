@@ -41,9 +41,14 @@ Answers to the Nov 3 meeting questions:
    - Flight reconstruction and simulation replay: Reconstruct real-world flights in RViz and replay recorded commands in Gazebo to investigate failures and test improvements.
    - Reusable research infrastructure: Develop and evaluate custom autonomy and coordination algorithms without repeatedly rebuilding the underlying robotics architecture.
    - Integration costs and limitations: Additional computational overhead, ROS 2 integration, communication latency, and command-interface restrictions that require evaluation.
-3. What does coordination in Aerostack2 take? A mission script with one drone interface per drone, or a custom
-   behavior; one stack per drone namespace. On AERPAW only waypoints (DO_REPOSITION, MISSION_ITEM) and velocity-only
-   setpoints pass the filter. Multi-drone also needs ROS 2 between E-VMs (not tested).
+3. What does it take to implement planning and coordination algorithms in Aerostack2? What we need to set up, and how it works:
+   - One Aerostack2 stack per drone: each drone's E-VM runs MAVROS, our platform in AERPAW mode, the state estimator, the controller and the motion behaviors, in its own namespace (drone0, drone1, ...); today's single-drone setup repeated on every E-VM.
+   - A shared ROS 2 network: all E-VMs use the same ROS_DOMAIN_ID so each drone's topics and behaviors are visible to the others over AERPAW's experiment network; a Fast DDS discovery server on one E-VM if multicast is blocked. Not tested yet.
+   - One common map: each drone measures position from its own takeoff point, so the coordinator converts every drone to one shared frame using GPS.
+   - The algorithm as a coordinator: a Python mission with one drone interface per drone (fastest) or a custom Aerostack2 behavior (reusable), on one E-VM. Each step it reads all drones' positions, computes each drone's next target (leader-follower offset, consensus average, coverage cell) and sends it through that drone's go_to behavior. A distributed version runs one copy per drone reading its neighbours' positions.
+   - Commands through AERPAW's rules: go_to becomes a GPS waypoint (DO_REPOSITION, after the planned fix) that the filter checks against the geofence; the safety pilot arms each drone. Algorithms advance in waypoint steps every 1 to 2 s; velocity commands are also allowed by the filter if we enable them in AERPAW mode.
+   - Safety and measurement: a minimum-separation check before sending targets; rosbag2 records every drone's position, target and timing for formation error, minimum separation and completion time.
+   - Test path: Aerostack2's simulator or Gazebo with several drones, then the two-drone AERPAW emulator, then AERPAW Development, then the testbed. None of the multi-drone pieces are built yet; one drone flying on AERPAW comes first.
 4. Implement, then run on AERPAW: in progress; one drone must fly on AERPAW first (needs the three fixes).
 
 ## Stage 6: AERPAW mode, flying by the real AERPAW rules (Nov 3, 2026)
