@@ -32,21 +32,15 @@ Next: make the three changes, rehearse on Chameleon with AERPAW's real filter, r
 Answers to the Nov 3 meeting questions:
 1. Can docker run be executed in an AERPAW E-VM? No: the E-VM is an unprivileged container, every container fails
    with "unshare: operation not permitted". install_evm.sh installs the same packages natively instead.
-2. Why would an experimenter run an AERPAW experiment with Aerostack2? It gives AERPAW experiments a complete
-   autonomy stack that also runs outside AERPAW:
-   - Same code on every testbed: Gazebo or Aerostack2's simulator, the AERPAW emulator, the real AERPAW drones, and
-     other Aerostack2 platforms (PX4, Crazyflie, DJI, Tello); results compare across testbeds and others can repeat them.
-   - Ready-made autonomy instead of a single script: state estimation, motion controllers, behaviors (take off, go to,
-     follow path, land), path planning around no-fly zones (A*, Voronoi), behavior-tree missions. aerpawlib offers
-     vehicle commands and a state machine, with no planners or behaviors.
-   - Radio-aware autonomy, AERPAW's core topic: a small bridge can publish AERPAW's radio measurements (SDR, LTE/5G)
-     as ROS 2 topics for Aerostack2 behaviors to act on (fly toward better signal, relay data).
-   - Measurement and replay: rosbag2 records every topic with timestamps; RViz shows the flight live in the emulator.
-   - Multi-drone and networking studies: one stack per drone namespace, data exchanged over ROS 2, so ROS 2 over real
-     wireless links becomes something to measure on AERPAW.
-   - Coordination and control on top: leader-follower, consensus, coverage written once as missions or behaviors.
-   - Costs: heavier E-VM setup (about 15 minutes); only waypoints and velocity commands pass AERPAW's filter (no
-     trajectory tracking or position streaming); MAVROS adds delay not yet measured; ROS 2 between E-VMs untested.
+2. Why would an experimenter run an AERPAW experiment with Aerostack2? What Aerostack2 adds to AERPAW:
+   - Cross-platform portability: Develop autonomy missions that can transfer across simulation environments, AERPAW, and other supported drone platforms.
+   - Complete autonomy stack: Ready-made state estimation, motion control, path planning, behaviors, and mission execution.
+   - Communication-aware autonomy: Integrate AERPAW's wireless measurements into autonomous navigation and decision-making.
+   - Multi-UAV coordination: Support research into formation control, leader-follower systems, consensus, and distributed planning.
+   - Experiment recording and analysis: Record synchronized vehicle states, commands, sensor data, and wireless measurements using ROS bags.
+   - Flight reconstruction and simulation replay: Reconstruct real-world flights in RViz and replay recorded commands in Gazebo to investigate failures and test improvements.
+   - Reusable research infrastructure: Develop and evaluate custom autonomy and coordination algorithms without repeatedly rebuilding the underlying robotics architecture.
+   - Integration costs and limitations: Additional computational overhead, ROS 2 integration, communication latency, and command-interface restrictions that require evaluation.
 3. What does coordination in Aerostack2 take? A mission script with one drone interface per drone, or a custom
    behavior; one stack per drone namespace. On AERPAW only waypoints (DO_REPOSITION, MISSION_ITEM) and velocity-only
    setpoints pass the filter. Multi-drone also needs ROS 2 between E-VMs (not tested).
