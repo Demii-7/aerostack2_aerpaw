@@ -6,6 +6,40 @@ Platform code: `ws/src/as2_platform_mavlink` is a git submodule of https://githu
 Clone with `git clone --recurse-submodules ...`, or run `git submodule update --init` after a pull or checkout.
 To change the platform: commit inside ws/src/as2_platform_mavlink, push to the fork, then commit the new submodule commit here.
 
+## Stage 7 results: first real AERPAW Development session (Nov 10, 2026)
+
+Goal: get our Aerostack2 stack talking to the drone from a real AERPAW E-VM.
+
+What I did:
+- Experiment as2_aerpaw_demarce2 (ID 1600), one UAV node (LPN1), Development. (1599 dropped: AERPAW only installs
+  SSH keys that are in the profile at the first Initiate Development.)
+- `ssh -i ~/.ssh/id_aerpaw_rsa root@192.168.122.1` (VPN on). E-VM: Ubuntu 22.04.5, internet works.
+- Docker on the E-VM: not possible (below).
+- Native install, then Save in the portal: `git clone --recurse-submodules https://github.com/Demii-7/aerostack2_aerpaw.git /root/aerostack2_aerpaw`,
+  checkout stage5-pivot-mavlink-platform, `git submodule update --init`, `bash ./ws/aerpaw/install_evm.sh` (platform built in 34 s).
+- MAVROS on UDP 14550 (the port AERPAW's own scripts use): saw the drone for a moment, then nothing.
+
+Results:
+- E-VM side works: install, build, network to the C-VM and the OEO console.
+- No flight yet. MAVROS sent messages the MAVLink filter does not allow (SYSTEM_TIME, TIMESYNC); any disallowed
+  message makes the filter put the drone in LOITER and shut down, so nothing reaches the E-VM afterwards.
+- Filter rules read from AERPAW's C-VM code (ws/notes/aerpaw_filter_findings_2026-11-10.md). AERPAW mode needs:
+  MAVROS sending only allowed messages; mode changes as DO_SET_MODE (176), not SET_MODE; waypoints as
+  DO_REPOSITION (192), not position targets in SET_POSITION_TARGET_GLOBAL_INT (velocity only).
+
+Next: make the three changes, rehearse on Chameleon with AERPAW's real filter, restart the Development session, fly the square.
+
+Answers to the Nov 3 meeting questions:
+1. Can docker run be executed in an AERPAW E-VM? No: the E-VM is an unprivileged container, every container fails
+   with "unshare: operation not permitted". install_evm.sh installs the same packages natively instead.
+2. Why Aerostack2 on AERPAW? The same coordination code runs in Gazebo, the AERPAW emulator and on real outdoor drones,
+   so comparisons are fair and repeatable; aerpawlib scripts run only on AERPAW and have no planners or behaviors.
+   Cost: heavier E-VM setup and fitting AERPAW's filter.
+3. What does coordination in Aerostack2 take? A mission script with one drone interface per drone, or a custom
+   behavior; one stack per drone namespace. On AERPAW only waypoints (DO_REPOSITION, MISSION_ITEM) and velocity-only
+   setpoints pass the filter. Multi-drone also needs ROS 2 between E-VMs (not tested).
+4. Implement, then run on AERPAW: in progress; one drone must fly on AERPAW first (needs the three fixes).
+
 ## Stage 6: AERPAW mode, flying by the real AERPAW rules (Nov 3, 2026)
 
 Why: on real AERPAW a MAVLink filter between the E-VM and the drone only allows GUIDED and LAND, takeoff to 20–110 m
