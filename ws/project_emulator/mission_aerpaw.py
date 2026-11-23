@@ -20,6 +20,13 @@ def main():
     parser.add_argument('-n', '--namespace', default='drone0')
     parser.add_argument('--side', type=float, default=20.0, help='square side (m)')
     parser.add_argument('--speed', type=float, default=3.0)
+    # On the AERPAW emulator the start point is < 20 m from the geofence's east edge
+    # (Nov 23, 2026: a waypoint 20 m east was rejected by the MAVLink filter), so the
+    # square goes west and north by default.
+    parser.add_argument('--east', type=int, default=-1, choices=[-1, 1],
+                        help='square towards +x (east, 1) or -x (west, -1)')
+    parser.add_argument('--north', type=int, default=1, choices=[-1, 1],
+                        help='square towards +y (north, 1) or -y (south, -1)')
     parser.add_argument('--alt', type=float, default=25.0,
                         help='flying height (m above start, 20-110 on AERPAW)')
     args = parser.parse_args()
@@ -44,8 +51,8 @@ def main():
         x0, y0, _ = drone.position
         z = args.alt
         print(f'home (earth frame): x {x0:.2f} y {y0:.2f}, flying at z {z:.1f}', flush=True)
-        s = args.side
-        path = [[x0 + s, y0, z], [x0 + s, y0 + s, z], [x0, y0 + s, z], [x0, y0, z]]
+        sx, sy = args.side * args.east, args.side * args.north
+        path = [[x0 + sx, y0, z], [x0 + sx, y0 + sy, z], [x0, y0 + sy, z], [x0, y0, z]]
         for goal in path:
             ok = step(f'go_to {[round(v, 1) for v in goal]}', fly_to(drone, goal, args.speed, tol=1.0))
             print(f'  position: {[round(v, 2) for v in drone.position]}', flush=True)

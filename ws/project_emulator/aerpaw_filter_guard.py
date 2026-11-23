@@ -23,6 +23,7 @@ No dependencies beyond Python 3.
 import argparse
 import json
 import math
+import re
 import signal
 import socket
 import struct
@@ -53,6 +54,27 @@ ALLOWED_CMDS = {21: 'NAV_LAND', 22: 'NAV_TAKEOFF', 115: 'CONDITION_YAW', 176: 'D
 ALLOWED_MODES = {4: 'GUIDED', 9: 'LAND'}
 POSITION_TYPEMASK_CHECK = 0b000111000111  # velocity only
 MAV_TYPE_GCS = 6
+MIN_ALT, MAX_ALT = 20.0, 120.0  # safety_checker_config_copter.yaml
+
+
+def read_kml_polygon(path):
+    """Return [(lon, lat), ...] of the first polygon in a KML geofence file."""
+    text = open(path).read()
+    coords = re.search(r'<coordinates>(.*?)</coordinates>', text, re.S).group(1).split()
+    return [(float(c.split(',')[0]), float(c.split(',')[1])) for c in coords]
+
+
+def inside(lon, lat, poly):
+    """Ray casting point-in-polygon, same idea as aerpawlib.safetyChecker.inside."""
+    result = False
+    j = len(poly) - 1
+    for i in range(len(poly)):
+        xi, yi = poly[i]
+        xj, yj = poly[j]
+        if (yi > lat) != (yj > lat) and lon < (xj - xi) * (lat - yi) / (yj - yi) + xi:
+            result = not result
+        j = i
+    return result
 
 
 def frames(buf):
@@ -76,7 +98,8 @@ def frames(buf):
 
 class Guard:
 
-    def __init__(self):
+    def __init__(self, geofence=None):
+        self.geofence = geofence
         self.armed = False
         self.arm_time = None
         self.vehicle_mode = None
@@ -91,6 +114,16 @@ class Guard:
                 self.arm_time = time.time()
             self.armed = armed
             self.vehicle_mode = custom_mode
+
+    def check_waypoint(self, lat, lon, alt):
+        """The filter's safety checker: altitude limits and inside the geofence (when armed)."""
+        if not self.armed:
+            return None
+        if alt < MIN_ALT or alt > MAX_ALT:
+            return f'waypoint altitude {alt:.1f} m outside {MIN_ALT:.0f}-{MAX_ALT:.0f} m'
+        if self.geofence and not inside(lon, lat, self.geofence):
+            return f'waypoint ({lat:.7f},{lon:.7f}) outside the geofence'
+        return None
 
     def check(self, msgid, p):
         """Return (label, reason) where reason is None if the filter would allow it."""
@@ -116,6 +149,9 @@ class Guard:
                 label += f'({x / 1e7:.7f},{y / 1e7:.7f},{z:.1f})'
                 if not (math.isfinite(z) and x and y):
                     return label, 'reposition without a valid position'
+                reason = self.check_waypoint(x / 1e7, y / 1e7, z)
+                if reason:
+                    return label, reason
             return label, None
         if msgid in (84, 86):
             mask = struct.unpack_from('<H', p, 48)[0]
@@ -126,7 +162,10 @@ class Guard:
         if msgid == 39:
             cmd = struct.unpack_from('<H', p, 30)[0]
             label = f'{name}:{cmd}'
-            return label, (None if cmd == 16 else f'mission item {cmd} not allowed')
+            if cmd != 16:
+                return label, f'mission item {cmd} not allowed'
+            x, y, z = struct.unpack_from('<fff', p, 16)
+            return label, self.check_waypoint(x, y, z)
         if msgid in ALLOWED_MSGS:
             return name, None
         return name, 'message type not allowed'
@@ -138,6 +177,8 @@ def main():
     ap.add_argument('--mavros-port', type=int, default=14570, help='port MAVROS binds')
     ap.add_argument('--log', default='aerpaw_filter_guard.log')
     ap.add_argument('--audit', action='store_true', help='forward everything, only log')
+    ap.add_argument('--geofence', help='KML include geofence (e.g. AERPAW-Dev/AHN/C-VM/'
+                    'MAVLink_Filter/Geofences/copter_geofence.kml)')
     args = ap.parse_args()
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -145,7 +186,7 @@ def main():
     sock.settimeout(1.0)
     mavros = ('127.0.0.1', args.mavros_port)
     vehicle = None
-    guard = Guard()
+    guard = Guard(read_kml_polygon(args.geofence) if args.geofence else None)
     sent, blocked = Counter(), Counter()
     rx = 0
     log = open(args.log, 'a', buffering=1)
