@@ -1,0 +1,99 @@
+results: /root/Results/as2_1123_2048
+Started screen sessions as2_drone0_*. List: screen -ls
+Mode: AERPAW, config /root/aerostack2_aerpaw/ws/project_emulator/config/config_aerpaw.yaml
+== screens
+	357.as2_drone0_controller	(11/23/26 15:48:42)	(Detached)
+	365.as2_drone0_behaviors	(11/23/26 15:48:42)	(Detached)
+	343.as2_drone0_platform	(11/23/26 15:48:42)	(Detached)
+	349.as2_drone0_estimator	(11/23/26 15:48:42)	(Detached)
+	335.as2_drone0_mavros	(11/23/26 15:48:41)	(Detached)
+	320.as2_guard	(11/23/26 15:48:40)	(Detached)
+== mavros state
+header:
+  stamp:
+    sec: 1795466963
+    nanosec: 939898000
+  frame_id: ''
+connected: true
+armed: false
+guided: false
+manual_input: true
+mode: ALT_HOLD
+system_status: 3
+---
+== platform info
+header:
+  stamp:
+    sec: 1795466969
+    nanosec: 479715891
+  frame_id: ''
+connected: true
+armed: false
+offboard: false
+status:
+  state: 0
+current_control_mode:
+  header:
+    stamp:
+      sec: 0
+      nanosec: 0
+    frame_id: ''
+  yaw_mode: 0
+  control_mode: 0
+  reference_frame: 0
+---
+== gps
+latitude: 35.7274824
+longitude: -78.6962749
+altitude: -34.205480038525934
+== guard log
+2026-11-23T20:48:41Z guard: filter -> :14550 <-> MAVROS ('127.0.0.1', 14570) (enforce)
+2026-11-23T20:48:41Z vehicle link from ('192.168.32.25', 14651)
+2026-11-23T20:48:41Z vehicle armed=False custom_mode=2
+2026-11-23T20:48:44Z -> HEARTBEAT
+2026-11-23T20:48:44Z -> COMMAND_LONG:REQUEST_MESSAGE
+2026-11-23T20:48:50Z -> REQUEST_DATA_STREAM
+2026-11-23T20:49:11Z summary {"armed": false, "blocked": {}, "forwarded": {"COMMAND_LONG:REQUEST_MESSAGE": 1, "HEARTBEAT": 28, "REQUEST_DATA_STREAM": 3}, "from_vehicle_datagrams": 6355, "vehicle_mode": 2}
+== mavros log (plugins / errors)
+[mavros_node-1] [INFO] [1795466923.067356837] [drone0.mavros]: Plugin setpoint_trajectory ignored
+[mavros_node-1] [INFO] [1795466923.067363138] [drone0.mavros]: Plugin setpoint_velocity ignored
+[mavros_node-1] [INFO] [1795466923.067369440] [drone0.mavros]: Plugin sim_state ignored
+[mavros_node-1] [INFO] [1795466923.074741200] [drone0.mavros]: Plugin sys_status created
+[mavros_node-1] [INFO] [1795466923.074793859] [drone0.mavros]: Plugin sys_status initialized
+[mavros_node-1] [INFO] [1795466923.074803918] [drone0.mavros]: Plugin sys_time ignored
+[mavros_node-1] [INFO] [1795466923.074811001] [drone0.mavros]: Plugin tdr_radio ignored
+[mavros_node-1] [INFO] [1795466923.074817433] [drone0.mavros]: Plugin terrain ignored
+[mavros_node-1] [INFO] [1795466923.074824046] [drone0.mavros]: Plugin trajectory ignored
+[mavros_node-1] [INFO] [1795466923.074830508] [drone0.mavros]: Plugin tunnel ignored
+[mavros_node-1] [INFO] [1795466923.074837170] [drone0.mavros]: Plugin vfr_hud ignored
+[mavros_node-1] [INFO] [1795466923.074843672] [drone0.mavros]: Plugin vibration ignored
+[mavros_node-1] [INFO] [1795466923.074850495] [drone0.mavros]: Plugin vision_pose ignored
+[mavros_node-1] [INFO] [1795466923.074856947] [drone0.mavros]: Plugin vision_speed ignored
+[mavros_node-1] [INFO] [1795466923.074863530] [drone0.mavros]: Plugin waypoint ignored
+[mavros_node-1] [INFO] [1795466923.074870062] [drone0.mavros]: Plugin wheel_odometry ignored
+[mavros_node-1] [INFO] [1795466923.074876274] [drone0.mavros]: Plugin wind_estimation ignored
+[mavros_node-1] [WARN] [1795466923.290888365] [drone0.mavros.imu]: IMU: linear acceleration on RAW_IMU known on APM only.
+[mavros_node-1] [WARN] [1795466923.290896691] [drone0.mavros.imu]: IMU: ~imu/data_raw stores unscaled raw acceleration report.
+[mavros_node-1] [WARN] [1795466924.940191611] [drone0.mavros.cmd]: CMD: Unexpected command 512, result 0
+== platform log
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-11-23-15-48-47-899131-2c4f941ecac0-626
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [as2_platform_mavlink_node-1]: process started with pid [693]
+[as2_platform_mavlink_node-1] [0m[INFO] [1795466928.368513262] [drone0.platform]: Construct with name [platform][0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1795466928.370844677] [as2_mode]: Control mode: UNSET [0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1795466928.370862300] [as2_mode]: Control mode: HOVER YAW_ANGLE BODY_FLU_FRAME [0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1795466928.370871627] [as2_mode]: Control mode: POSITION YAW_ANGLE LOCAL_ENU_FRAME [0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1795466928.370880063] [as2_mode]: Control mode: POSITION YAW_SPEED LOCAL_ENU_FRAME [0m
+[as2_platform_mavlink_node-1] [33m[WARN] [1795466928.379915675] [drone0.platform]: AERPAW mode: pilot arms, GUIDED/LAND only, global waypoints, altitude 20-110 m, land within 5 m of takeoff[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1795466928.389538568] [drone0.platform]: MAVLink platform configured for autopilot 'ardupilot' (vehicle: copter)[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1795466928.389561061] [drone0.platform]: Flight modes: offboard 'GUIDED', manual 'LOITER', hold 'BRAKE'[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1795466928.389573634] [drone0.platform]: Simulation mode: false[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1795466928.389583383] [drone0.platform]: External odometry mode: false[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1795466929.949756510] [drone0.platform]: Autopilot link established[0m
+[as2_platform_mavlink_node-1] [0m[INFO] [1795466929.949803539] [drone0.platform]: Autopilot flight mode changed: '' -> 'ALT_HOLD'[0m
+== streams
+requester: making request: mavros_msgs.srv.StreamRate_Request(stream_id=0, message_rate=10, on_off=True)
+
+response:
+mavros_msgs.srv.StreamRate_Response()
+

@@ -1,0 +1,82 @@
+== /root/Results/as2_1123_2048
+	357.as2_drone0_controller	(11/23/26 15:48:42)	(Detached)
+	365.as2_drone0_behaviors	(11/23/26 15:48:42)	(Detached)
+	343.as2_drone0_platform	(11/23/26 15:48:42)	(Detached)
+	349.as2_drone0_estimator	(11/23/26 15:48:42)	(Detached)
+	335.as2_drone0_mavros	(11/23/26 15:48:41)	(Detached)
+	320.as2_guard	(11/23/26 15:48:40)	(Detached)
+== mavros state
+connected: true
+armed: false
+guided: false
+mode: LAND
+== rel_alt
+data: 0.003
+== guard (last)
+2026-11-23T20:50:27Z -> COMMAND_INT:DO_REPOSITION(35.7274823,-78.6964958,25.0)
+2026-11-23T20:50:28Z -> COMMAND_INT:DO_REPOSITION(35.7276618,-78.6964959,25.0)
+2026-11-23T20:50:30Z -> COMMAND_INT:DO_REPOSITION(35.7276618,-78.6964959,25.0)
+2026-11-23T20:50:32Z -> COMMAND_INT:DO_REPOSITION(35.7276618,-78.6964959,25.0)
+2026-11-23T20:50:34Z -> COMMAND_INT:DO_REPOSITION(35.7276618,-78.6964960,25.0)
+2026-11-23T20:50:36Z -> COMMAND_INT:DO_REPOSITION(35.7276618,-78.6962746,25.0)
+2026-11-23T20:50:38Z -> COMMAND_INT:DO_REPOSITION(35.7276619,-78.6962746,25.0)
+2026-11-23T20:50:40Z -> COMMAND_INT:DO_REPOSITION(35.7276619,-78.6962747,25.0)
+2026-11-23T20:50:41Z summary {"armed": true, "blocked": {}, "forwarded": {"COMMAND_INT:DO_REPOSITION(35.7274822,-78.6964958,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7274822,-78.6964959,25.0)": 2, "COMMAND_INT:DO_REPOSITION(35.7274823,-78.6964958,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7276618,-78.6962746,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7276618,-78.6964959,25.0)": 3, "COMMAND_INT:DO_REPOSITION(35.7276618,-78.6964960,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7276619,-78.6962746,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7276619,-78.6962747,25.0)": 1, "COMMAND_LONG:DO_SET_MODE(GUIDED)": 1, "COMMAND_LONG:NAV_TAKEOFF": 1, "COMMAND_LONG:REQUEST_MESSAGE": 1, "HEARTBEAT": 118, "REQUEST_DATA_STREAM": 3}, "from_vehicle_datagrams": 30104, "vehicle_mode": 4}
+2026-11-23T20:50:42Z -> COMMAND_INT:DO_REPOSITION(35.7276619,-78.6962746,25.0)
+2026-11-23T20:50:43Z -> COMMAND_INT:DO_REPOSITION(35.7274823,-78.6962747,25.0)
+2026-11-23T20:50:45Z -> COMMAND_INT:DO_REPOSITION(35.7274823,-78.6962745,25.0)
+2026-11-23T20:50:47Z -> COMMAND_INT:DO_REPOSITION(35.7274822,-78.6962746,25.0)
+2026-11-23T20:50:49Z -> COMMAND_INT:DO_REPOSITION(35.7274822,-78.6962746,25.0)
+2026-11-23T20:50:51Z -> COMMAND_LONG:DO_SET_MODE(LAND)
+2026-11-23T20:50:51Z vehicle armed=True custom_mode=9
+2026-11-23T20:51:11Z summary {"armed": true, "blocked": {}, "forwarded": {"COMMAND_INT:DO_REPOSITION(35.7274822,-78.6962746,25.0)": 2, "COMMAND_INT:DO_REPOSITION(35.7274822,-78.6964958,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7274822,-78.6964959,25.0)": 2, "COMMAND_INT:DO_REPOSITION(35.7274823,-78.6962745,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7274823,-78.6962747,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7274823,-78.6964958,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7276618,-78.6962746,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7276618,-78.6964959,25.0)": 3, "COMMAND_INT:DO_REPOSITION(35.7276618,-78.6964960,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7276619,-78.6962746,25.0)": 2, "COMMAND_INT:DO_REPOSITION(35.7276619,-78.6962747,25.0)": 1, "COMMAND_LONG:DO_SET_MODE(GUIDED)": 1, "COMMAND_LONG:DO_SET_MODE(LAND)": 1, "COMMAND_LONG:NAV_TAKEOFF": 1, "COMMAND_LONG:REQUEST_MESSAGE": 1, "HEARTBEAT": 148, "REQUEST_DATA_STREAM": 3}, "from_vehicle_datagrams": 38046, "vehicle_mode": 9}
+2026-11-23T20:51:25Z vehicle armed=False custom_mode=9
+2026-11-23T20:51:41Z summary {"armed": false, "blocked": {}, "forwarded": {"COMMAND_INT:DO_REPOSITION(35.7274822,-78.6962746,25.0)": 2, "COMMAND_INT:DO_REPOSITION(35.7274822,-78.6964958,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7274822,-78.6964959,25.0)": 2, "COMMAND_INT:DO_REPOSITION(35.7274823,-78.6962745,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7274823,-78.6962747,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7274823,-78.6964958,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7276618,-78.6962746,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7276618,-78.6964959,25.0)": 3, "COMMAND_INT:DO_REPOSITION(35.7276618,-78.6964960,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7276619,-78.6962746,25.0)": 2, "COMMAND_INT:DO_REPOSITION(35.7276619,-78.6962747,25.0)": 1, "COMMAND_LONG:DO_SET_MODE(GUIDED)": 1, "COMMAND_LONG:DO_SET_MODE(LAND)": 1, "COMMAND_LONG:NAV_TAKEOFF": 1, "COMMAND_LONG:REQUEST_MESSAGE": 1, "HEARTBEAT": 178, "REQUEST_DATA_STREAM": 3}, "from_vehicle_datagrams": 45910, "vehicle_mode": 9}
+2026-11-23T20:52:11Z summary {"armed": false, "blocked": {}, "forwarded": {"COMMAND_INT:DO_REPOSITION(35.7274822,-78.6962746,25.0)": 2, "COMMAND_INT:DO_REPOSITION(35.7274822,-78.6964958,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7274822,-78.6964959,25.0)": 2, "COMMAND_INT:DO_REPOSITION(35.7274823,-78.6962745,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7274823,-78.6962747,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7274823,-78.6964958,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7276618,-78.6962746,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7276618,-78.6964959,25.0)": 3, "COMMAND_INT:DO_REPOSITION(35.7276618,-78.6964960,25.0)": 1, "COMMAND_INT:DO_REPOSITION(35.7276619,-78.6962746,25.0)": 2, "COMMAND_INT:DO_REPOSITION(35.7276619,-78.6962747,25.0)": 1, "COMMAND_LONG:DO_SET_MODE(GUIDED)": 1, "COMMAND_LONG:DO_SET_MODE(LAND)": 1, "COMMAND_LONG:NAV_TAKEOFF": 1, "COMMAND_LONG:REQUEST_MESSAGE": 1, "HEARTBEAT": 208, "REQUEST_DATA_STREAM": 3}, "from_vehicle_datagrams": 53744, "vehicle_mode": 9}
+== platform (last)
+[as2_platform_mavlink_node-1] [INFO] [1795467006.517477267] [drone0.platform]: Switching to offboard control mode 'GUIDED'
+[as2_platform_mavlink_node-1] [INFO] [1795467006.517522021] [drone0.platform]: AERPAW mode: GUIDED via MAV_CMD_DO_SET_MODE (custom mode 4)
+[as2_platform_mavlink_node-1] [INFO] [1795467006.521271215] [drone0.platform]: Autopilot flight mode changed: 'ALT_HOLD' -> 'GUIDED'
+[as2_platform_mavlink_node-1] [INFO] [1795467007.097518890] [drone0.platform]: Transition [TAKE_OFF] : New State [TAKING_OFF]
+[as2_platform_mavlink_node-1] [INFO] [1795467007.100805036] [drone0.platform]: Taking off 25.00 m (MAV_CMD_NAV_TAKEOFF)
+[as2_platform_mavlink_node-1] [INFO] [1795467020.541977039] [drone0.platform]: Takeoff completed at 24.03 m
+[as2_platform_mavlink_node-1] [INFO] [1795467020.542109017] [drone0.platform]: Transition [TOOK_OFF] : New State [FLYING]
+[as2_platform_mavlink_node-1] [WARN] [1795467020.629072007] [drone0.platform]: Invalid transition: FLYING -> TOOK_OFF
+[as2_platform_mavlink_node-1] [INFO] [1795467021.039057889] [drone0.platform]: POSITION mode enabled
+[as2_platform_mavlink_node-1] [INFO] [1795467021.159935657] [drone0.platform]: AERPAW mode: DO_REPOSITION lat 35.7274822 lon -78.6964959 rel_alt 25.0 m
+[as2_platform_mavlink_node-1] [INFO] [1795467028.619141760] [drone0.platform]: AERPAW mode: DO_REPOSITION lat 35.7276618 lon -78.6964959 rel_alt 25.0 m
+[as2_platform_mavlink_node-1] [INFO] [1795467036.259192048] [drone0.platform]: AERPAW mode: DO_REPOSITION lat 35.7276618 lon -78.6962746 rel_alt 25.0 m
+[as2_platform_mavlink_node-1] [INFO] [1795467043.799126372] [drone0.platform]: AERPAW mode: DO_REPOSITION lat 35.7274823 lon -78.6962747 rel_alt 25.0 m
+[as2_platform_mavlink_node-1] [INFO] [1795467051.229093983] [drone0.platform]: Transition [LAND] : New State [LANDING]
+[as2_platform_mavlink_node-1] [INFO] [1795467051.232363186] [drone0.platform]: AERPAW mode: landing with LAND mode (0.6 m from home)
+[as2_platform_mavlink_node-1] [INFO] [1795467051.232393583] [drone0.platform]: AERPAW mode: LAND via MAV_CMD_DO_SET_MODE (custom mode 9)
+[as2_platform_mavlink_node-1] [INFO] [1795467051.236769583] [drone0.platform]: Autopilot flight mode changed: 'GUIDED' -> 'LAND'
+[as2_platform_mavlink_node-1] [INFO] [1795467085.946321154] [drone0.platform]: Transition [LANDED] : New State [LANDED]
+[as2_platform_mavlink_node-1] [WARN] [1795467086.063278797] [drone0.platform]: Invalid transition: LANDED -> LANDED
+[as2_platform_mavlink_node-1] [WARN] [1795467086.066617410] [drone0.platform]: UAV is already disarmed
+== mission
+    from .exceptions import (AstropyDeprecationWarning, AstropyUserWarning,
+  File "/usr/lib/python3/dist-packages/astropy/utils/exceptions.py", line 11, in <module>
+    from erfa import ErfaError, ErfaWarning  # noqa
+  File "/usr/lib/python3/dist-packages/erfa/__init__.py", line 5, in <module>
+    from .version import version as __version__  # noqa
+  File "/usr/lib/python3/dist-packages/erfa/version.py", line 25, in <module>
+    from . import ufunc
+AttributeError: _ARRAY_API not found
+[INFO] [1795466978.282848307] [drone0.drone0_interface]: Starting drone0
+[INFO] [1795466978.813266594] [drone0.drone0_interface]: drone0 interface initialized
+waiting for the safety pilot to arm...
+arm (by pilot): OK
+offboard (GUIDED): OK
+takeoff: OK
+home (earth frame): x 0.02 y -0.02, flying at z 25.0
+go_to [-20.0, -0.0, 25.0]: OK
+  position: [-19.49, -0.08, 24.95]
+go_to [-20.0, 20.0, 25.0]: OK
+  position: [-19.99, 19.13, 24.97]
+go_to [0.0, 20.0, 25.0]: OK
+  position: [-0.46, 20.0, 24.99]
+go_to [0.0, -0.0, 25.0]: OK
+  position: [0.07, 0.97, 24.99]
+land: OK
+final position: [0.05, -0.18, 0.01]
