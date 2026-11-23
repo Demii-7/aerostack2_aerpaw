@@ -34,7 +34,7 @@ while getopts "n:u:s:w:kaS" opt; do
 done
 
 session="as2_${ns}"
-parts=(mavros platform estimator controller behaviors viewer mission)
+parts=(mavros streams platform estimator controller behaviors viewer mission)
 if [[ ${use_screen} == "true" ]]; then
   for p in "${parts[@]}"; do screen -S "${session}_${p}" -X quit >/dev/null 2>&1; done
 else
@@ -45,16 +45,25 @@ fi
 here="$(cd "$(dirname "$0")" && pwd)"
 cfg="${here}/config/config.yaml"
 modes_arg=""
+mavros_aerpaw="false"
+streams_cmd="true"
 mission_hint="python3 mission_takeoff_land.py -n ${ns}   or   python3 mission_square.py -n ${ns}"
 if [[ ${aerpaw} == "true" ]]; then
   cfg="${here}/config/config_aerpaw.yaml"
   modes_arg="control_modes_file:=${here}/config/control_modes_aerpaw.yaml"
   mission_hint="python3 mission_aerpaw.py -n ${ns}"
+  # Only MAVROS plugins whose traffic the AERPAW MAVLink filter allows; telemetry is
+  # then requested once with REQUEST_DATA_STREAM (allowed) after the link is up.
+  mavros_aerpaw="true"
+  streams_cmd="until ros2 topic echo --once /${ns}/mavros/state 2>/dev/null | grep -q 'connected: true'; do sleep 1; done; \
+for i in 1 2 3; do ros2 service call /${ns}/mavros/set_stream_rate mavros_msgs/srv/StreamRate \
+'{stream_id: 0, message_rate: 10, on_off: true}'; sleep 5; done"
 fi
 src="source /opt/ros/humble/setup.bash; source ${ws}/install/setup.bash; cd ${here}"
 
 windows=(
-  "mavros|ros2 launch as2_platform_mavlink mavros_launch.py namespace:=${ns} autopilot:=ardupilot mavros_config_file:=${cfg} fcu_url:=${fcu_url} tgt_system:=${tgt_system}"
+  "mavros|ros2 launch as2_platform_mavlink mavros_launch.py namespace:=${ns} autopilot:=ardupilot mavros_config_file:=${cfg} fcu_url:=${fcu_url} tgt_system:=${tgt_system} aerpaw:=${mavros_aerpaw}"
+  "streams|sleep 3; ${streams_cmd}"
   "platform|sleep 5; ros2 launch as2_platform_mavlink as2_platform_mavlink_launch.py namespace:=${ns} platform_config_file:=${cfg} ${modes_arg}"
   "estimator|sleep 7; ros2 launch as2_state_estimator state_estimator_launch.py namespace:=${ns} config_file:=${cfg}"
   "controller|sleep 7; ros2 launch as2_motion_controller controller_launch.py namespace:=${ns} config_file:=${cfg} plugin_name:=pid_speed_controller"
