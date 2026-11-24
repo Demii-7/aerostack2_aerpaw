@@ -29,7 +29,7 @@ Only watch in QGroundControl: do not change modes or upload missions (the filter
 ```
 ssh -i ~/.ssh/id_aerpaw_rsa root@192.168.122.1
 ```
-then, on the E-VM:
+then, once the `root@E-VM-M1` prompt appears:
 ```
 cd /root/aerostack2_aerpaw/ws/project_emulator
 export RESULTS_DIR=/root/Results/run_$(date +%m%d_%H%M) && mkdir -p $RESULTS_DIR
@@ -43,16 +43,25 @@ python3 mission_aerpaw.py -n drone0
 ```
 It prints "waiting for the safety pilot to arm...".
 
+The NumPy 1.x / 2.x warnings and tracebacks it prints first are harmless (an optional library, astropy,
+fails to load); what matters is the last line.
+
 ## 5. Terminal 3: arm (OEO console)
+Log in first:
 ```
 ssh -i ~/.ssh/id_aerpaw_rsa root@192.168.122.62
-source /root/.ap-set-experiment-env.sh
-/root/workarea/AERPAW-Dev/OEO/OEO-CONSOLE/InstallScripts/startOEOConsole.sh
 ```
-In the console type:
+Wait for the `root@OEO-CONSOLE:~$` prompt (lines pasted before it appears are lost), then start the console:
 ```
-agent 1 arm
+source /root/.ap-set-experiment-env.sh && /root/workarea/AERPAW-Dev/OEO/OEO-CONSOLE/InstallScripts/startOEOConsole.sh
 ```
+A full-screen view opens: a status table (ID, armed, mode, alt, gps, screens) and an input line `►` at the bottom.
+Before arming, check the table: node 1, armed 0, mode ALT_HOLD, gps 6, and the as2_* and as2_guard screens listed.
+Console commands are `<node ID> <command>`. At the `►` line type:
+```
+1 arm
+```
+(`agent 1 arm` gives "Invalid node_id: agent"; `1 vehicle arm` gives "Invalid command: vehicle".)
 Only use `arm` here. set_mode / takeoff / land / rtl make the filter stop the session.
 
 ## 6. Watch
